@@ -17,13 +17,27 @@ var conversation = new watson.ConversationV1 ({
 });
 
 
-conversation.listWorkspaces(function(err, response) {
-    if (err) {
-        console.error(err);
-    } else {
-        console.log(JSON.stringify(response, null, 2));
-    }
+// conversation.listWorkspaces(function(err, response) {
+//     if (err) {
+//         console.error(err);
+//     } else {
+//         console.log(JSON.stringify(response, null, 2));
+//     }
+// });
+
+
+conversation.message({
+    workspace_id: '49317eb4-0292-4f3d-a6ea-93dc547151ac',
+    input: {'text': 'Hello'}
+},  function(err, response) {
+    if (err)
+        console.log('error:', err);
+    else
+        // console.log(JSON.stringify(response, null, 2));
+        console.log(response.output.text);
 });
+
+
 
 // the following is my code:
 var hbs = require('express-handlebars');// Finn
