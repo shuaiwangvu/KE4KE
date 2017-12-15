@@ -65,7 +65,7 @@ router.get('/members', function(req, res, next) {
         // console.log(response.output.text);
         chatbot_reply = response.output.text
         console.log(chatbot_reply)
-        res.render('members', { title: 'Members', condition: true, anyArray: [1,2,3], reply: chatbot_reply });
+        res.render('members', { output: chatbot_reply });
     });
 
 
@@ -83,7 +83,11 @@ router.get('/publications', function(req, res, next) {
 
 
 router.get('/members/:id', function(req, res, next) {
-    res.render('members', {output: req.params.id});
+
+    var question = req.params.id;
+    var answer = 'answer of ' + question;
+
+    res.render('members', {input: question, output: answer});
 });
 
 router.post('/members/submit', function (req, res, next) {
