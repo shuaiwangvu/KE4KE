@@ -19,4 +19,11 @@
 
 <!--this is the chatbot-->
 
+<form action="/members/submit" method="post">
+    <input type="text" name="id">
+    <button type="submit">Submit</button>
+</form>
+
+<p>ID passed: {{ output }}</p>
+
 <p>The chatbot said: {{ reply }} </p>

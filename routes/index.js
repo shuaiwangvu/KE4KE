@@ -46,11 +46,11 @@ router.get('/', function(req, res, next) {
 });
 
 
-router.get('/about.html', function(req, res, next) {
+router.get('/about', function(req, res, next) {
     res.render('about', { title: 'About', condition: true, anyArray: [1,2,3] });
 });
 
-router.get('/members.html', function(req, res, next) {
+router.get('/members', function(req, res, next) {
 
     var chatbot_reply; // empty string for now
 
@@ -73,13 +73,23 @@ router.get('/members.html', function(req, res, next) {
 
 });
 
-router.get('/projects.html', function(req, res, next) {
+router.get('/projects', function(req, res, next) {
     res.render('projects', { title: 'Projects', condition: true, anyArray: [1,2,3] });
 });
 
-router.get('/publications.html', function(req, res, next) {
+router.get('/publications', function(req, res, next) {
     res.render('publications', { title: 'Publications', condition: true, anyArray: [1,2,3] });
 });
 
+
+router.get('/members/:id', function(req, res, next) {
+    res.render('members', {output: req.params.id});
+});
+
+router.post('/members/submit', function (req, res, next) {
+    var id = req.body.id;
+    console.log(id)
+    res.redirect('/members/' + id)
+})
 
 module.exports = router;
