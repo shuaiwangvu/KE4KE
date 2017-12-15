@@ -85,9 +85,28 @@ router.get('/publications', function(req, res, next) {
 router.get('/members/:id', function(req, res, next) {
 
     var question = req.params.id;
-    var answer = 'answer of ' + question;
+    if (question)
+        console.log('what the fuck')
+    else
+        // var answer = 'answer of ' + question;
+        var chatbot_reply;
+        conversation.message({
+            workspace_id: '49317eb4-0292-4f3d-a6ea-93dc547151ac',
+            input: {'text': question}
+        },  function(err, response) {
+            if (err)
+                console.log('error:', err);
+            else
+                console.log(JSON.stringify(response, null, 2));
+            // console.log(response.output.text);
+                chatbot_reply = response.output.text.toString()
+            console.log(chatbot_reply)
+            // res.render('members', { output: chatbot_reply });
+            res.render('members', {input: question, output: chatbot_reply});
+        });
 
-    res.render('members', {input: question, output: answer});
+
+    // res.render('members', {input: question, output: answer});
 });
 
 router.post('/members/submit', function (req, res, next) {
