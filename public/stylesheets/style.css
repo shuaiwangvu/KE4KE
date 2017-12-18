@@ -114,3 +114,41 @@ a{
 
 
 
+
+/* Pattern styles */
+.container {
+  display: table;
+  width: 100%;
+}
+
+.left-half {
+  background-color: #ff9e2c;
+  position: absolute;
+  left: 0px;
+  top: 10%;
+  height: 90%;
+  width: 70%;
+  overflow: scroll;
+}
+
+
+.left-half-recommend {
+  height: 50%;
+  background-color: #339e2c;
+  overflow: scroll;
+}
+.left-half-all{
+  height: 50%;
+  overflow: scroll;
+}
+
+.right-half {
+  background-color: #b6701e;
+  position: absolute;
+  height: 90%;
+  top: 10%;
+  right: 0px;
+  width: 30%;
+  overflow: scroll;
+}
+

@@ -1,31 +1,95 @@
-<!--<h1>{{ title }}</h1>-->
-<!--<p>Welcome to {{ title }}</p>-->
 
-<!--{{# each anyArray as |val key|}}-->
-    <!--{{ key }}: {{ val }}-->
-<!--{{/each}}-->
 
-<div class="container">
-    <div class="row">
-        <div class="col-lg-12">
-            <div class="content">
-                <h1>Specialist Finder</h1>
-                <h3>Find your Specialist</h3>
-                <hr>
-            </div>
+
+<section class="container">
+    <div class="left-half">
+        <div id="recommended" class="left-half-recommend" >
+
+            <article>
+                {{#each lst}}
+                    <h1>
+                        {{this}}
+                    </h1>
+                {{/each}}
+
+                <p>Weekends don't count unless you spend them doing something completely pointless.</p>
+                <h1>Left Half</h1>
+                <p>Weekends don't count unless you spend them doing something completely pointless.</p>
+                <h1>Left Half</h1>
+                <p>Weekends don't count unless you spend them doing something completely pointless.</p>
+                <h1>Left Half</h1>
+                <p>Weekends don't count unless you spend them doing something completely pointless.</p>
+                <h1>Left Half</h1>
+                <p>Weekends don't count unless you spend them doing something completely pointless.</p>
+                <h1>Left Half</h1>
+                <p>Weekends don't count unless you spend them doing something completely pointless.</p>
+                <h1>Left Half</h1>
+                <p>Weekends don't count unless you spend them doing something completely pointless.</p>
+
+            </article>
         </div>
+        <div id="all" class="left-half-all" >
+            <article>
+                <h1>Left Half</h1>
+                <p>Weekends don't count unless you spend them doing something completely pointless.</p>
+                <h1>Left Half</h1>
+                <p>Weekends don't count unless you spend them doing something completely pointless.</p>
+                <h1>Left Half</h1>
+                <p>Weekends don't count unless you spend them doing something completely pointless.</p>
+                <h1>Left Half</h1>
+                <p>Weekends don't count unless you spend them doing something completely pointless.</p>
+                <h1>Left Half</h1>
+                <p>Weekends don't count unless you spend them doing something completely pointless.</p>
+                <h1>Left Half</h1>
+                <p>Weekends don't count unless you spend them doing something completely pointless.</p>
+                <h1>Left Half</h1>
+                <p>Weekends don't count unless you spend them doing something completely pointless.</p>
+
+            </article>
+
+        </div>
+
     </div>
-</div>
+    <div class="right-half">
+        <article>
+            <h1>Right Half</h1>
+            <p>If your knees aren't green by the end of the day, you ought to seriously re-examine your life.</p>
+
+            <form action="/members/submit" method="post">
+                <input type="text" name="id">
+                <button type="submit">Submit</button>
+            </form>
+
+
+            <p>The question was: {{ input }}</p>
+            <p>The answer is: {{ output }}</p>
+
+            <!--<p>The chatbot said: {{ reply }} </p>-->
+
+
+        </article>
+    </div>
+</section>
+
+<!--<div class="container">-->
+    <!--<div style="width: 70%;">test-->
+    <!--</div>-->
+            <!--<div class="content" style="width: 30%;">-->
+                <!--<h1>Specialist Finder</h1>-->
+                <!--<h3>Find your Specialist</h3>-->
+                <!--<hr>-->
+            <!--</div>-->
+<!--</div>-->
 
 <!--this is the chatbot-->
 
-<form action="/members/submit" method="post">
-    <input type="text" name="id">
-    <button type="submit">Submit</button>
-</form>
+<!--<form action="/members/submit" method="post">-->
+    <!--<input type="text" name="id">-->
+    <!--<button type="submit">Submit</button>-->
+<!--</form>-->
 
 
-<p>The question was: {{ input }}</p>
-<p>The answer is: {{ output }}</p>
+<!--<p>The question was: {{ input }}</p>-->
+<!--<p>The answer is: {{ output }}</p>-->
 
 <!--<p>The chatbot said: {{ reply }} </p>-->

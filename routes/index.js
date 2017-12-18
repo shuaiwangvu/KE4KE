@@ -1,7 +1,14 @@
 
 var express = require('express');
 var router = express.Router();
+var fs = require('fs');
 
+
+
+var path = require('path');
+var rdf = require('rdflib');
+
+var filename = './people.owl';
 
 // var Conversation = require('watson-developer-cloud/conversation/v1'); // watson sdk
 var watson = require("watson-developer-cloud");
@@ -64,7 +71,7 @@ router.get('/members', function(req, res, next) {
         console.log(JSON.stringify(response, null, 2));
         // console.log(response.output.text);
         chatbot_reply = response.output.text
-        console.log(chatbot_reply)
+        console.log(chatbot_reply);
         res.render('members', { output: chatbot_reply });
     });
 
@@ -96,14 +103,16 @@ router.get('/members/:id', function(req, res, next) {
             console.log('error:', err);
         else
             console.log(JSON.stringify(response, null, 2));
-            chatbot_reply = response.output.text.toString()
-            console.log('there are ', response.entities.length, 'entities')
+            chatbot_reply = response.output.text.toString();
+            console.log('there are ', response.entities.length, 'entities');
             response.entities.forEach(function (item) {
                 console.log(item.value);
-            })
-        console.log(chatbot_reply)
+            });
+        console.log(chatbot_reply);
+        let hello = [1,2,3];
+
         // res.render('members', { output: chatbot_reply });
-        res.render('members', {input: question, output: chatbot_reply});
+        res.render('members', {input: question, output: chatbot_reply, lst: hello});
     });
 
     // res.render('members', {input: question, output: answer});
@@ -111,8 +120,8 @@ router.get('/members/:id', function(req, res, next) {
 
 router.post('/members/submit', function (req, res, next) {
     var id = req.body.id;
-    console.log(id)
+    console.log(id);
     res.redirect('/members/' + id)
-})
+});
 
 module.exports = router;

@@ -1,0 +1,196 @@
+@prefix : <#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix xml: <http://www.w3.org/XML/1998/namespace> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix admin: <http://webns.net/mvcb/> .
+@base <http://www.w3.org/2002/07/owl#> .
+
+[ rdf:type owl:Ontology
+ ] .
+
+#################################################################
+#    Annotation properties
+#################################################################
+
+###  http://xmlns.com/foaf/0.1/currentProject
+foaf:currentProject rdf:type owl:AnnotationProperty .
+
+
+###  http://xmlns.com/foaf/0.1/depiction
+foaf:depiction rdf:type owl:AnnotationProperty .
+
+
+###  http://xmlns.com/foaf/0.1/family_name
+foaf:family_name rdf:type owl:AnnotationProperty .
+
+
+###  http://xmlns.com/foaf/0.1/givenname
+foaf:givenname rdf:type owl:AnnotationProperty .
+
+
+###  http://xmlns.com/foaf/0.1/homepage
+foaf:homepage rdf:type owl:AnnotationProperty .
+
+
+###  http://xmlns.com/foaf/0.1/interest
+foaf:interest rdf:type owl:AnnotationProperty .
+
+
+###  http://xmlns.com/foaf/0.1/mbox
+foaf:mbox rdf:type owl:AnnotationProperty .
+
+
+###  http://xmlns.com/foaf/0.1/nick
+foaf:nick rdf:type owl:AnnotationProperty .
+
+
+###  http://xmlns.com/foaf/0.1/status
+foaf:status rdf:type owl:AnnotationProperty .
+
+
+###  http://xmlns.com/foaf/0.1/title
+foaf:title rdf:type owl:AnnotationProperty .
+
+
+###  http://xmlns.com/foaf/0.1/workplaceHomepage
+foaf:workplaceHomepage rdf:type owl:AnnotationProperty .
+
+
+#################################################################
+#    Classes
+#################################################################
+
+###  http://xmlns.com/foaf/0.1/Person
+foaf:Person rdf:type owl:Class .
+
+
+#################################################################
+#    Individuals
+#################################################################
+
+###  file:/Users/finnpotason/Programming/FOAF/krr.rdf#albert
+<file:/Users/finnpotason/Programming/FOAF/krr.rdf#albert> rdf:type owl:NamedIndividual ,
+                                                                   foaf:Person ;
+                                                          foaf:currentProject "CLARIAH" ,
+                                                                              "Linked Data APIs" ,
+                                                                              "MIDI Linked Data" ;
+                                                          foaf:depiction <https://www.albertmeronyo.org/wp-content/uploads/2017/01/L_10a-750x804.jpg> ;
+                                                          foaf:family_name "Meroño Peñuela" ;
+                                                          foaf:givenname "Albert" ;
+                                                          foaf:homepage <https://www.albertmeronyo.org/> ;
+                                                          foaf:interest "knowledge access" ,
+                                                                        "linked data" ,
+                                                                        "semantic music" ;
+                                                          foaf:mbox <file:/Users/finnpotason/Programming/FOAF/albert.merono@vu.nl> ;
+                                                          foaf:status "postdoc" ;
+                                                          foaf:title "Dr." .
+
+
+###  file:/Users/finnpotason/Programming/FOAF/krr.rdf#ali
+<file:/Users/finnpotason/Programming/FOAF/krr.rdf#ali> rdf:type owl:NamedIndividual ,
+                                                                foaf:Person ;
+                                                       foaf:currentProject "RISIS" ,
+                                                                           "SlideWiki" ;
+                                                       foaf:depiction <http://ali1k.com/imgs/ali_smile.jpg> ;
+                                                       foaf:family_name "Khalili" ;
+                                                       foaf:givenname "Ali" ;
+                                                       foaf:homepage <http://ali1k.com/> ;
+                                                       foaf:interest "human-computer interaction" ,
+                                                                     "linked data" ,
+                                                                     "natural language processing" ,
+                                                                     "semantic web" ,
+                                                                     "user interface" ;
+                                                       foaf:mbox <file:/Users/finnpotason/Programming/FOAF/a.khalili@vu.nl> ;
+                                                       foaf:status "postdoc" ;
+                                                       foaf:title "Dr." .
+
+
+###  file:/Users/finnpotason/Programming/FOAF/krr.rdf#annette
+<file:/Users/finnpotason/Programming/FOAF/krr.rdf#annette> rdf:type owl:NamedIndividual ,
+                                                                    foaf:Person ;
+                                                           foaf:currentProject "NO" ;
+                                                           foaf:depiction <https://www.cs.vu.nl/en/Images/Teije_Annette_ten_tcm210-543587.jpg> ;
+                                                           foaf:family_name "ten Teije" ;
+                                                           foaf:givenname "Annette" ;
+                                                           foaf:homepage <http://www.cs.vu.nl/~annette/> ;
+                                                           foaf:interest "medical guideline" ,
+                                                                         "medical ontology" ,
+                                                                         "medical protocol" ,
+                                                                         "semantic web" ;
+                                                           foaf:mbox <file:/Users/finnpotason/Programming/FOAF/annette@cs.vu.nl> ;
+                                                           foaf:status "professor" ;
+                                                           foaf:title "Prof." .
+
+
+###  file:/Users/finnpotason/Programming/FOAF/krr.rdf#eva
+<file:/Users/finnpotason/Programming/FOAF/krr.rdf#eva> rdf:type owl:NamedIndividual ,
+                                                                foaf:Person ;
+                                                       foaf:currentProject "Amsterdam Data Science" ;
+                                                       foaf:depiction <http://amsterdamdatascience.nl/wp-content/uploads/sites/12/2016/03/AAEAAQAAAAAAAAUeAAAAJGQyOTk5NmZiLWIyYTYtNDZhYy04ODNjLTRlNzk0YjUzOTJhNA.jpg> ;
+                                                       foaf:family_name "Kenny" ;
+                                                       foaf:givenname "Eva" ;
+                                                       foaf:homepage <https://www.linkedin.com/in/eva-kenny-lowther-4b723793/> ;
+                                                       foaf:interest "data science" ,
+                                                                     "project management" ;
+                                                       foaf:mbox <file:/Users/finnpotason/Programming/FOAF/e.r.kenny@uva.nl> ;
+                                                       foaf:status "project manager" ;
+                                                       foaf:title "Dr." .
+
+
+###  file:/Users/finnpotason/Programming/FOAF/krr.rdf#finn
+<file:/Users/finnpotason/Programming/FOAF/krr.rdf#finn> rdf:type owl:NamedIndividual ,
+                                                                 foaf:Person ;
+                                                        foaf:currentProject "Meastrograph" ;
+                                                        foaf:depiction <https://potason.github.io/images/cthulu.jpeg> ;
+                                                        foaf:family_name "Wang" ;
+                                                        foaf:givenname "Shuai" ;
+                                                        foaf:homepage <https://potason.github.io/> ;
+                                                        foaf:interest "knowledge graph" ,
+                                                                      "logic" ,
+                                                                      "machine learning" ;
+                                                        foaf:mbox <file:/Users/finnpotason/Programming/FOAF/s2.wang@vu.nl> ;
+                                                        foaf:nick "Finn Potason" ;
+                                                        foaf:status "phd" ;
+                                                        foaf:title "Mr" ;
+                                                        foaf:workplaceHomepage <http://krr.cs.vu.nl/> .
+
+
+###  file:/Users/finnpotason/Programming/FOAF/krr.rdf#frank
+<file:/Users/finnpotason/Programming/FOAF/krr.rdf#frank> rdf:type owl:NamedIndividual ,
+                                                                  foaf:Person ;
+                                                         foaf:currentProject "Meastrograph" ;
+                                                         foaf:depiction <https://en.wikipedia.org/wiki/Frank_van_Harmelen#/media/File:Frank_van_Harmelen_at_Open_Innovation_2.0_Conference_2016.jpg> ;
+                                                         foaf:family_name "van Harmelen" ;
+                                                         foaf:givenname "Frank" ;
+                                                         foaf:homepage <http://www.cs.vu.nl/~frank.van.harmelen/> ;
+                                                         foaf:interest "knowledge graph" ,
+                                                                       "knowledge representation" ,
+                                                                       "medical ontology" ;
+                                                         foaf:mbox <file:/Users/finnpotason/Programming/FOAF/Frank.van.Harmelen@vu.nl> ;
+                                                         foaf:status "professor" ;
+                                                         foaf:title "Prof." .
+
+
+###  file:/Users/finnpotason/Programming/FOAF/krr.rdf#peter
+<file:/Users/finnpotason/Programming/FOAF/krr.rdf#peter> rdf:type owl:NamedIndividual ,
+                                                                  foaf:Person ;
+                                                         foaf:currentProject "AAA Datascience" ,
+                                                                             "Meastrograph" ;
+                                                         foaf:depiction <http://amsterdamdatascience.nl/wp-content/uploads/sites/12/2016/03/peter_bloem_tcm210-703537.jpg> ;
+                                                         foaf:family_name "Bloem" ;
+                                                         foaf:givenname "Peter" ;
+                                                         foaf:homepage <http://www.peterbloem.nl/> ;
+                                                         foaf:interest "deep learning" ,
+                                                                       "knowledge graph" ,
+                                                                       "kolmogorov complexity" ,
+                                                                       "machine learning" ,
+                                                                       "minimum description length" ;
+                                                         foaf:mbox <file:/Users/finnpotason/Programming/FOAF/vu@peterbloem.nl> ;
+                                                         foaf:status "postdoc" ;
+                                                         foaf:title "Dr." .
+
+
+###  Generated by the OWL API (version 4.2.8.20170104-2310) https://github.com/owlcs/owlapi

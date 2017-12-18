@@ -10,7 +10,6 @@ var bodyParser = require('body-parser');
 // the following is my code:
 var hbs = require('express-handlebars');// Finn
 
-
 var index = require('./routes/index');
 // var members = require('./routes/members');
 
