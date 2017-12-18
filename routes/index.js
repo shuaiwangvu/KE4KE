@@ -43,7 +43,14 @@ var conversation = new watson.ConversationV1 ({
 // });
 
 
+var rdfData = fs.readFileSync(filename).toString();
 
+var store = rdf.graph();
+var contentType='text/turtle';
+// var knows = FOAF('knows'); //???
+var baseUrl="http://www.w3.org/2002/07/owl#Thing";
+// var body = '<a> <b> <c> .';
+rdf.parse(rdfData,store,baseUrl);
 
 
 
@@ -92,6 +99,39 @@ router.get('/publications', function(req, res, next) {
 router.get('/members/:id', function(req, res, next) {
 
     var question = req.params.id;
+
+    // console.log(rdfData);
+    // console.log('======= end of file =======');
+
+
+    var stms = store.statementsMatching(undefined, undefined , undefined);
+    for (var i=0; i<stms.length;i++) {
+        console.log("\n");
+        var stm = stms[i];
+        var subject = stm.subject.uri;
+        var predicate = stm.predicate.uri;
+        var object = stm.object;
+
+
+        // var object = stm.object.uri;
+
+        console.log("termType = ", object.termType);
+
+
+        // var object = stm.object.uri;
+        console.log("subject: "+ subject);
+        console.log("predicate: "+ predicate);
+        // console.log("******** object: "+ object.toString());
+        if (object.termType === "Literal") {
+            console.log("value of = ", object.value);
+        }else {
+            console.log("uri = ", object.uri)
+        }
+
+        console.log(stm) // the WebID of a friend
+
+    }
+
 
     // var answer = 'answer of ' + question;
     var chatbot_reply;
