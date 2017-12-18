@@ -52,7 +52,11 @@ var baseUrl="http://www.w3.org/2002/07/owl#Thing";
 // var body = '<a> <b> <c> .';
 rdf.parse(rdfData,store,baseUrl);
 
+console.log (" ==== BEGINNING OF HISTORY! ====\n");
 
+console.log("There are ", store.length, " triples");
+
+console.log (" ==== END OF HISTORY! ====\n");
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
@@ -113,19 +117,15 @@ router.get('/members/:id', function(req, res, next) {
         var object = stm.object;
 
 
-        // var object = stm.object.uri;
-
         console.log("termType = ", object.termType);
 
-
-        // var object = stm.object.uri;
         console.log("subject: "+ subject);
         console.log("predicate: "+ predicate);
         // console.log("******** object: "+ object.toString());
         if (object.termType === "Literal") {
-            console.log("value of = ", object.value);
+            console.log("Object : value of = ", object.value);
         }else {
-            console.log("uri = ", object.uri)
+            console.log("Object : uri = ", object.uri)
         }
 
         console.log(stm) // the WebID of a friend
@@ -135,6 +135,8 @@ router.get('/members/:id', function(req, res, next) {
 
     // var answer = 'answer of ' + question;
     var chatbot_reply;
+
+    var interest_restrictions = [];
     conversation.message({
         workspace_id: '49317eb4-0292-4f3d-a6ea-93dc547151ac',
         input: {'text': question}
@@ -148,8 +150,20 @@ router.get('/members/:id', function(req, res, next) {
             response.entities.forEach(function (item) {
                 console.log(item.value);
             });
-        console.log(chatbot_reply);
-        let hello = [1,2,3];
+        console.log('REPLY FROM WATSON: ', chatbot_reply);
+
+        // ==========THIS IS A TEST ON RETRIVING FROM KNOWLEDGE GRAPH
+        var deep_learning = rdf.literal("deep learning");
+
+
+        // var interest = rdf.sym('http://xmlns.com/foaf/0.1/interest'); //
+        var friends = store.each( undefined, undefined, deep_learning);
+        console.log('HOW MANY RESULTS ARE THERE? -- ', friends.length);
+        for (var i=0; i<friends.length;i++) {
+            var friend = friends[i];
+            console.log('===================SEARCHING RESULT=======', friend.uri) // the WebID of a friend
+        }
+        var hello = [1,2,3];
 
         // res.render('members', { output: chatbot_reply });
         res.render('members', {input: question, output: chatbot_reply, lst: hello});
