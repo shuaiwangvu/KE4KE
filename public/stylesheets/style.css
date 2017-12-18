@@ -125,8 +125,8 @@ a{
   background-color: #ff9e2c;
   position: absolute;
   left: 0px;
-  top: 10%;
-  height: 90%;
+  top: 50px;
+  height: 95%;
   width: 70%;
   overflow: scroll;
 }
@@ -141,6 +141,24 @@ a{
   height: 50%;
   background-color: #7a9e2d;
 }
+
+.imageCell{
+  /*width: 100px;*/
+  height: 130px;
+  width: 20%;
+  position: relative;
+  left: 0px;
+}
+
+.textCell{
+  /*width: 100px;*/
+  height: 100px;
+  width: 70%;
+  right: 0px;
+  position: relative;
+  /*overflow: scroll;*/
+}
+
 .left-half-all{
   height: 50%;
   overflow: scroll;
@@ -149,8 +167,8 @@ a{
 .right-half {
   background-color: #b6701e;
   position: absolute;
-  height: 90%;
-  top: 10%;
+  height: 95%;
+  top: 50px;
   right: 0px;
   width: 30%;
   overflow: scroll;
