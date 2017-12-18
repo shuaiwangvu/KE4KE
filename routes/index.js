@@ -43,6 +43,7 @@ var conversation = new watson.ConversationV1 ({
 // });
 
 
+//     < PRE PROCESSING OF DATA >
 var rdfData = fs.readFileSync(filename).toString();
 
 var store = rdf.graph();
@@ -52,9 +53,73 @@ var baseUrl="http://www.w3.org/2002/07/owl#Thing";
 // var body = '<a> <b> <c> .';
 rdf.parse(rdfData,store,baseUrl);
 
+
 console.log (" ==== BEGINNING OF HISTORY! ====\n");
 
 console.log("There are ", store.length, " triples");
+
+var is_of_type = rdf.sym("http://www.w3.org/1999/02/22-rdf-syntax-ns#type");
+var individual = rdf.sym("http://www.w3.org/2002/07/owl#NamedIndividual");
+
+// GLOBAL LIST OF ALL PEOPLE . NOTE THAT NOT ALL PEOPLE ARE SCIENTISTS
+var all_people = [];
+var recommended_people = [];
+var other_people = [];
+
+var to_display = [];
+
+
+var people_prefix = "file:/Users/finnpotason/Programming/FOAF/krr.rdf#";
+var people = store.each(undefined, is_of_type, individual);
+console.log('HOW MANY RESULTS ARE THERE? -- ', people.length);
+for (var i=0; i<people.length;i++) {
+    var p = people[i];
+    console.log('The URI of this people is: ', p.uri); // the WebID of a friend
+    all_people += p.uri;
+
+    // title and name
+    var has_first_name = rdf.sym("http://xmlns.com/foaf/0.1/givenname");
+    var first_name = store.any(p, has_first_name);
+    var has_family_name = rdf.sym("http://xmlns.com/foaf/0.1/family_name");
+    var family_name = store.any(p, has_family_name);
+    console.log("This people has first name: ", first_name.value);
+    console.log("This people has family name: ", family_name.value);
+
+    var has_title = rdf.sym("http://xmlns.com/foaf/0.1/title");
+    var title = store.any(p, has_title);
+    console.log("This people has title: ", title.value);
+
+    //interest
+    var interest = [];
+    var interest_string = "";
+    var has_interest = rdf.sym("http://xmlns.com/foaf/0.1/interest");
+    var interest_list = store.each(p, has_interest, undefined);
+    for (var j=0; j<interest_list.length;j++) {
+        it = interest_list[j];
+        interest += it.value; // the WebID of a friend
+        interest_string += " ";
+        interest_string += it.value;
+    }
+    console.log("This person has interest in ", interest);
+
+    //image
+    var has_image = rdf.sym("http://xmlns.com/foaf/0.1/depiction");
+    var image = store.any(p, has_image);
+    console.log("This people has image: ", image.value);
+
+    //homepage
+    var has_homepage = rdf.sym("http://xmlns.com/foaf/0.1/homepage");
+    var homepage = store.any(p, has_homepage);
+    console.log("This people has homepage: ", homepage.value);
+
+    var pp = {uri: p.uri ,name : title.value + " " + first_name.value + " "+ family_name.value,
+        interest: interest_string, image: image.value, homepage: homepage.value};
+
+    console.log("Initialised an entry for " + pp.name + "\n");
+    to_display.push(pp);
+}
+
+// console.log('         < ALL PEOPLE > \n', all_people);
 
 console.log (" ==== END OF HISTORY! ====\n");
 
@@ -156,6 +221,7 @@ router.get('/members/:id', function(req, res, next) {
         var deep_learning = rdf.literal("deep learning");
 
 
+
         // var interest = rdf.sym('http://xmlns.com/foaf/0.1/interest'); //
         var friends = store.each( undefined, undefined, deep_learning);
         console.log('HOW MANY RESULTS ARE THERE? -- ', friends.length);
@@ -166,7 +232,8 @@ router.get('/members/:id', function(req, res, next) {
         var hello = [1,2,3];
 
         // res.render('members', { output: chatbot_reply });
-        res.render('members', {input: question, output: chatbot_reply, lst: hello});
+        // console.log("TO DISPLAY :" + to_display[0].name);
+        res.render('members', {input: question, output: chatbot_reply, people: to_display});
     });
 
     // res.render('members', {input: question, output: answer});

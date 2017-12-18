@@ -137,6 +137,10 @@ a{
   background-color: #339e2c;
   overflow: scroll;
 }
+.left-half-recommend-cell {
+  height: 50%;
+  background-color: #7a9e2d;
+}
 .left-half-all{
   height: 50%;
   overflow: scroll;

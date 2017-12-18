@@ -6,15 +6,29 @@
         <div id="recommended" class="left-half-recommend" >
 
             <article>
-                {{#each lst}}
-                    <h1>
-                        {{this}}
-                    </h1>
-                {{/each}}
+
+
 
                 <p>Weekends don't count unless you spend them doing something completely pointless.</p>
                 <h1>Left Half</h1>
-                <p>Weekends don't count unless you spend them doing something completely pointless.</p>
+                <p>**Weekends don't count unless you spend them doing something completely pointless.</p>
+                <!--<p>WTF: {{people.length}}</p>-->
+                <div class = "left-half-recommend-cell">
+                    {{#each people}}
+                        <h1>
+                            {{this.name}}
+                        </h1>
+                        <p>{{this.interest}}</p>
+                        <p>{{this.image}}</p>
+                        <p>{{this.homepage}}</p>
+
+                        <div style="text-align:center" >
+                            <img class="imageBox" title= "{{this.name}}" src="{{this.image}}" />
+                        </div>
+                    {{/each}}
+                </div>
+
+
                 <h1>Left Half</h1>
                 <p>Weekends don't count unless you spend them doing something completely pointless.</p>
                 <h1>Left Half</h1>

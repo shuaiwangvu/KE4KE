@@ -121,8 +121,8 @@ foaf:Person rdf:type owl:Class .
                                                                          "medical protocol" ,
                                                                          "semantic web" ;
                                                            foaf:mbox <file:/Users/finnpotason/Programming/FOAF/annette@cs.vu.nl> ;
-                                                           foaf:status "professor" ;
-                                                           foaf:title "Prof." .
+                                                           foaf:status "associate professor" ;
+                                                           foaf:title "Dr." .
 
 
 ###  file:/Users/finnpotason/Programming/FOAF/krr.rdf#eva
