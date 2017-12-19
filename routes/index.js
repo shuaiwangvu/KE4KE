@@ -70,6 +70,8 @@ var to_display = [];
 var upper = [];
 var lower = [];
 
+var location = 0;
+
 var people_prefix = "file:/Users/finnpotason/Programming/FOAF/krr.rdf#";
 var people = store.each(undefined, is_of_type, individual);
 console.log('HOW MANY RESULTS ARE THERE? -- ', people.length);
@@ -77,7 +79,7 @@ for (var i=0; i<people.length;i++) {
     var p = people[i];
     console.log('The URI of this people is: ', p.uri); // the WebID of a friend
 
-    var pl = {uri : p.uri, interest: []}
+    var pl = {uri : p.uri, interest: [], position: ""}
 
 
     // title and name
@@ -107,7 +109,7 @@ for (var i=0; i<people.length;i++) {
     }
     console.log("This person has interest in ", interest, " = ", pl.interest.length);
 
-    all_people.push(pl); // all this person in the all_people for splitting
+
 
     //image
     var has_image = rdf.sym("http://xmlns.com/foaf/0.1/depiction");
@@ -124,12 +126,18 @@ for (var i=0; i<people.length;i++) {
     var position = store.any(p, has_position);
     console.log("This people has position: ", position.value);
 
+    pl.position = position.value;
+    all_people.push(pl); // all this person in the all_people for splitting
+
     var pp = {uri: p.uri ,name : title.value + " " + first_name.value + " "+ family_name.value,
         interest: interest_string, image: image.value, homepage: homepage.value, position: position.value};
 
     console.log("Initialised an entry for " + pp.name + "\n");
     to_display.push(pp);
 }
+
+var upper = [];
+var lower = to_display;
 
 console.log('         < ALL PEOPLE > ', all_people.length);
 
@@ -147,6 +155,13 @@ router.get('/about', function(req, res, next) {
 
 router.get('/members', function(req, res, next) {
 
+    location  = 0;
+    upper = [];
+    lower = to_display;
+
+    recommended_people = [];
+    other_people = [];
+
     var chatbot_reply; // empty string for now
 
     conversation.message({
@@ -160,12 +175,11 @@ router.get('/members', function(req, res, next) {
         // console.log(response.output.text);
         chatbot_reply = response.output.text
         console.log(chatbot_reply);
-        res.render('members', { output: chatbot_reply });
+        res.render('members', { output: chatbot_reply, upper: upper, lower: lower});
     });
 
-
     // res.render('members', { title: 'Members', condition: true, anyArray: [1,2,3], reply: chatbot_reply });
-
+    // res.render('members', {input: "", output: "", upper: upper, lower: lower});
 });
 
 router.get('/projects', function(req, res, next) {
@@ -178,6 +192,8 @@ router.get('/publications', function(req, res, next) {
 
 
 router.get('/members/:id', function(req, res, next) {
+
+    location += 1;
 
     upper = [];
     lower = [];
@@ -231,25 +247,67 @@ router.get('/members/:id', function(req, res, next) {
                 console.log(item.value);
             });
 
-            all_people.forEach(function (ppl){
+            //UPDATE THE TWO LITS ACCORIDNG TO THE DOMAIN
+            if (location  ==  1 || location == 4)
+            {
+            all_people.forEach(function (ppl) {
                 var flag = true;
                 response.entities.forEach(function (item) {
                     var comp = ppl.interest.includes(item.value);
                     console.log("test", item.value, "is in ", ppl.interest, ": ", comp);
-                    if (comp === false){
+                    if (comp === false) {
                         flag = false;
                     }
 
                 });
 
-                if (flag === true){
-                    recommended_people.push(ppl.uri);
-                }else {
-                    other_people.push(ppl.uri);
+                if (flag === true) {
+                    recommended_people.push(ppl);
+                } else {
+                    other_people.push(ppl);
+                }
+                // console.log('why?');
+
+                });
+            };
+            console.log("location ==== ", location);
+
+
+        //UPDATE THE TWO LIST ACCORDING TO THE POSITION
+        if (location  ==  2 || location == 5)
+        {
+            recommended_people.forEach(function (ppl) {
+                var flag = false;
+
+                response.entities.forEach(function (item) {
+                    console.log("position needed", item.value);
+                    console.log("this person", ppl.uri, " has position ", ppl.position);
+                    if (ppl.position == item.value) {
+                        flag = true;
+                    }
+
+                });
+
+                if (flag === true) {
+                    //nothing changes to this people
+                    console.log("nothing changes for ppl", ppl.uri);
+                } else {
+                    console.log("move it to the other list:", ppl.uri);
+                    other_people.push(ppl);
+
+                    var index = recommended_people.indexOf(ppl);
+                    if (index > -1) {
+                        recommended_people.splice(index, 1);
+                    }
+                    other_people.push(ppl);
                 }
                 // console.log('why?');
 
             });
+        };
+
+
+
         console.log('REPLY FROM WATSON: ', chatbot_reply);
 
         // ==========THIS IS A TEST ON RETRIVING FROM KNOWLEDGE GRAPH
@@ -258,19 +316,25 @@ router.get('/members/:id', function(req, res, next) {
 
 
         // var interest = rdf.sym('http://xmlns.com/foaf/0.1/interest'); //
-        var friends = store.each( undefined, undefined, deep_learning);
-        console.log('HOW MANY RESULTS ARE THERE? -- ', friends.length);
-        for (var i=0; i<friends.length;i++) {
-            var friend = friends[i];
-            console.log('===================SEARCHING RESULT=======', friend.uri) // the WebID of a friend
-        }
+        // var friends = store.each( undefined, undefined, deep_learning);
+        // console.log('HOW MANY RESULTS ARE THERE? -- ', friends.length);
+        // for (var i=0; i<friends.length;i++) {
+        //     var friend = friends[i];
+        //     console.log('===================SEARCHING RESULT=======', friend.uri) // the WebID of a friend
+        // }
 
         to_display.forEach(function (display_ppl) {
-            if (recommended_people.includes(display_ppl.uri)){
-                upper.push(display_ppl);
+            var flag_rec = false;
+            recommended_people.forEach(function(reco){
+                if (display_ppl.uri == reco.uri){
+                    flag_rec = true;
+                }
+            });
+            if (flag_rec == true){
+                upper.push(display_ppl)
             }else{
                 lower.push(display_ppl);
-            }
+            };
         });
 
         res.render('members', {input: question, output: chatbot_reply, upper: upper, lower: lower});
