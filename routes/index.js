@@ -155,7 +155,7 @@ router.get('/about', function(req, res, next) {
 
 router.get('/members', function(req, res, next) {
 
-    location  = 0;
+    location  = 1;
     upper = [];
     lower = to_display;
 
@@ -193,7 +193,9 @@ router.get('/publications', function(req, res, next) {
 
 router.get('/members/:id', function(req, res, next) {
 
-    location += 1;
+
+
+    console.log("this is location  ", location);
 
     upper = [];
     lower = [];
@@ -247,9 +249,12 @@ router.get('/members/:id', function(req, res, next) {
                 console.log(item.value);
             });
 
+
             //UPDATE THE TWO LITS ACCORIDNG TO THE DOMAIN
-            if (location  ==  1 || location == 4)
+            if (location%3 == 1)
             {
+                recommended_people = [];
+                other_people = [];
             all_people.forEach(function (ppl) {
                 var flag = true;
                 response.entities.forEach(function (item) {
@@ -273,8 +278,10 @@ router.get('/members/:id', function(req, res, next) {
             console.log("location ==== ", location);
 
 
+
+
         //UPDATE THE TWO LIST ACCORDING TO THE POSITION
-        if (location  ==  2 || location == 5)
+        if (location%3 == 2)
         {
             recommended_people.forEach(function (ppl) {
                 var flag = false;
@@ -292,12 +299,14 @@ router.get('/members/:id', function(req, res, next) {
                     //nothing changes to this people
                     console.log("nothing changes for ppl", ppl.uri);
                 } else {
-                    console.log("move it to the other list:", ppl.uri);
-                    other_people.push(ppl);
+                    console.log("does not meet the requirement so move it to the other list:", ppl.uri);
+                    // other_people.push(ppl);
 
                     var index = recommended_people.indexOf(ppl);
                     if (index > -1) {
                         recommended_people.splice(index, 1);
+                    }else{
+                        console.log("ERROR!!!!!!!!!");
                     }
                     other_people.push(ppl);
                 }
@@ -336,7 +345,7 @@ router.get('/members/:id', function(req, res, next) {
                 lower.push(display_ppl);
             };
         });
-
+        location += 1;
         res.render('members', {input: question, output: chatbot_reply, upper: upper, lower: lower});
     });
 
