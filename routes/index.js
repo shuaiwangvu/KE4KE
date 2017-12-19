@@ -199,6 +199,7 @@ router.get('/members/:id', function(req, res, next) {
 
     upper = [];
     lower = [];
+    var valid = true;
 
     var question = req.params.id;
 
@@ -241,110 +242,131 @@ router.get('/members/:id', function(req, res, next) {
     },  function(err, response) {
         if (err)
             console.log('error:', err);
-        else
+        else{
             console.log(JSON.stringify(response, null, 2));
             chatbot_reply = response.output.text.toString();
             console.log('there are ', response.entities.length, 'entities');
-            response.entities.forEach(function (item) {
-                console.log(item.value);
-            });
+
+            // response.entities.forEach(function (item) {
+            //     console.log(item.value);
+            // });
+            if (response.entities.length !== 0){
+                //UPDATE THE TWO LITS ACCORIDNG TO THE DOMAIN
+                if (location%3 == 1)
+                {
+                    recommended_people = [];
+                    other_people = [];
+                    all_people.forEach(function (ppl) {
+                        var flag = true;
+                        response.entities.forEach(function (item) {
+                            var comp = ppl.interest.includes(item.value);
+                            console.log("test", item.value, "is in ", ppl.interest, ": ", comp);
+                            if (comp === false) {
+                                flag = false;
+                            }
+
+                        });
+
+                        if (flag === true) {
+                            recommended_people.push(ppl);
+                        } else {
+                            other_people.push(ppl);
+                        }
+                        // console.log('why?');
+
+                    });
+                };
+                console.log("location ==== ", location);
 
 
-            //UPDATE THE TWO LITS ACCORIDNG TO THE DOMAIN
-            if (location%3 == 1)
-            {
-                recommended_people = [];
-                other_people = [];
-            all_people.forEach(function (ppl) {
-                var flag = true;
-                response.entities.forEach(function (item) {
-                    var comp = ppl.interest.includes(item.value);
-                    console.log("test", item.value, "is in ", ppl.interest, ": ", comp);
-                    if (comp === false) {
-                        flag = false;
-                    }
+                //UPDATE THE TWO LIST ACCORDING TO THE POSITION
+                if (location%3 == 2)
+                {
+                    recommended_people.forEach(function (ppl) {
+                        var flag = false;
 
-                });
+                        response.entities.forEach(function (item) {
+                            console.log("position needed", item.value);
+                            console.log("this person", ppl.uri, " has position ", ppl.position);
+                            if (ppl.position == item.value) {
+                                flag = true;
+                            }
 
-                if (flag === true) {
-                    recommended_people.push(ppl);
-                } else {
-                    other_people.push(ppl);
-                }
-                // console.log('why?');
+                        });
 
-                });
-            };
-            console.log("location ==== ", location);
+                        if (flag === true) {
+                            //nothing changes to this people
+                            console.log("nothing changes for ppl", ppl.uri);
+                        } else {
+                            console.log("does not meet the requirement so move it to the other list:", ppl.uri);
+                            // other_people.push(ppl);
+
+                            var index = recommended_people.indexOf(ppl);
+                            if (index > -1) {
+                                recommended_people.splice(index, 1);
+                            }else{
+                                console.log("ERROR!!!!!!!!!");
+                            }
+                            other_people.push(ppl);
+                        }
+                        // console.log('why?');
+
+                    });
+                };
 
 
-        //UPDATE THE TWO LIST ACCORDING TO THE POSITION
-        if (location%3 == 2)
-        {
-            recommended_people.forEach(function (ppl) {
-                var flag = false;
 
-                response.entities.forEach(function (item) {
-                    console.log("position needed", item.value);
-                    console.log("this person", ppl.uri, " has position ", ppl.position);
-                    if (ppl.position == item.value) {
-                        flag = true;
-                    }
+                console.log('REPLY FROM WATSON: ', chatbot_reply);
 
-                });
+                // ==========THIS IS A TEST ON RETRIVING FROM KNOWLEDGE GRAPH
+                var deep_learning = rdf.literal("deep learning");
 
-                if (flag === true) {
-                    //nothing changes to this people
-                    console.log("nothing changes for ppl", ppl.uri);
-                } else {
-                    console.log("does not meet the requirement so move it to the other list:", ppl.uri);
-                    // other_people.push(ppl);
 
-                    var index = recommended_people.indexOf(ppl);
-                    if (index > -1) {
-                        recommended_people.splice(index, 1);
+
+                // var interest = rdf.sym('http://xmlns.com/foaf/0.1/interest'); //
+                // var friends = store.each( undefined, undefined, deep_learning);
+                // console.log('HOW MANY RESULTS ARE THERE? -- ', friends.length);
+                // for (var i=0; i<friends.length;i++) {
+                //     var friend = friends[i];
+                //     console.log('===================SEARCHING RESULT=======', friend.uri) // the WebID of a friend
+                // }
+
+                to_display.forEach(function (display_ppl) {
+                    var flag_rec = false;
+                    recommended_people.forEach(function(reco){
+                        if (display_ppl.uri == reco.uri){
+                            flag_rec = true;
+                        }
+                    });
+                    if (flag_rec == true){
+                        upper.push(display_ppl)
                     }else{
-                        console.log("ERROR!!!!!!!!!");
-                    }
-                    other_people.push(ppl);
-                }
-                // console.log('why?');
+                        lower.push(display_ppl);
+                    };
+                });
+            } else{
+                chatbot_reply = "Watson cannot understand you. You may contact our secretary.";
+                upper = [];
+                lower = [];
+                valid = false;
 
-            });
-        };
+                to_display.forEach(function (display_ppl) {
+                    if (display_ppl.position == "secretary"){
+                        upper.push(display_ppl)
+                    }else{
+                        lower.push(display_ppl);
+                    };
+                });
+
+            }
 
 
 
-        console.log('REPLY FROM WATSON: ', chatbot_reply);
+            location += 1;
+            res.render('members', {input: question, output: chatbot_reply, valid:valid ,upper: upper, lower: lower});
 
-        // ==========THIS IS A TEST ON RETRIVING FROM KNOWLEDGE GRAPH
-        var deep_learning = rdf.literal("deep learning");
+        }
 
-
-
-        // var interest = rdf.sym('http://xmlns.com/foaf/0.1/interest'); //
-        // var friends = store.each( undefined, undefined, deep_learning);
-        // console.log('HOW MANY RESULTS ARE THERE? -- ', friends.length);
-        // for (var i=0; i<friends.length;i++) {
-        //     var friend = friends[i];
-        //     console.log('===================SEARCHING RESULT=======', friend.uri) // the WebID of a friend
-        // }
-
-        to_display.forEach(function (display_ppl) {
-            var flag_rec = false;
-            recommended_people.forEach(function(reco){
-                if (display_ppl.uri == reco.uri){
-                    flag_rec = true;
-                }
-            });
-            if (flag_rec == true){
-                upper.push(display_ppl)
-            }else{
-                lower.push(display_ppl);
-            };
-        });
-        location += 1;
-        res.render('members', {input: question, output: chatbot_reply, upper: upper, lower: lower});
     });
 
     // res.render('members', {input: question, output: answer});

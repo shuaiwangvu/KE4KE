@@ -3,7 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="ab8968bf-feb1-4f94-8c87-4438ded22ed8" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change beforePath="$PROJECT_DIR$/people.owl" afterPath="$PROJECT_DIR$/people.owl" />
       <change beforePath="$PROJECT_DIR$/routes/index.js" afterPath="$PROJECT_DIR$/routes/index.js" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -58,8 +57,8 @@
       <file leaf-file-name="index.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/routes/index.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-293">
-              <caret line="132" column="42" lean-forward="false" selection-start-line="132" selection-start-column="42" selection-end-line="132" selection-end-column="42" />
+            <state relative-caret-position="274">
+              <caret line="135" column="14" lean-forward="false" selection-start-line="135" selection-start-column="4" selection-end-line="135" selection-end-column="14" />
               <folding />
             </state>
           </provider>
@@ -132,7 +131,6 @@
       <find>imageCell</find>
       <find>history</find>
       <find>all peop</find>
-      <find>to_display</find>
       <find>members</find>
       <find>all_people</find>
       <find>pl</find>
@@ -141,6 +139,7 @@
       <find>move</find>
       <find>locat</find>
       <find>to_dis</find>
+      <find>to_display</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -287,12 +286,12 @@
       <workItem from="1513292315574" duration="2985000" />
       <workItem from="1513296118798" duration="5713000" />
       <workItem from="1513446595618" duration="1220000" />
-      <workItem from="1513594620251" duration="32661000" />
+      <workItem from="1513594620251" duration="33761000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="55081000" />
+    <option name="totallyTimeSpent" value="56181000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1440" height="900" extended-state="0" />
@@ -756,8 +755,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/routes/index.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-293">
-          <caret line="132" column="42" lean-forward="false" selection-start-line="132" selection-start-column="42" selection-end-line="132" selection-end-column="42" />
+        <state relative-caret-position="274">
+          <caret line="135" column="14" lean-forward="false" selection-start-line="135" selection-start-column="4" selection-end-line="135" selection-end-column="14" />
           <folding />
         </state>
       </provider>
