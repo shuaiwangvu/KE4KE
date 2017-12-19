@@ -278,8 +278,6 @@ router.get('/members/:id', function(req, res, next) {
             console.log("location ==== ", location);
 
 
-
-
         //UPDATE THE TWO LIST ACCORDING TO THE POSITION
         if (location%3 == 2)
         {
