@@ -10,9 +10,9 @@
 
 
                 <h1>Relevant Specialists </h1>
-                <!--<p>WTF: {{people.length}}</p>-->
+                <!--<p>WTF: {{upper.length}}</p>-->
                 <div class = "left-half-recommend-cell">
-                    {{#each people}}
+                    {{#each upper}}
 
                     <section class="container">
                         <div  class = "imageCell">
@@ -48,9 +48,28 @@
         </div>
         <div id="all" class="left-half-all" >
             <article>
-                <h1>Other Specialists</h1>
+                <h1>Other Specialists </h1>
+                <!--<p>WTF: {{lower.length}}</p>-->
+                <div class = "left-half-recommend-cell">
+                    {{#each lower}}
+
+                        <section class="container">
+                            <div  class = "imageCell">
+                                <img height=130px, src="{{this.image}}" />
+                            </div>
 
 
+                            <div class = "textCell">
+
+                                <p><a href="{{this.homepage}}">{{this.name}} ({{this.position}})</a>
+                                </p>
+
+                                <p><i>{{this.interest}}</i></p>
+
+                            </div>
+                        </section>
+                    {{/each}}
+                </div>
 
             </article>
 

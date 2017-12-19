@@ -67,7 +67,8 @@ var recommended_people = [];
 var other_people = [];
 
 var to_display = [];
-
+var upper = [];
+var lower = [];
 
 var people_prefix = "file:/Users/finnpotason/Programming/FOAF/krr.rdf#";
 var people = store.each(undefined, is_of_type, individual);
@@ -75,7 +76,9 @@ console.log('HOW MANY RESULTS ARE THERE? -- ', people.length);
 for (var i=0; i<people.length;i++) {
     var p = people[i];
     console.log('The URI of this people is: ', p.uri); // the WebID of a friend
-    all_people += p.uri;
+
+    var pl = {uri : p.uri, interest: []}
+
 
     // title and name
     var has_first_name = rdf.sym("http://xmlns.com/foaf/0.1/givenname");
@@ -99,8 +102,12 @@ for (var i=0; i<people.length;i++) {
         interest += it.value; // the WebID of a friend
         interest_string += " ";
         interest_string += it.value;
+
+        pl.interest.push (it.value);
     }
-    console.log("This person has interest in ", interest);
+    console.log("This person has interest in ", interest, " = ", pl.interest.length);
+
+    all_people.push(pl); // all this person in the all_people for splitting
 
     //image
     var has_image = rdf.sym("http://xmlns.com/foaf/0.1/depiction");
@@ -172,6 +179,9 @@ router.get('/publications', function(req, res, next) {
 
 router.get('/members/:id', function(req, res, next) {
 
+    upper = [];
+    lower = [];
+
     var question = req.params.id;
 
     // console.log(rdfData);
@@ -220,6 +230,26 @@ router.get('/members/:id', function(req, res, next) {
             response.entities.forEach(function (item) {
                 console.log(item.value);
             });
+
+            all_people.forEach(function (ppl){
+                var flag = true;
+                response.entities.forEach(function (item) {
+                    var comp = ppl.interest.includes(item.value);
+                    console.log("test", item.value, "is in ", ppl.interest, ": ", comp);
+                    if (comp === false){
+                        flag = false;
+                    }
+
+                });
+
+                if (flag === true){
+                    recommended_people.push(ppl.uri);
+                }else {
+                    other_people.push(ppl.uri);
+                }
+                // console.log('why?');
+
+            });
         console.log('REPLY FROM WATSON: ', chatbot_reply);
 
         // ==========THIS IS A TEST ON RETRIVING FROM KNOWLEDGE GRAPH
@@ -234,11 +264,16 @@ router.get('/members/:id', function(req, res, next) {
             var friend = friends[i];
             console.log('===================SEARCHING RESULT=======', friend.uri) // the WebID of a friend
         }
-        var hello = [1,2,3];
 
-        // res.render('members', { output: chatbot_reply });
-        // console.log("TO DISPLAY :" + to_display[0].name);
-        res.render('members', {input: question, output: chatbot_reply, people: to_display});
+        to_display.forEach(function (display_ppl) {
+            if (recommended_people.includes(display_ppl.uri)){
+                upper.push(display_ppl);
+            }else{
+                lower.push(display_ppl);
+            }
+        });
+
+        res.render('members', {input: question, output: chatbot_reply, upper: upper, lower: lower});
     });
 
     // res.render('members', {input: question, output: answer});
