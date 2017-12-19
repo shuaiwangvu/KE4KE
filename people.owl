@@ -111,7 +111,7 @@ foaf:Person rdf:type owl:Class .
 ###  file:/Users/finnpotason/Programming/FOAF/krr.rdf#annette
 <file:/Users/finnpotason/Programming/FOAF/krr.rdf#annette> rdf:type owl:NamedIndividual ,
                                                                     foaf:Person ;
-                                                           foaf:currentProject "NO" ;
+                                                           foaf:currentProject "NO IDEA" ;
                                                            foaf:depiction <https://www.cs.vu.nl/en/Images/Teije_Annette_ten_tcm210-543587.jpg> ;
                                                            foaf:family_name "ten Teije" ;
                                                            foaf:givenname "Annette" ;
@@ -162,7 +162,7 @@ foaf:Person rdf:type owl:Class .
 <file:/Users/finnpotason/Programming/FOAF/krr.rdf#frank> rdf:type owl:NamedIndividual ,
                                                                   foaf:Person ;
                                                          foaf:currentProject "Meastrograph" ;
-                                                         foaf:depiction <https://en.wikipedia.org/wiki/Frank_van_Harmelen#/media/File:Frank_van_Harmelen_at_Open_Innovation_2.0_Conference_2016.jpg> ;
+                                                         foaf:depiction <http://iswc2011.semanticweb.org/uploads/pics/frank-van-harmelen_03.jpg> ;
                                                          foaf:family_name "van Harmelen" ;
                                                          foaf:givenname "Frank" ;
                                                          foaf:homepage <http://www.cs.vu.nl/~frank.van.harmelen/> ;

@@ -62,7 +62,7 @@ var is_of_type = rdf.sym("http://www.w3.org/1999/02/22-rdf-syntax-ns#type");
 var individual = rdf.sym("http://www.w3.org/2002/07/owl#NamedIndividual");
 
 // GLOBAL LIST OF ALL PEOPLE . NOTE THAT NOT ALL PEOPLE ARE SCIENTISTS
-var all_people = [];
+var all_people = []; // uri
 var recommended_people = [];
 var other_people = [];
 
@@ -112,14 +112,19 @@ for (var i=0; i<people.length;i++) {
     var homepage = store.any(p, has_homepage);
     console.log("This people has homepage: ", homepage.value);
 
+    // position
+    var has_position = rdf.sym("http://xmlns.com/foaf/0.1/status");
+    var position = store.any(p, has_position);
+    console.log("This people has position: ", position.value);
+
     var pp = {uri: p.uri ,name : title.value + " " + first_name.value + " "+ family_name.value,
-        interest: interest_string, image: image.value, homepage: homepage.value};
+        interest: interest_string, image: image.value, homepage: homepage.value, position: position.value};
 
     console.log("Initialised an entry for " + pp.name + "\n");
     to_display.push(pp);
 }
 
-// console.log('         < ALL PEOPLE > \n', all_people);
+console.log('         < ALL PEOPLE > ', all_people.length);
 
 console.log (" ==== END OF HISTORY! ====\n");
 
