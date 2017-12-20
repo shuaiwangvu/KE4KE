@@ -3,7 +3,7 @@
 	
  			<div class="content">
  				<h1>Specialist Finder</h1>
- 				<h3>Find your Specialist</h3>
+				 <h3>Inquiry the Specialists in the KRR Group</h3>
  				<hr>
  				<div class="resultCB">
 					<h4 class="animated bounceInRight"><strong>Mr. Watson says: </strong>{{ output }} 
@@ -81,14 +81,14 @@
 								{{/if}}
 							{{/if}}
 
-                  <section class="container">
+                   <section class="container">
 									{{#each lower}}
 												<div class="col-sm-12 col-md-6 col-lg-3">
 														<div>
 															<img class="imageCell thumbnail" src="{{this.image}}" />
 														</div>
 														<div class="nameTittle">
-															<p>{{this.name}}</p>
+															<a href="{{this.homepage}}">{{this.name}}</a>
 														</div>
 											</div>
                     {{/each}}
