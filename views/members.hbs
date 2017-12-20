@@ -1,102 +1,101 @@
-
-
-
 <section class="container">
-    <div class="left-half">
+	
+	
+ 			<div class="content">
+ 				<h1>Specialist Finder</h1>
+ 				<h3>Find your Specialist</h3>
+ 				<hr>
+ 				<div class="resultCB">
+					<h4><strong>Mr. Watson says: </strong>{{ output }}</h4>
+					<h4><strong>You said: </strong>{{ input }}</h4>
+				</div>
+				
+				<!--<p>The chatbot said: {{ reply }} </p>-->
+				<div class="row">
+						<div class="col-lg-2">
+						</div>
+							<div class="col-lg-8">
+								<form class="formInput" action="/members/submit" method="post">
+										<input class="form-control mr-sm-2 inputSearch" id="id" name="id" type="text" placeholder="Search..." aria-label="Search">
+									
+										<button class="btn btn-outline-success my-2 my-sm-0" id="searchButton" type="submit"><i class="fa fa-search" aria-hidden="true"></i></button>            
+							</form>
+
+
+							</div>
+						<div class="col-lg-2">
+						</div>
+				</div>
+			</div>
+			
+
         <div id="recommended" class="left-half-recommend" >
-
-            <article>
-
-
-
-                <h1>Relevant Specialists </h1>
+			      <article>
+                <h1>Relevant Specialists</h1>
+								<hr>
+								
                 <!--<p>WTF: {{upper.length}}</p>-->
-                <div class = "left-half-recommend-cell">
-                    {{#each upper}}
+
+									{{#each upper}}
 
                     <section class="container">
-                        <div  class = "imageCell">
-                            <img height=130px, src="{{this.image}}" />
-                        </div>
-
-
-                        <div class = "textCell">
-
-                            <p><a href="{{this.homepage}}">{{this.name}} ({{this.position}})</a>
-                            </p>
-
-                            <p><i>{{this.interest}}</i></p>
-
-                        </div>
+										
+											
+										<div class="row">
+										<div class="specialistBox">
+												<div class="col-lg-4">
+															<img class="imageCell thumbnail" src="{{this.image}}" />
+												</div>
+												<div class="col-lg-8">
+													<div class = "textCell">
+														<h2>{{this.name}} ({{this.position}})</h2>
+														<div class="interestBox"><p><i>{{this.interest}}</i></p></div>
+														<hr>
+														<p id="descriptionResult">Senior researcher at the Database Architectures research group of CWI and professor at the Vrije Universiteit Amsterdam in the special chair of Large-Scale Analytical Data Management (about my research). Architect of the database systems MonetDB, VectorWise (aka Actian Vector) and VectorH (VectorWise-on-Hadoop). Have been involved in 3 spin-off companies in the area of data management.</p>
+														<hr>
+															<p><a href="{{this.homepage}}">Webpage of {{this.name}}</a>
+																</p>
+														<p>p.boncz@vu.nl - WN-T342</p>
+													</div>
+												</div>	
+											</div>
+										</div>
                     </section>
                     {{/each}}
-                </div>
 
-
-                <!--<h1>Left Half</h1>-->
-                <!--<p>Weekends don't count unless you spend them doing something completely pointless.</p>-->
-                <!--<h1>Left Half</h1>-->
-                <!--<p>Weekends don't count unless you spend them doing something completely pointless.</p>-->
-                <!--<h1>Left Half</h1>-->
-                <!--<p>Weekends don't count unless you spend them doing something completely pointless.</p>-->
-                <!--<h1>Left Half</h1>-->
-                <!--<p>Weekends don't count unless you spend them doing something completely pointless.</p>-->
-                <!--<h1>Left Half</h1>-->
-                <!--<p>Weekends don't count unless you spend them doing something completely pointless.</p>-->
-
-            </article>
-        </div>
+            </article>			
+					
+				</div>	
+	
         <div id="all" class="left-half-all" >
-            <article>
+			      <article>
                 <h1>Other Specialists </h1>
+								<hr>
                 <!--<p>WTF: {{lower.length}}</p>-->
-                <div class = "left-half-recommend-cell">
-                    {{#each lower}}
-
-                        <section class="container">
-                            <div  class = "imageCell">
-                                <img height=130px, src="{{this.image}}" />
-                            </div>
-
-
-                            <div class = "textCell">
-
-                                <p><a href="{{this.homepage}}">{{this.name}} ({{this.position}})</a>
-                                </p>
-
-                                <p><i>{{this.interest}}</i></p>
-
-                            </div>
-                        </section>
+                  <section class="container">
+									{{#each lower}}
+												<div class="col-lg-3">
+														<div>
+															<img class="imageCell thumbnail" src="{{this.image}}" />
+														</div>
+														<div class="nameTittle">
+															<h4>{{this.name}} ({{this.position}})</h4>
+														</div>
+										</div>
                     {{/each}}
-                </div>
+									</section>
 
-            </article>
+            </article>			
+					
+				</div>				
+				
 
-        </div>
-
-    </div>
-    <div class="right-half">
-        <article>
-            <h1>Right Half</h1>
-            <p>If your knees aren't green by the end of the day, you ought to seriously re-examine your life.</p>
-
-            <form action="/members/submit" method="post">
-                <input type="text" name="id">
-                <button type="submit">Submit</button>
-            </form>
-
-
-            <p>The question was: {{ input }}</p>
-            <p>The answer is: {{ output }}</p>
-
-            <!--<p>The chatbot said: {{ reply }} </p>-->
-
-
-        </article>
-    </div>
 </section>
 
+			
+			
+			
+			
 <!--<div class="container">-->
     <!--<div style="width: 70%;">test-->
     <!--</div>-->
