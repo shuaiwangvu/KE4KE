@@ -6,7 +6,11 @@
  				<h3>Find your Specialist</h3>
  				<hr>
  				<div class="resultCB">
-					<h4><strong>Mr. Watson says: </strong>{{ output }}</h4>
+					<h4><strong>Mr. Watson says: </strong>{{ output }} 
+					
+					</h4>
+
+					
 				</div>
 				
 				<!--<p>The chatbot said: {{ reply }} </p>-->
@@ -30,11 +34,12 @@
 
         <div id="recommended" class="left-half-recommend" >
 			      <article>
+							{{#if found}}
+								{{#if valid}}
                 <h1>Relevant Specialists</h1>
 								<hr>
-								
-                <!--<p>WTF: {{upper.length}}</p>-->
-
+								{{/if}}
+							{{/if}}
 									{{#each upper}}
 
                     <section class="container">
@@ -68,9 +73,14 @@
 	
         <div id="all" class="left-half-all" >
 			      <article>
-                <h1>Other Specialists </h1>
+							
+							{{#if found}}
+								{{#if valid}}
+                <h1>Other Specialists</h1>
 								<hr>
-                <!--<p>WTF: {{lower.length}}</p>-->
+								{{/if}}
+							{{/if}}
+
                   <section class="container">
 									{{#each lower}}
 												<div class="col-sm-12 col-md-6 col-lg-3">
@@ -90,30 +100,3 @@
 				
 
 </section>
-
-			
-			
-			
-			
-<!--<div class="container">-->
-    <!--<div style="width: 70%;">test-->
-    <!--</div>-->
-            <!--<div class="content" style="width: 30%;">-->
-                <!--<h1>Specialist Finder</h1>-->
-                <!--<h3>Find your Specialist</h3>-->
-                <!--<hr>-->
-            <!--</div>-->
-<!--</div>-->
-
-<!--this is the chatbot-->
-
-<!--<form action="/members/submit" method="post">-->
-    <!--<input type="text" name="id">-->
-    <!--<button type="submit">Submit</button>-->
-<!--</form>-->
-
-
-<!--<p>The question was: {{ input }}</p>-->
-<!--<p>The answer is: {{ output }}</p>-->
-
-<!--<p>The chatbot said: {{ reply }} </p>-->
