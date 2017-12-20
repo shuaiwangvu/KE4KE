@@ -149,15 +149,9 @@ a{
 
 .nameTittle{
     background-color: lightsteelblue;
-		text-align: center;
-    margin-right: 20px;
-    margin-left: 20px;
-    margin-bottom: 30px;
-    padding-top: 10px;
-    padding-bottom: 10px;
+    margin-bottom: 5%;
 	color: white;
 	border-radius: 10px;
-	text-shadow: 2px 2px #000000;
 }
 
 
@@ -188,11 +182,6 @@ a{
 	margin-bottom: 75px;
 
 }
-
-
-
-
-
 
 
 
@@ -232,8 +221,8 @@ a{
 }
 
 .imageCell{
-	margin-top: 40px;
-	margin-left: 20px;
+	margin-top: 8%;
+	margin-left: 5%;
   height: 250px;
   width: 200px;
   position:relative;
@@ -245,23 +234,9 @@ a{
   position: relative;
 }
 
-.left-half-all{
-  height: 50%;
-  overflow: scroll;
-}
-
-.right-half {
-  background-color: #b6701e;
-  position: absolute;
-  height: 95%;
-  top: 50px;
-  right: 0px;
-  width: 30%;
-  overflow: scroll;
-}
 
 .specialistBox{
-	margin-bottom: 300px;
+	margin-bottom: 25%;
 }
 
 
