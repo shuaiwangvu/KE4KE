@@ -2,3 +2,7 @@
 node_modules/*
 node_modules/watson-developer-cloud/package.json
 ./node_modules/watson-developer-cloud/package.json
+
+
+ld-r/*
+ld-r/
