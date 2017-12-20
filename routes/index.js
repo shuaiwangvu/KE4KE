@@ -319,7 +319,7 @@ router.get('/members/:id', function(req, res, next) {
                 console.log('REPLY FROM WATSON: ', chatbot_reply);
 
                 // ==========THIS IS A TEST ON RETRIVING FROM KNOWLEDGE GRAPH
-                var deep_learning = rdf.literal("deep learning");
+                // var deep_learning = rdf.literal("deep learning");
 
 
 
@@ -346,7 +346,9 @@ router.get('/members/:id', function(req, res, next) {
                 });
 
                 // if no one was found then display only the secretary
-                if (upper.length == 0){
+                if (recommended_people.length == 0){
+                    upper= [];
+                    console.log("no one found and now!!!")
                     to_display.forEach(function (display_ppl) {
                         if (display_ppl.position == "secretary"){
                             upper.push(display_ppl)
@@ -360,6 +362,13 @@ router.get('/members/:id', function(req, res, next) {
                 upper = [];
                 lower = [];
                 valid = false;
+
+                console.log("no one found and now!!!")
+                to_display.forEach(function (display_ppl) {
+                    if (display_ppl.position == "secretary"){
+                        upper.push(display_ppl)
+                    };
+                });
 
             }
 
