@@ -369,13 +369,13 @@ router.get('/members/:id', function(req, res, next) {
 
 
             } else{
-                chatbot_reply = "Watson cannot understand you. You may contact our secretary.";
+
                 upper = [];
                 lower = [];
 
                 valid = false;
-                console.log("no one found and now!!!");
-                chatbot_reply = "Do not abuse Watson. Here is a meme.";
+                console.log("watson does not understand!!!");
+                chatbot_reply = "Watson cannot understand you. You may contact our secretary.";
                 to_display.forEach(function (display_ppl) {
                     if (display_ppl.position == "secretary"){
                         upper.push(display_ppl)
