@@ -6,7 +6,7 @@
  				<h3>Find your Specialist</h3>
  				<hr>
  				<div class="resultCB">
-					<h4><strong>Mr. Watson says: </strong>{{ output }} 
+					<h4 class="animated bounceInRight"><strong>Mr. Watson says: </strong>{{ output }} 
 					
 					</h4>
 
@@ -21,7 +21,7 @@
 								<form class="formInput" action="/members/submit" method="post">
 										<input class="form-control mr-sm-2 inputSearch" id="id" name="id" type="text" placeholder="Search..." aria-label="Search">
 									
-										<button class="btn btn-outline-success my-2 my-sm-0" id="searchButton" type="submit"><i class="fa fa-search" aria-hidden="true"></i></button>            
+										<button class="btn btn-outline-success my-2 my-sm-0 btn btn-info" id="searchButton" type="submit"><i class="fa fa-search"></i></button>            
 							</form>
 
 
@@ -59,7 +59,7 @@
 														<hr>
 															<p><a href="{{this.homepage}}">Webpage of {{this.name}}</a>
 																</p>
-														<p>p.boncz@vu.nl - WN-T342</p>
+														<p>{{this.email}} - WN-T342</p>
 													</div>
 												</div>	
 											</div>

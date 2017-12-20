@@ -9,7 +9,7 @@
 
 
 body {
-    background-color:chocolate;
+    background-color: #41677a;
     background-size: cover;
     background-position: center; 
 }
@@ -87,7 +87,7 @@ hr{
 }
 
 .textField{
-    background-color: darkgrey;
+    background-color: #8da9b9;
     border: solid;
 		padding-top: 15px;
     margin-bottom: 5%;
@@ -98,8 +98,13 @@ hr{
 		font-style: oblique;
 }
 
+.textField > a {
+		color: white;
+
+}
+
 .imageTextField{
-    background-color: darkgrey;
+    background-color: #8da9b9;
     border: solid;
 		padding-top: 15px;
     margin-bottom: 5%;
@@ -109,8 +114,13 @@ hr{
 		font-style: oblique;
 }
 
+.imageTextField > a {
+	color: white;
+}
+
 .imageField{
 	width: 250px;
+	height: 180px;
 }
 
 .eventNewstItem{
@@ -264,4 +274,29 @@ a{
 
 .postmetadata{
 	background-color: white;
+}
+
+.imageHP{
+	width: 100%;
+}
+
+.introductionHP{
+	margin-top: -40%;
+	margin-bottom: 20%;
+	margin-left: 40%
+}
+
+.btnFindSP{
+	margin-top: -35%;
+
+	margin-left: 40%;
+}
+
+.textABP{
+	width: 70%;
+	margin-left: 18%;
+}
+
+button {
+	background-color: deepskyblue;
 }
