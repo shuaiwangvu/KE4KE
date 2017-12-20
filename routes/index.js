@@ -260,7 +260,7 @@ router.get('/members/:id', function(req, res, next) {
                         var flag = true;
                         response.entities.forEach(function (item) {
                             var comp = ppl.interest.includes(item.value);
-                            console.log("test", item.value, "is in ", ppl.interest, ": ", comp);
+                            // console.log("test", item.value, "is in ", ppl.interest, ": ", comp);
                             if (comp === false) {
                                 flag = false;
                             }
@@ -282,36 +282,44 @@ router.get('/members/:id', function(req, res, next) {
                 //UPDATE THE TWO LIST ACCORDING TO THE POSITION
                 if (location%3 == 2)
                 {
+                    var to_remove = [];
                     recommended_people.forEach(function (ppl) {
-                        var flag = false;
+                        var flg = false;
 
                         response.entities.forEach(function (item) {
                             console.log("position needed", item.value);
+                            console.log("There are ", recommended_people.length, " recommended people");
                             console.log("this person", ppl.uri, " has position ", ppl.position);
                             if (ppl.position == item.value) {
-                                flag = true;
+                                flg = true;
                             }
 
                         });
 
-                        if (flag === true) {
+                        if (flg == true) {
                             //nothing changes to this people
                             console.log("nothing changes for ppl", ppl.uri);
                         } else {
                             console.log("does not meet the requirement so move it to the other list:", ppl.uri);
                             // other_people.push(ppl);
+                            to_remove.push(ppl);
 
-                            var index = recommended_people.indexOf(ppl);
-                            if (index > -1) {
-                                recommended_people.splice(index, 1);
-                            }else{
-                                console.log("ERROR!!!!!!!!!");
-                            }
-                            other_people.push(ppl);
                         }
                         // console.log('why?');
 
                     });
+                    to_remove.forEach(function(ppl){
+                        var index = recommended_people.indexOf(ppl);
+                        if (index > -1) {
+                            recommended_people.splice(index, 1);
+                        }else{
+                            console.log("ERROR!!!!!!!!!");
+                        }
+                        other_people.push(ppl);
+                    });
+
+
+
                 };
 
 
@@ -319,7 +327,7 @@ router.get('/members/:id', function(req, res, next) {
                 console.log('REPLY FROM WATSON: ', chatbot_reply);
 
                 // ==========THIS IS A TEST ON RETRIVING FROM KNOWLEDGE GRAPH
-                var deep_learning = rdf.literal("deep learning");
+                // var deep_learning = rdf.literal("deep learning");
 
 
 
@@ -346,7 +354,9 @@ router.get('/members/:id', function(req, res, next) {
                 });
 
                 // if no one was found then display only the secretary
-                if (upper.length == 0){
+                if (recommended_people.length == 0){
+                    upper= [];
+                    console.log("no one found and now!!!")
                     to_display.forEach(function (display_ppl) {
                         if (display_ppl.position == "secretary"){
                             upper.push(display_ppl)
@@ -360,6 +370,13 @@ router.get('/members/:id', function(req, res, next) {
                 upper = [];
                 lower = [];
                 valid = false;
+
+                console.log("no one found and now!!!")
+                to_display.forEach(function (display_ppl) {
+                    if (display_ppl.position == "secretary"){
+                        upper.push(display_ppl)
+                    };
+                });
 
             }
 
