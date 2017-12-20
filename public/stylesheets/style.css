@@ -224,6 +224,7 @@ a{
 	margin-bottom: 4%;
 	padding-top: 2%;
 	padding-bottom: 1%;
+	border-radius: 20px;
 }
 .left-half-recommend-cell {
   height: 50%;
@@ -293,10 +294,16 @@ a{
 }
 
 .textABP{
-	width: 70%;
-	margin-left: 18%;
+	margin-top: 3%;
+	width: 80%;
+	margin-left: 10%;
+	text-align: left;
 }
 
 button {
 	background-color: deepskyblue;
+}
+
+.aboutPG{
+	margin-top: -5%;
 }
