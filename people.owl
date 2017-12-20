@@ -84,7 +84,7 @@ foaf:Person rdf:type owl:Class .
                                                           foaf:interest "knowledge access" ,
                                                                         "linked data" ,
                                                                         "semantic music" ;
-                                                          foaf:mbox <file:/Users/finnpotason/Programming/FOAF/albert.merono@vu.nl> ;
+                                                          foaf:mbox "albert.merono@vu.nl" ;
                                                           foaf:status "postdoc" ;
                                                           foaf:title "Dr." .
 
@@ -103,7 +103,7 @@ foaf:Person rdf:type owl:Class .
                                                                      "natural language processing" ,
                                                                      "semantic web" ,
                                                                      "user interface" ;
-                                                       foaf:mbox <file:/Users/finnpotason/Programming/FOAF/a.khalili@vu.nl> ;
+                                                       foaf:mbox "a.khalili@vu.nl" ;
                                                        foaf:status "postdoc" ;
                                                        foaf:title "Dr." .
 
@@ -120,7 +120,7 @@ foaf:Person rdf:type owl:Class .
                                                                          "medical ontology" ,
                                                                          "medical protocol" ,
                                                                          "semantic web" ;
-                                                           foaf:mbox <file:/Users/finnpotason/Programming/FOAF/annette@cs.vu.nl> ;
+                                                           foaf:mbox "annette@cs.vu.nl" ;
                                                            foaf:status "associate professor" ;
                                                            foaf:title "Dr." .
 
@@ -135,7 +135,7 @@ foaf:Person rdf:type owl:Class .
                                                        foaf:homepage <https://www.linkedin.com/in/eva-kenny-lowther-4b723793/> ;
                                                        foaf:interest "data science" ,
                                                                      "project management" ;
-                                                       foaf:mbox <file:/Users/finnpotason/Programming/FOAF/e.r.kenny@uva.nl> ;
+                                                       foaf:mbox "e.r.kenny@uva.nl" ;
                                                        foaf:status "project manager" ;
                                                        foaf:title "Dr." .
 
@@ -151,7 +151,7 @@ foaf:Person rdf:type owl:Class .
                                                         foaf:interest "knowledge graph" ,
                                                                       "logic" ,
                                                                       "machine learning" ;
-                                                        foaf:mbox <file:/Users/finnpotason/Programming/FOAF/s2.wang@vu.nl> ;
+                                                        foaf:mbox "s2.wang@vu.nl" ;
                                                         foaf:nick "Finn Potason" ;
                                                         foaf:status "phd" ;
                                                         foaf:title "Mr" ;
@@ -169,7 +169,7 @@ foaf:Person rdf:type owl:Class .
                                                          foaf:interest "knowledge graph" ,
                                                                        "knowledge representation" ,
                                                                        "medical ontology" ;
-                                                         foaf:mbox <file:/Users/finnpotason/Programming/FOAF/Frank.van.Harmelen@vu.nl> ;
+                                                         foaf:mbox "Frank.van.Harmelen@vu.nl" ;
                                                          foaf:status "professor" ;
                                                          foaf:title "Prof." .
 
@@ -188,7 +188,7 @@ foaf:Person rdf:type owl:Class .
                                                                        "kolmogorov complexity" ,
                                                                        "machine learning" ,
                                                                        "minimum description length" ;
-                                                         foaf:mbox <file:/Users/finnpotason/Programming/FOAF/vu@peterbloem.nl> ;
+                                                         foaf:mbox "vu@peterbloem.nl\"" ;
                                                          foaf:status "postdoc" ;
                                                          foaf:title "Dr." .
 
@@ -200,7 +200,7 @@ foaf:Person rdf:type owl:Class .
                                                  foaf:family_name "Lovrenčak" ;
                                                  foaf:givenname "Mojca" ;
                                                  foaf:homepage <https://www.cs.vu.nl/en/about-the-department/support_staff/lovrencak/index.aspx> ;
-                                                 foaf:mbox <file:/Users/finnpotason/Programming/FOAF/m.lovrencak@vu.nl> ;
+                                                 foaf:mbox "m.lovrencak@vu.nl" ;
                                                  foaf:status "secretary" ;
                                                  foaf:title "Mrs." .
 

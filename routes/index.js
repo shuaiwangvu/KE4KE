@@ -80,7 +80,7 @@ for (var i=0; i<people.length;i++) {
     var p = people[i];
     console.log('The URI of this people is: ', p.uri); // the WebID of a friend
 
-    var pl = {uri : p.uri, interest: [], position: ""}
+    var pl = {uri : p.uri, interest: [], position: "", email : ""};
 
 
     // title and name
@@ -128,10 +128,21 @@ for (var i=0; i<people.length;i++) {
     console.log("This people has position: ", position.value);
 
     pl.position = position.value;
+
+    //email
+    var has_email = rdf.sym("http://xmlns.com/foaf/0.1/mbox");
+    var email = store.any(p, has_email);
+    console.log("This people has email: ", email.value);
+
+    pl.email = email.value;
+
+
+    //store up and go
     all_people.push(pl); // all this person in the all_people for splitting
 
     var pp = {uri: p.uri ,name : title.value + " " + first_name.value + " "+ family_name.value,
-        interest: interest_string, image: image.value, homepage: homepage.value, position: position.value};
+        interest: interest_string, image: image.value, homepage: homepage.value, position: position.value,
+        email: email.value};
 
     console.log("Initialised an entry for " + pp.name + "\n");
     to_display.push(pp);
