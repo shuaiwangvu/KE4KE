@@ -50,7 +50,6 @@ h1 {
     text-shadow: 0px 4px 3px rgba(0,0,0,0.4),
                  0px 8px 13px rgba(0,0,0,0.1),
                  0px 18px 23px rgba(0,0,0,0.1);
-	margin-bottom: 50px;
 }
 
 hr{
@@ -72,12 +71,15 @@ hr{
 }
 
 
-#inputSearch{
-    width: 600px;
+.inputSearch{
+    width: 720px;
 	  margin-bottom: 50px;
 		margin-left: 50px;
-		margin-right: 10px;
 		float:left;
+}
+
+.formInput{
+	margin-top: 50px;
 }
 
 .textField{
@@ -129,6 +131,7 @@ a{
 	margin-bottom: 30px;
 	color: white;
 	text-shadow: 2px 2px #000000;
+	border-radius: 10px;
 }
 
 
@@ -149,6 +152,7 @@ a{
     padding-top: 10px;
     padding-bottom: 10px;
 	color: white;
+	border-radius: 10px;
 	text-shadow: 2px 2px #000000;
 }
 
@@ -188,11 +192,17 @@ a{
 
 
 
-
 /* Pattern styles */
 .container {
   display: table;
-  width: 100%;
+  width: 80%;
+	margin-bottom: 60px;
+		text-align: center;
+    text-shadow: 0px 4px 3px rgba(0,0,0,0.4),
+                 0px 8px 13px rgba(0,0,0,0.1),
+                 0px 18px 23px rgba(0,0,0,0.1);
+}
+
 }
 
 .left-half {
@@ -201,15 +211,16 @@ a{
   left: 0px;
   top: 50px;
   height: 95%;
-  width: 70%;
-  overflow: scroll;
+  width: 60%;
 }
 
 
 .left-half-recommend {
-  height: 50%;
   background-color: #339e2c;
-  overflow: scroll;
+	margin-top: 4%;
+	margin-bottom: 4%;
+	padding-top: 2%;
+	padding-bottom: 1%;
 }
 .left-half-recommend-cell {
   height: 50%;
@@ -217,20 +228,17 @@ a{
 }
 
 .imageCell{
-  /*width: 100px;*/
-  height: 130px;
-  width: 20%;
-  position: relative;
-  left: 0px;
+	margin-top: 40px;
+	margin-left: 20px;
+  height: 250px;
+  width: 200px;
+  position:relative;
 }
 
 .textCell{
-  /*width: 100px;*/
   height: 100px;
-  width: 70%;
   right: 0px;
   position: relative;
-  /*overflow: scroll;*/
 }
 
 .left-half-all{
@@ -248,3 +256,27 @@ a{
   overflow: scroll;
 }
 
+.specialistBox{
+	margin-bottom: 300px;
+}
+
+
+.interestBox{
+	background-color: lightgrey;
+	border-radius: 20px;
+	width: 60%;
+	color: black;
+	margin-left: 130px;
+  text-shadow: 0px 4px 3px rgba(0,0,0,0.0),
+               0px 8px 13px rgba(0,0,0,0.0),
+               0px 18px 23px rgba(0,0,0,0.0);
+	margin-top: 20px;
+}
+
+.imageTextCellOS{
+	float: left;
+}
+
+.resultCB{
+	margin-top: 70px;
+}
