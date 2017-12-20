@@ -99,18 +99,27 @@ for (var i=0; i<people.length;i++) {
     var interest = [];
     var interest_string = "";
     var has_interest = rdf.sym("http://xmlns.com/foaf/0.1/interest");
+
     var interest_list = store.each(p, has_interest, undefined);
-    for (var j=0; j<interest_list.length;j++) {
-        it = interest_list[j];
-        interest += it.value; // the WebID of a friend
-        interest_string += " ";
-        interest_string += it.value;
+    if (interest_list.length > 0){
+        interest_string = interest_list[0].value;
+        // interest_string += "; ";
+        for (var j=1; j<interest_list.length;j++) {
+            it = interest_list[j];
+            interest += it.value; // the WebID of a friend
+            interest_string += "; ";
+            interest_string += it.value;
+            pl.interest.push (it.value);
+        }
+        console.log("This person has interest in ", interest, " = ", pl.interest.length);
 
-        pl.interest.push (it.value);
-    }
-    console.log("This person has interest in ", interest, " = ", pl.interest.length);
+    };
 
+    //description = topic_interest
 
+    var has_description = rdf.sym("http://xmlns.com/foaf/0.1/topic_interest");
+    var description = store.any(p, has_description);
+    console.log("This people has description: ", description.value);
 
     //image
     var has_image = rdf.sym("http://xmlns.com/foaf/0.1/depiction");
@@ -142,7 +151,7 @@ for (var i=0; i<people.length;i++) {
 
     var pp = {uri: p.uri ,name : title.value + " " + first_name.value + " "+ family_name.value,
         interest: interest_string, image: image.value, homepage: homepage.value, position: position.value,
-        email: email.value};
+        email: email.value, description: description.value};
 
     console.log("Initialised an entry for " + pp.name + "\n");
     to_display.push(pp);
