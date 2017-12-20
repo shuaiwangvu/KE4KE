@@ -200,6 +200,7 @@ router.get('/members/:id', function(req, res, next) {
     upper = [];
     lower = [];
     var valid = true;
+    var found = true;
 
     var question = req.params.id;
 
@@ -356,7 +357,9 @@ router.get('/members/:id', function(req, res, next) {
                 // if no one was found then display only the secretary
                 if (recommended_people.length == 0){
                     upper= [];
-                    console.log("no one found and now!!!")
+                    console.log("no one found and now!!!");
+                    found = false;
+                    chatbot_reply = "No one was found. Please contact our secretary."
                     to_display.forEach(function (display_ppl) {
                         if (display_ppl.position == "secretary"){
                             upper.push(display_ppl)
@@ -371,7 +374,8 @@ router.get('/members/:id', function(req, res, next) {
                 lower = [];
                 valid = false;
 
-                console.log("no one found and now!!!")
+                console.log("no one found and now!!!");
+                chatbot_reply = "Do not abuse Watson. Here is a meme.";
                 to_display.forEach(function (display_ppl) {
                     if (display_ppl.position == "secretary"){
                         upper.push(display_ppl)
@@ -383,7 +387,7 @@ router.get('/members/:id', function(req, res, next) {
 
 
             location += 1;
-            res.render('members', {input: question, output: chatbot_reply, valid:valid ,upper: upper, lower: lower});
+            res.render('members', {input: question, output: chatbot_reply, valid:valid , found: found, upper: upper, lower: lower});
 
         }
 
