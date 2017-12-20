@@ -372,8 +372,9 @@ router.get('/members/:id', function(req, res, next) {
                 chatbot_reply = "Watson cannot understand you. You may contact our secretary.";
                 upper = [];
                 lower = [];
-                valid = false;
-
+                if (position >0) {
+                    valid = false;
+                }
                 console.log("no one found and now!!!");
                 chatbot_reply = "Do not abuse Watson. Here is a meme.";
                 to_display.forEach(function (display_ppl) {
