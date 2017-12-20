@@ -344,19 +344,22 @@ router.get('/members/:id', function(req, res, next) {
                         lower.push(display_ppl);
                     };
                 });
+
+                // if no one was found then display only the secretary
+                if (upper.length == 0){
+                    to_display.forEach(function (display_ppl) {
+                        if (display_ppl.position == "secretary"){
+                            upper.push(display_ppl)
+                        };
+                    });
+                };
+
+
             } else{
                 chatbot_reply = "Watson cannot understand you. You may contact our secretary.";
                 upper = [];
                 lower = [];
                 valid = false;
-
-                to_display.forEach(function (display_ppl) {
-                    if (display_ppl.position == "secretary"){
-                        upper.push(display_ppl)
-                    }else{
-                        lower.push(display_ppl);
-                    };
-                });
 
             }
 
