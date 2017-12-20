@@ -75,6 +75,7 @@ var location = 0;
 var people_prefix = "file:/Users/finnpotason/Programming/FOAF/krr.rdf#";
 var people = store.each(undefined, is_of_type, individual);
 console.log('HOW MANY RESULTS ARE THERE? -- ', people.length);
+
 for (var i=0; i<people.length;i++) {
     var p = people[i];
     console.log('The URI of this people is: ', p.uri); // the WebID of a friend
