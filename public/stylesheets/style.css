@@ -1,11 +1,4 @@
-/*body {*/
-  /*padding: 50px;*/
-  /*font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;*/
-/*}*/
 
-/*a {*/
-  /*color: #00B7FF;*/
-/*}*/
 
 
 body {
@@ -130,7 +123,11 @@ hr{
 
 
 a{
-	color:skyblue;
+	color:#fff6d6;
+	  text-shadow: 0px 4px 3px rgba(0,0,0,0.0),
+               0px 8px 13px rgba(0,0,0,0.0),
+               0px 18px 23px rgba(0,0,0,0.0);
+	
 }
  
 .nameTittle > a {
@@ -219,7 +216,7 @@ a{
 
 
 .left-half-recommend {
-  background-color: #339e2c;
+  background-color: #66b3b9;
 	margin-top: 4%;
 	margin-bottom: 4%;
 	padding-top: 2%;
