@@ -3,7 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="ab8968bf-feb1-4f94-8c87-4438ded22ed8" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change beforePath="$PROJECT_DIR$/people.owl" afterPath="$PROJECT_DIR$/people.owl" />
       <change beforePath="$PROJECT_DIR$/routes/index.js" afterPath="$PROJECT_DIR$/routes/index.js" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -18,8 +17,8 @@
       <file leaf-file-name="index.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/routes/index.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="370">
-              <caret line="153" column="52" lean-forward="false" selection-start-line="153" selection-start-column="41" selection-end-line="153" selection-end-column="52" />
+            <state relative-caret-position="233">
+              <caret line="105" column="50" lean-forward="false" selection-start-line="105" selection-start-column="50" selection-end-line="105" selection-end-column="50" />
               <folding />
             </state>
           </provider>
@@ -39,7 +38,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>to_</find>
       <find>test</find>
       <find>container</find>
       <find>overflow: scroll;</find>
@@ -68,6 +66,7 @@
       <find>e</find>
       <find>title</find>
       <find>pl</find>
+      <find>repl</find>
       <find>interest</find>
     </findStrings>
   </component>
@@ -219,12 +218,12 @@
       <workItem from="1513296118798" duration="5713000" />
       <workItem from="1513446595618" duration="1220000" />
       <workItem from="1513594620251" duration="34175000" />
-      <workItem from="1513771306337" duration="12713000" />
+      <workItem from="1513771306337" duration="15983000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="69308000" />
+    <option name="totallyTimeSpent" value="72578000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1440" height="900" extended-state="0" />
@@ -651,8 +650,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/routes/index.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="370">
-          <caret line="153" column="52" lean-forward="false" selection-start-line="153" selection-start-column="41" selection-end-line="153" selection-end-column="52" />
+        <state relative-caret-position="233">
+          <caret line="105" column="50" lean-forward="false" selection-start-line="105" selection-start-column="50" selection-end-line="105" selection-end-column="50" />
           <folding />
         </state>
       </provider>

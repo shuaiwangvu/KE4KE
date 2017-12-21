@@ -103,7 +103,7 @@ for (var i=0; i<people.length;i++) {
     var interest_list = store.each(p, has_interest, undefined);
     if (interest_list.length > 0){
 				pl.interest.push(interest_list[0].value);
-        
+        interest_string += interest_list[0].value;
 				for (var j=1; j<interest_list.length;j++) {
             it = interest_list[j];
             interest += it.value; // the WebID of a friend
