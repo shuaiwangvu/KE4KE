@@ -269,9 +269,9 @@ router.get('/members/:id', function(req, res, next) {
             chatbot_reply = response.output.text.toString();
             console.log('there are ', response.entities.length, 'entities');
 
-            // response.entities.forEach(function (item) {
-            //     console.log(item.value);
-            // });
+            response.entities.forEach(function (item) {
+                console.log("Entity :", item.value);
+            });
             if (response.entities.length !== 0){
                 //UPDATE THE TWO LITS ACCORIDNG TO THE DOMAIN
                 if (location%3 == 1)
