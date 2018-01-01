@@ -3,54 +3,73 @@
  			<div class="content aboutPG">
 				 <h2>The Knowledge Representation and Reasoning Group</h2>
  				<hr>
-				
+
 				<div>
 					<img width="900px" height="500px" src="https://github.com/VrijeUniKnowledgeEngineering/KE4KE/blob/master/views/graph.jpg?raw=true">
 				</div>
 
-				
+
 				<div class="textABP">
 				 <h4>The <strong> Knowledge Representation &amp; Reasoning Group</strong> group investigates modelling and representation of different forms of knowledge and reasoning, as found in a large variety of <a title="Artificial intelligence" rel="wikipedia" href="http://en.wikipedia.org/wiki/Artificial_intelligence">AI</a> systems. We have an interest in both applications and theory. We study theoretical properties of <a title="Knowledge representation and reasoning" rel="wikipedia" href="http://en.wikipedia.org/wiki/Knowledge_representation_and_reasoning">knowledge representation and reasoning</a> formalisms, but are also involved in developing practical <a title="Knowledge-based systems" rel="wikipedia" href="http://en.wikipedia.org/wiki/Knowledge-based_systems">knowledge-based systems</a>. Recently, we have been very active in developments around the Semantic Web.</h4>
 
 				</div>
-				
-				
+
+
 				<div class="cInfo">
 					<h2><strong>CONTACT US</strong></h2>
-		
-					<H3><strong>USER CENTRIC DATA SCIENCE @ VU</strong></H3>
+
+					<H3><strong>KR @ VU</strong></H3>
 				</div>
 
 					<div class="col-lg-4">
 							<h4>POSTAL ADRESS:</h4>
 							<hr>
-							<H4>De Boelelaan 1105</H4>
+							<H4>De Boelelaan 1081a</H4>
 							<H4>1081 HV Amsterdam</H4>
 					</div>
-					
+
 					<div class="col-lg-4">
 							<h4>VISITING ADRESS:</h4>
 							<hr>
-							<H4>De Boelelaan 1105</H4>
+							<H4>De Boelelaan 1081a</H4>
 							<H4>1081 HV Amsterdam</H4>
-
-							<h4>T (central): +31 20 59 89898</h4>
-							<h4>F (central): +31 20 59 89899</h4>
 						</div>
-						
+
 					<div class="col-lg-4">
-							<h4>SECRETARY ADRESS</h4>
+							<h4>SECRETARY</h4>
 							<hr>
 							<h4>Mocja Lovrencak</h4>
 							<h4>T +31 20 59 87782</h4>
 							<h4>m.lovrencak@vu.bl</h4>
 					</div>
-					
 
-					
+
+
 				</div>
  			</div>
- 		
+
+<!-- map -->
+
+<div id="map"></div>
+    <script>
+
+      function initMap() {
+        var vuLatLng = {lat: 52.332927, lng: 4.867903};
+
+        var map = new google.maps.Map(document.getElementById('map'), {
+          zoom: 16,
+          center: vuLatLng
+        });
+
+        var marker = new google.maps.Marker({
+          position: vuLatLng,
+          map: map,
+          title: 'Hello World!'
+        });
+      }
+    </script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyANwYFUQxO5rcFP8RyHLyAPY1r_orVlBB4&callback=initMap"
+    async defer></script>
 
 
  <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.4.js"></script>
