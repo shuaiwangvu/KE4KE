@@ -4,7 +4,7 @@
 body {
     background-color: #41677a;
     background-size: cover;
-    background-position: center; 
+    background-position: center;
 }
 
 body,
@@ -72,7 +72,7 @@ hr{
 }
 
 #searchButton{
-	margin-left: -10%; 
+	margin-left: -10%;
 }
 
 .formInput{
@@ -127,9 +127,9 @@ a{
 	  text-shadow: 0px 4px 3px rgba(0,0,0,0.0),
                0px 8px 13px rgba(0,0,0,0.0),
                0px 18px 23px rgba(0,0,0,0.0);
-	
+
 }
- 
+
 .nameTittle > a {
 	color:white;
 }
@@ -150,7 +150,7 @@ a{
 	width: 200px;
 	height: 250px;
 	margin-top: 20px;
-	margin-bottom: 20px;	
+	margin-bottom: 20px;
 }
 
 
@@ -175,7 +175,7 @@ a{
 	background-color: skyblue;
 	border-radius: 20px 20px 20px;
 	margin-top: 50px;
-	
+
 }
 
 
@@ -307,4 +307,19 @@ button {
 
 .cInfo{
 	margin-top: 4%;
+}
+
+
+.column {
+    float: left;
+    width: 50%;
+    padding: 10px;
+    /* height: 300px; /* Should be removed. Only for demonstration */ */
+}
+
+/* Clear floats after the columns */
+.row:after {
+    content: "";
+    display: table;
+    clear: both;
 }

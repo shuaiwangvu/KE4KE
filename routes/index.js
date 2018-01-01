@@ -22,6 +22,78 @@ var conversation = new watson.ConversationV1 ({
 });
 
 
+var hometown = [
+  {lat: 52.371591, lng: 4.888045}, // albert
+  {lat: 52.089428, lng: 4.962933}, // Harmelen
+  {lat: 52.378951, lng: 4.655923}, // Harlem
+  {lat: 39.094480, lng: 107.984852}, //ordos
+  {lat: 30.573953, lng: 114.328528}, // wu han
+  {lat: 54.970417, lng: -1.624563}, // newcastel
+  {lat: 35.673309, lng: 51.408175}, // iran
+];
+
+var oldmembers = [
+  {lat: 52.371591, lng: 4.888045}, // Rinke Hoekstra (now at Elsevier)
+  {lat: 52.332627, lng: 4.867903}, // Triply/ VU
+  {lat: 40.766041, lng:-73.988471}, // Sara Magliacane  IBM@NY
+  {lat: 52.355052, lng:4.953405}, // science park
+  {lat: 52.294813, lng:4.957984}, // AMC
+  {lat: 52.332927, lng: 4.867603},// VU
+  {lat: 30.563953, lng: 114.329528}, // wuhan
+  {lat: 52.332027, lng: 4.867613}, // VU
+  {lat:  52.157142, lng: 4.485209}, //leiden
+  {lat: 52.157873, lng:4.486108}, //leiden
+  {lat: 52.332227, lng: 4.867913}, // VU
+  {lat: -35.304239, lng: -71.625783},//Cilli
+  {lat: 52.295764, lng:4.676865}, // Jora solutions??
+  {lat: 52.356868, lng:4.951838}, //CWI
+  {lat: -25.746558, lng:28.278893}, // CSIR , south africa
+  {lat: 52.081026, lng:4.345630}, //DANS
+  {lat: 44.246656, lng:-70.636723}, // IBM US
+  {lat: 42.372614, lng:-71.077291}, // philips research
+  {lat: 42.372414, lng:-71.077301}, // philips research
+  {lat: 51.984615, lng:5.665780}, //wachningen University
+  {lat: 51.995846, lng:4.376735}, // TU Delft
+  {lat: 52.360595, lng:4.902973}, // McKinsey)
+  {lat: 52.333096, lng:4.866444},// VU web and media
+  {lat: 52.333196, lng:4.866344},// VU web and media
+  {lat: 52.334478, lng:4.866203}, // communication VU
+  {lat: 52.332137, lng:4.867893}, // VU
+  {lat: 38.030445, lng:23.792949}, // greece
+  {lat: 47.533739, lng:7.638444}, // Switzerland
+  {lat: 49.484178, lng:8.460603}, //mannheim germany
+  {lat: 52.024990, lng:-0.706864}, // open univeristy
+  {lat: 52.303042, lng:4.715054}, // LogicaCMG
+  {lat: -41.290538, lng:174.778265}, // NZ
+  {lat: 52.091326, lng:5.122773}, // Utrecht
+  {lat: 51.819282, lng:5.856759}, // Nijmegen
+  {lat: 43.607611, lng:-73.180503}, //Castelon
+  {lat: 52.130770, lng:4.695389}
+];
+
+var visitors = [
+  {lat: 30.563953, lng: 114.329528},//wuhan
+  {lat: 30.563953, lng: 114.329528},//wuhan
+  {lat: 35.305336, lng: 25.072624},//forth
+  {lat: -15.989339, lng: -48.045224},//brazil
+  {lat: 42.877197, lng: -8.558904},// USC.es
+  {lat: 46.067179, lng: 11.149779},// Trento
+  {lat: 46.067879, lng: 11.149739},// Trento
+  {lat: 53.466792, lng: -2.233894},// manchester
+  {lat: 52.388606, lng: 9.713342},//leipsig
+  {lat: 40.448507, lng: -3.719130},//UPM madrid
+  {lat: -33.811886, lng: 151.025533},//west sydney
+  {lat: 32.056282, lng: 118.794243},//SouthEast uni, china
+  {lat: 43.561983, lng: 1.467986},//IRIT, Toulouse, FR
+  {lat: 39.879869, lng: 116.479347},// Beijing University of Technology
+  {lat: 53.308813, lng: -6.223562},//Ireland, Galway
+  {lat: 37.184853, lng: -3.600579},//Granada, ES
+  {lat: 53.120094, lng: 8.852710},//bremen university
+  {lat: 33.954318, lng: -111.957057},// Arizona State University
+  {lat: 51.514231, lng: -0.128518},//Yahoo, uk
+  {lat: 30.763851, lng: 103.970534},//chendu, china
+  {lat: 39.480926, lng: -0.341142},//Universitat Politècnica de València
+];
 // conversation.listWorkspaces(function(err, response) {
 //     if (err) {
 //         console.error(err);
@@ -196,7 +268,7 @@ router.get('/members', function(req, res, next) {
         // console.log(response.output.text);
         chatbot_reply = response.output.text
         console.log(chatbot_reply);
-        res.render('members', { output: chatbot_reply, upper: upper, lower: lower});
+        res.render('members', { output: chatbot_reply, upper: upper, lower: lower, hometown: hometown, oldmembers:oldmembers, visitors:visitors});
     });
 
     // res.render('members', { title: 'Members', condition: true, anyArray: [1,2,3], reply: chatbot_reply });
@@ -208,7 +280,7 @@ router.get('/projects', function(req, res, next) {
 });
 
 router.get('/publications', function(req, res, next) {
-    res.render('publications', { title: 'Publications', condition: true, anyArray: [1,2,3] });
+    res.render('publications', { title: 'Publications', condition: true, anyArray: [1,2,3]});
 });
 
 
@@ -408,7 +480,7 @@ router.get('/members/:id', function(req, res, next) {
 
 
             location += 1;
-            res.render('members', {input: question, output: chatbot_reply, valid:valid , found: found, upper: upper, lower: lower});
+            res.render('members', {input: question, output: chatbot_reply, valid:valid , found: found, upper: upper, lower: lower, hometown: hometown, oldmembers: oldmembers, visitors:visitors});
 
         }
 

@@ -1,18 +1,18 @@
 <section class="container">
-	
-	
+
+
  			<div class="content">
  				<h1>Specialist Finder</h1>
-				 <h3>Inquiry the Specialists in the KRR Group</h3>
+				 <h3>inquire specialists currently in our group</h3>
  				<hr>
  				<div class="resultCB">
-					<h4 class="animated bounceInRight"><strong>Mr. Watson says: </strong>{{ output }} 
-					
+					<h4 class="animated bounceInRight"><strong>Mr. Watson says: </strong>{{ output }}
+
 					</h4>
 
-					
+
 				</div>
-				
+
 				<!--<p>The chatbot said: {{ reply }} </p>-->
 				<div class="row">
 						<div class="col-lg-2">
@@ -20,8 +20,8 @@
 							<div class="col-lg-8">
 								<form class="formInput" action="/members/submit" method="post">
 										<input class="form-control mr-sm-2 inputSearch" id="id" name="id" type="text" placeholder="Answer to Mr. Watson" aria-label="Search">
-									
-										<button class="btn btn-outline-success my-2 my-sm-0 btn btn-info" id="searchButton" type="submit"><i class="fa fa-search"></i></button>            
+
+										<button class="btn btn-outline-success my-2 my-sm-0 btn btn-info" id="searchButton" type="submit"><i class="fa fa-search"></i></button>
 							</form>
 
 
@@ -30,7 +30,7 @@
 						</div>
 				</div>
 			</div>
-			
+
 
         <div id="recommended" class="left-half-recommend" >
 			      <article>
@@ -43,8 +43,8 @@
 									{{#each upper}}
 
                     <section class="container">
-										
-											
+
+
 										<div class="row">
 										<div class="specialistBox">
 												<div class="col-lg-4">
@@ -61,19 +61,19 @@
 																</p>
 														<p>{{this.email}} - WN-T342</p>
 													</div>
-												</div>	
+												</div>
 											</div>
 										</div>
                     </section>
                     {{/each}}
 
-            </article>			
-					
-				</div>	
-	
+            </article>
+
+				</div>
+
         <div id="all" class="left-half-all" >
 			      <article>
-							
+
 							{{#if found}}
 								{{#if valid}}
                 <h1>Other Specialists</h1>
@@ -94,9 +94,163 @@
                     {{/each}}
 									</section>
 
-            </article>			
-					
-				</div>				
-				
+            </article>
+
+				</div>
+
 
 </section>
+
+
+
+<div class="content">
+	<h3 >
+		A Truely Global Team With Global Impact
+	</h3>
+	<h4> Green = KR&amp;R Group; Red = hometown of current members; Yellow = past members; Blue = past visitors
+</div>
+<div id="map"></div>
+
+
+    <script>
+
+      function initMap() {
+        var vuLatLng = {lat: 52.332927, lng: 4.867903};
+				var cet = {lat : 32.447073,lng:  7.477245}
+        var map = new google.maps.Map(document.getElementById('map'), {
+          zoom: 2,
+          center: cet
+        });
+
+        var marker = new google.maps.Marker({
+          position: vuLatLng,
+          map: map,
+          title: 'Hello World!'
+        });
+				marker.setIcon('http://maps.google.com/mapfiles/ms/icons/green-dot.png')
+
+
+
+				{{#each hometown}}
+				var myLatLng = {lat: {{this.lat}}, lng: {{this.lng}} };
+				var marker = new google.maps.Marker({
+          position: myLatLng,
+          map: map
+        });
+				{{/each}}
+
+
+				{{#each oldmembers}}
+				var oldLatLng = {lat: {{this.lat}}, lng: {{this.lng}} };
+				var marker = new google.maps.Marker({
+          position: oldLatLng,
+          map: map
+        });
+				marker.setIcon('http://maps.google.com/mapfiles/ms/icons/yellow-dot.png')
+
+				{{/each}}
+
+
+				{{#each visitors}}
+				var vLatLng = {lat: {{this.lat}}, lng: {{this.lng}} };
+				var marker = new google.maps.Marker({
+          position: vLatLng,
+          map: map
+        });
+				marker.setIcon('http://maps.google.com/mapfiles/ms/icons/blue-dot.png')
+
+				{{/each}}
+
+      }
+    </script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyANwYFUQxO5rcFP8RyHLyAPY1r_orVlBB4&callback=initMap"
+    async defer></script>
+
+
+<div class="content">
+<!-- <h3>Past Members and Visitors</h3> -->
+
+<div class="row">
+  <div class="column" align="right";>
+    <h2>Past Members</h2>
+		<p>
+		<ul style="list-style: none;">
+		<li><a href="http://www.rinkehoekstra.nl">Rinke Hoekstra</a> (now at Elsevier)</li>
+		<li><a href="http://laurensrietveld.nl">Laurens Rietveld</a>&nbsp;(now at <a href="https://triply.cc/">Triply</a>)</li>
+		<li><a href="https://smaglia.wordpress.com/">Sara Magliacane</a>&nbsp;(now at University of Amsterdam&nbsp;)</li>
+		<li><a href="http://www.few.vu.nl/~vci900/">Veruska Carretta Zamborlini</a>&nbsp;(now at University of Amsterdam&nbsp;)</li>
+		<li><a href="http://www.few.vu.nl/~kdr250/">Kathrin Dentler</a> (now at AMC)</li>
+		<li><a href="http://www.jacopourbani.it/">Jacopo Urbani</a>&nbsp;(now at Computer Systems group of the VU)</li>
+		<li><a href="http://www.huiqingao.com">Huiqin Gao</a></li>
+		<li><a href="http://www.few.vu.nl/~alu900">Antonis Loizou</a></li>
+		<li><a href="http://www.universiteitleiden.nl/en/staffmembers/steven-de-rooij">Steven de Rooij</a> (Now at <a href="http://www.universiteitleiden.nl/en">Leiden University</a>)</li>
+		<li><a href="http://scholar.google.com/citations?user=Jiq47YsAAAAJ&amp;hl=en" target="_blank">Marat Charlaganov</a></li>
+		<li><a href="http://biosemantics.org/index.php/people/wytze-vlietstra">Wytze Vlietstra</a></li>
+		<li><a href="http://www.cs.vu.nl/~ronny/">Ronald Siebes</a>&nbsp;(now at VU&nbsp;<a href="http://wm.cs.vu.nl/">Web &amp; Media</a>&nbsp;group)</li>
+		<li><a href="http://www.few.vu.nl/~mka410/">Krystyna Milian</a></li>
+		<li><a href="mailto:fundatureanu.sever@gmail.com">Sever Fundatureanu</a></li>
+		<li><a href="http://campuscurico.utalca.cl/~rangles/" target="_blank">Renzo Angles</a>&nbsp;(<a href="http://www.utalca.cl/">Universidad de Talca</a>)</li>
+		<li><a href="http://www.cs.vu.nl/~rstegers">Ruud Stegers</a>&nbsp;(at <a href="http://www.jorasolutions.eu/">Jora solutions</a>, <a href="http://www.klm.com">KLM</a>, and <a href="https://www.vnv.nl/">VNV</a>)</li>
+		<li><a href="http://www.cs.vu.nl/~laurah/" target="_blank">Laura Hollink</a>&nbsp;(now at VU&nbsp;<a href="http://wm.cs.vu.nl/">Web &amp; Media</a>&nbsp;group)</li>
+		<li><a href="http://www.few.vu.nl/~pgroth/">Paul Groth</a>&nbsp;(now at VU&nbsp;<a href="http://wm.cs.vu.nl/">Web &amp; Media</a> group)</li>
+		<li><a href="http://klarman.synthasite.com/">Szymon Klarman</a>&nbsp;(now at <a href="http://www.cair.za.net/">CAIR</a>)</li>
+		<li><a href="http://www.few.vu.nl/~cgueret/">Christophe Gueret</a>&nbsp;(now at <a href="http://dans.knaw.nl">DANS</a>)</li>
+		<li><a href="http://www.few.vu.nl/~kot/">Spyros Kotoulas</a> (now at <a class="zem_slink" title="IBM" href="http://www.ibm.com" target="_blank" rel="homepage">IBM</a> Research)</li>
+		<li><a href="http://www.few.vu.nl/~gtagni/">Gaston Tagni</a> (now at <a class="zem_slink" title="Philips" href="http://philips.com" target="_blank" rel="homepage">Philips Research</a>)</li>
+		<li><a href="http://www.few.vu.nl/~swang/">Shenghui Wang</a> (now at <a class="zem_slink" title="Wageningen University and Research Centre" href="http://www.wur.nl" target="_blank" rel="homepage">Wageningen University</a>)</li>
+		<li><a href="http://www.few.vu.nl/~sbocconi/">Stefano Bocconi</a> (now at Cyntelix)</li>
+		<li><a href="http://eyaloren.org/">Eyal Oren</a> (now at <a class="zem_slink" title="McKinsey &amp; Company" href="http://en.wikipedia.org/wiki/McKinsey_%26_Company" target="_blank" rel="wikipedia">McKinsey</a>)</li>
+		<li><a href="http://www.few.vu.nl/~aisaac/">Antoine Isaac</a> (now at VU&nbsp;<a href="http://wm.cs.vu.nl/">Web &amp; Media</a>&nbsp;group, and at Europeana)</li>
+		<li><a href="http://www.cs.vu.nl/~lourens/">Lourens van der Meij</a> (now at VU&nbsp;<a href="http://wm.cs.vu.nl/">Web &amp; Media</a>&nbsp;group)</li>
+		<li><a href="http://www.cs.vu.nl/~wva/">Wouter van Atteveldt</a> (now at Dept. of Communication Studies at the VU)</li>
+		<li><a href="http://www.cs.vu.nl/~mcaklein/">Michel Klein</a> (now at Agent Group at the VU)</li>
+		<li><a href="http://www.few.vu.nl/~gan/">George Anadiotis</a> (now at&nbsp;<a href="http://www.imc.com.gr/">IMC Technologies)</a></li>
+		<li><a href="http://www.cs.vu.nl/~zharko/">Zharko Aleksovski</a> (now at&nbsp;<a href="http://www.research.philips.com/">Philips Research</a>)</li>
+		<li><a href="http://www.hsw.fhso.ch/wache/">Holger Wache</a> (moved to&nbsp;<a href="http://www.fhnw.ch/">the University of Applied Sciences Northwestern Switzerland (FHNW)</a>)</li>
+		<li><a href="http://www.cs.vu.nl/~mtvgendt/">Marjolein van Gendt</a></li>
+		<li>Andreas Hess</li>
+		<li>Radu Serban</li>
+		<li>Wouter van Steenbergen</li>
+		<li><a href="http://ki.informatik.uni-mannheim.de/">Heiner Stuckenschmidt</a> (now at&nbsp;<a href="http://www.uni-mannheim.de/">Universitat Mannheim, Germany</a>)</li>
+		<li><a href="http://kmi.open.ac.uk/people/marta/">Marta Sabou</a> (now at&nbsp;<a href="http://kmi.open.ac.uk/people/marta/">Knowledge Media Institute, UK</a>)</li>
+		<li><a href="http://www.cs.vu.nl/~mrmenken/">Maarten Menken</a> (now at&nbsp;<a href="http://www.logicacmg.nl/">LogicaCMG</a>)</li>
+		<li><a href="mailto:jeen.broekstra@gmail.com">Jeen Broekstra</a> (now lives in Wellington, and works at <a href="http://www.insightng.com">InsightNG</a>)</li>
+		<li><a href="http://www.cs.uu.nl/~broersen/">Jan Broersen</a> (now at <a class="zem_slink" title="Utrecht University" href="http://www.uu.nl" target="_blank" rel="homepage">Utrecht University</a>)</li>
+		<li><a href="http://osiris.cs.kun.nl/~perry/index.html">Perry Groot</a> (now at <a class="zem_slink" title="Radboud University Nijmegen" href="http://www.ru.nl/english" target="_blank" rel="homepage">University of Nijmegen</a>)</li>
+		<li><a href="http://www3.uji.es/~marcos/">Mar Marcos</a> (now at University of Castelon)</li>
+		</ul>
+		</p>
+  </div>
+  <div class="column" align="left";>
+    <h2> &emsp; Past Visitors</h2>
+
+		<ul style="list-style: none;">
+		<li><a href="http://www.ics.forth.gr/isl/people/people_individual.jsp?Person_ID=38">Grigoris Antoniou</a> (autumn 2003)</li>
+		<li><a href="http://www.cs.vu.nl/~edgard/">Edgard Costa Oliveira</a> (autumn 2003–summer 2004)</li>
+		<li><a href="http://aiff.usc.es/~elchus/chus.html">Maria Taboada Iglesias</a> (February 2005)</li>
+		<li><a href="http://dit.unitn.it/~zanobini/">Stefano Zanobini</a> (half a year starting from October 1, 2004)</li>
+		<li><a href="http://dl-web.man.ac.uk/~panz/Zhilin/">Jeff Pan</a> (July 2005)</li>
+		<li><a href="http://dit.unitn.it/~accord/">M. Yatskevich</a> (July 2005)</li>
+		<li><a href="http://www.l3s.de/~dolog/index2.html">Peter Dolog</a> (September – October 2005)</li>
+		<li><a href="mailto:rgarcia@fi.upm.es">Raul Garcia Castro</a> (February – April 2007)</li>
+		<li><a href="http://www.scm.uws.edu.au/~dongmo/">Dongmo Zhang</a> (August -September 2007)</li>
+		<li><a href="http://iws.seu.edu.cn/projects/matching/">Wei Hu</a> (November 2007 – April 2008)</li>
+		<li><a href="mailto:cassia.ts@gmail.com">Cássia Trojahn dos Santos</a> (February – April 2008)</li>
+		<li><a href="http://www.wici-lab.org/wici/~yizeng/">Yi Zeng</a> (May – June 2009)</li>
+		<li><a href="mailto:belakv@gmail.com">Václav Belák</a> (December 2009)</li>
+		<li><a href="http://www.ugr.es/~arturogf/">Arturo Gonzalez Ferrer</a> (April – June 2010)</li>
+		<li><a href="http://www.informatik.uni-bremen.de/~victor/">Víctor Gutiérrez</a> (April 2010)</li>
+		<li><a href="http://wiki.larkc.eu/yanwang">Yan Wang</a> (May – June 2010)</li>
+		<li><a href="http://www.stanford.edu/~plependu/">Paea Lependu</a> (October 2010)</li>
+		<li><a href="http://research.yahoo.com/Peter_Mika">Peter Mika</a> (October 2010)</li>
+		<li><a href="http://www.cs.vu.nl/en/sec/ai/kr/">Jun Fang</a> (December 2010 – Decmber 2011)</li>
+		<li><a href="http://www.ibime.upv.es/">José Alberto Maldonado</a> (May – July 2012)</li>
+		</ul>
+  </div>
+</div>
+</div>
+
+
+<!-- Previous members -->
+
+<!-- visitors -->
