@@ -2,7 +2,7 @@
 
 
 body {
-    background-color: #41677a;
+    background-color: rgba(66, 122, 159, 0.56);
     background-size: cover;
     background-position: center;
 }
@@ -58,7 +58,7 @@ hr{
 }
 
 .imageTextField > hr {
-    width: 240px;
+    width: 250px;
     border-top: 1px solid #f8f8f8;
     border-bottom: 1px solid rgba(0,0,0,0.2);
 }
@@ -100,10 +100,10 @@ hr{
     background-color: #8da9b9;
     border: solid;
 		padding-top: 15px;
-    margin-bottom: 5%;
+    margin-bottom: 15px;
 		text-align: center;
 		color: white;
-		font-size: 2em;
+		font-size: 1.5em;
 		font-style: oblique;
 }
 

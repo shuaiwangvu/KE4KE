@@ -4,6 +4,7 @@ var router = express.Router();
 var fs = require('fs');
 
 
+var testMe = "TestMe";
 
 var path = require('path');
 var rdf = require('rdflib');
@@ -236,6 +237,16 @@ console.log('         < ALL PEOPLE > ', all_people.length);
 
 console.log (" ==== END OF HISTORY! ====\n");
 
+
+
+
+
+
+
+
+
+
+
 /* GET home page. */
 router.get('/', function(req, res, next) {
     res.render('index', { condition: true, anyArray: [1,2,3] });
@@ -245,6 +256,24 @@ router.get('/', function(req, res, next) {
 router.get('/about', function(req, res, next) {
     res.render('about', { title: 'About', condition: true, anyArray: [1,2,3] });
 });
+
+router.get('/courses', function(req, res, next) {
+    res.render('courses', { title: 'Courses', condition: true, anyArray: [1,2,3] });
+});
+
+
+router.get('/news', function(req, res, next) {
+    res.render('news', { title: 'News', condition: true, anyArray: [1,2,3] });
+});
+
+router.get('/collaboration', function(req, res, next) {
+    res.render('collaboration', { title: 'Collaboration', condition: true, anyArray: [1,2,3] });
+});
+
+router.get('/vacancies', function(req, res, next) {
+    res.render('vacancies', { title: 'Vacancies', condition: true, anyArray: [1,2,3] });
+});
+
 
 router.get('/members', function(req, res, next) {
 
