@@ -10,6 +10,7 @@ var path = require('path');
 var rdf = require('rdflib');
 
 var filename = './people.owl';
+var filename2 = './publications.owl';
 
 // var Conversation = require('watson-developer-cloud/conversation/v1'); // watson sdk
 var watson = require("watson-developer-cloud");
@@ -30,7 +31,7 @@ var hometown = [
   {lat: 39.094480, lng: 107.984852}, //ordos
   {lat: 30.573953, lng: 114.328528}, // wu han
   {lat: 54.970417, lng: -1.624563}, // newcastel
-  {lat: 35.673309, lng: 51.408175}, // iran
+  {lat: 35.673309, lng: 51.408175} // iran
 ];
 
 var oldmembers = [
@@ -118,18 +119,23 @@ var visitors = [
 
 //     < PRE PROCESSING OF DATA >
 var rdfData = fs.readFileSync(filename).toString();
+var rdfData2 = fs.readFileSync(filename2).toString();
 
 var store = rdf.graph();
+var store2 = rdf.graph();
+
 var contentType='text/turtle';
 // var knows = FOAF('knows'); //???
 var baseUrl="http://www.w3.org/2002/07/owl#Thing";
 // var body = '<a> <b> <c> .';
 rdf.parse(rdfData,store,baseUrl);
+rdf.parse(rdfData2,store2,baseUrl);
 
 
-console.log (" ==== BEGINNING OF HISTORY! ====\n");
+console.log (" ==== BEGINNING OF PEOPLE! ====\n");
 
-console.log("There are ", store.length, " triples");
+console.log("There are ", store.length, " triples in people ontology");
+console.log("There are ", store2.length, " triples in publications ontology");
 
 var is_of_type = rdf.sym("http://www.w3.org/1999/02/22-rdf-syntax-ns#type");
 var individual = rdf.sym("http://www.w3.org/2002/07/owl#NamedIndividual");
@@ -235,15 +241,97 @@ var lower = to_display;
 
 console.log('         < ALL PEOPLE > ', all_people.length);
 
-console.log (" ==== END OF HISTORY! ====\n");
+console.log (" ==== END OF PEOPLE! ====\n");
+
+
+console.log (" ==== BEGINNING OF PUBLICATIONS! ====\n");
+
+
+var sub_class_of = rdf.sym("http://www.w3.org/2000/01/rdf-schema#subClassOf");
+var topic = rdf.sym("http://example.com/ontology#Topic");
 
 
 
+var keywords = store2.each(undefined, sub_class_of, topic);
+
+console.log('HOW MANY Triples ARE THERE? -- ', keywords.length);
+
+for (var i=0; i<keywords.length;i++) {
+    var k = keywords[i];
+    console.log('keywords uri = ', k.uri);
+}
+//keyword prefix = http://example.com/bibliography#
+
+var is_published_on_year = rdf.sym("http://example.com/ontology#isPublishedOnYear");
+var is_about = rdf.sym("http://example.com/ontology#isAbout");
+
+var publication_list = [];
+var keywords_by_year = [];
 
 
+for (var yr = 1996; yr < 2018; yr++){
+    var y = {year: yr, keyword_list: []};
+    keywords_by_year.push(y);
+    console.log("year ===== ", yr);
+}
+
+var publications = store2.each(undefined, is_published_on_year, undefined);
+
+// I took this method from https://stackoverflow.com/questions/1144783/how-to-replace-all-occurrences-of-a-string-in-javascript
+String.prototype.replaceAll = function(search, replacement) {
+    var target = this;
+    return target.replace(new RegExp(search, 'g'), replacement);
+};
+
+for (var i=0; i<publications.length;i++) {
+    var p = publications[i];
+    console.log('publications uri = ', p.uri);
+
+    var year = store2.any(p, is_published_on_year);
+    console.log(' is published on year', year.value);
 
 
+    var its_keywords = store2.each(p, is_about);
+    if (its_keywords.length > 0){
+        for (var k =0; k < its_keywords.length; k++){
+            kw = its_keywords[k];
+            console.log("        it has ", kw.value, " keywords");
 
+            keywords_by_year.forEach(function (ky) {
+                if (ky.year == year.value){
+
+                    var index = kw.value.indexOf("#");
+                    var keyword = kw.value.substring(index+1);
+                    keyword = keyword.replaceAll('_', ' ');
+
+                    ky.keyword_list.push(keyword);
+                    console.log(year.value , ' capture ', kw.value);
+
+                }
+            });
+
+        }
+    }
+
+
+}
+console.log("END OF PUBLICATION.");
+// why is this code not working?
+// var image = store.any(p, has_image);
+// keywords_by_year.forEach(function (ky) {
+//     console.log("this is year", ky.year);
+//     for (kwd in ky.keyword_list){
+//         console.log("     has keyword: ", kwd);
+//     }
+// });
+
+for (var yr=0; yr<keywords_by_year.length;yr++) {
+    kwy = keywords_by_year[yr];
+
+    console.log('this is year ', kwy.year);
+    console.log('has keywords ', kwy.keyword_list);
+
+}
 
 
 
