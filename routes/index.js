@@ -117,7 +117,8 @@ var visitors = [
 // });
 
 
-//     < PRE PROCESSING OF DATA >
+// STEP 0: LOAD KNOWLEDGE BASES: PEOPLE AND PUBLICATIONS
+
 var rdfData = fs.readFileSync(filename).toString();
 var rdfData2 = fs.readFileSync(filename2).toString();
 
@@ -125,9 +126,8 @@ var store = rdf.graph();
 var store2 = rdf.graph();
 
 var contentType='text/turtle';
-// var knows = FOAF('knows'); //???
 var baseUrl="http://www.w3.org/2002/07/owl#Thing";
-// var body = '<a> <b> <c> .';
+
 rdf.parse(rdfData,store,baseUrl);
 rdf.parse(rdfData2,store2,baseUrl);
 
@@ -233,6 +233,8 @@ for (var i=0; i<people.length;i++) {
         email: email.value, description: description.value};
 
     console.log("Initialised an entry for " + pp.name + "\n");
+
+    // -- PREPARE A LIST OF PEOPLE TO BE CLASSIFIED ACCORDING TO THE SPECIFICATION OF VISITORS
     to_display.push(pp);
 }
 
@@ -277,11 +279,19 @@ for (var yr = 1996; yr < 2018; yr++){
 
 var publications = store2.each(undefined, is_published_on_year, undefined);
 
-// I took this method from https://stackoverflow.com/questions/1144783/how-to-replace-all-occurrences-of-a-string-in-javascript
+// REFERENCE: I took this method from
+// https://stackoverflow.com/questions/1144783/how-to-replace-all-occurrences-of-a-string-in-javascript
+
 String.prototype.replaceAll = function(search, replacement) {
     var target = this;
     return target.replace(new RegExp(search, 'g'), replacement);
 };
+
+//REFERENCE END
+
+
+//CREATE A LIST OF PUBLICATIOONS.
+//IN FACT, HERE WE ONLY NEED THE KEYWORDS OF EACH YEAR.
 
 for (var i=0; i<publications.length;i++) {
     var p = publications[i];
@@ -313,7 +323,6 @@ for (var i=0; i<publications.length;i++) {
         }
     }
 
-
 }
 console.log("END OF PUBLICATION.");
 // why is this code not working?
@@ -325,6 +334,7 @@ console.log("END OF PUBLICATION.");
 //     }
 // });
 
+// SIMPLY OUTPUT THE KEYWORDS
 for (var yr=0; yr<keywords_by_year.length;yr++) {
     kwy = keywords_by_year[yr];
 
@@ -374,7 +384,7 @@ router.get('/members', function(req, res, next) {
 
     recommended_people = [];
     other_people = [];
-
+    // STEP 1: START THE CHATBOT (IBM BLUEMIX CONVERSATION API)
     var chatbot_reply; // empty string for now
 
     conversation.message({
@@ -445,7 +455,7 @@ router.get('/members/:id', function(req, res, next) {
 
     }
 
-
+    //INTERACTION WITH CHATBOT
     // var answer = 'answer of ' + question;
     var chatbot_reply;
 
@@ -461,6 +471,7 @@ router.get('/members/:id', function(req, res, next) {
             chatbot_reply = response.output.text.toString();
             console.log('there are ', response.entities.length, 'entities');
 
+            // STEP 2: OBTAIN ENTITIES
             response.entities.forEach(function (item) {
                 console.log("Entity :", item.value);
             });
@@ -468,6 +479,8 @@ router.get('/members/:id', function(req, res, next) {
                 //UPDATE THE TWO LITS ACCORIDNG TO THE DOMAIN
                 if (location%3 == 1)
                 {
+
+                    // STEP 3: MODIFY THE LIST ACCORDING TO THE SPECIFICAITON
                     recommended_people = [];
                     other_people = [];
                     all_people.forEach(function (ppl) {
@@ -493,7 +506,7 @@ router.get('/members/:id', function(req, res, next) {
                 console.log("location ==== ", location);
 
 
-                //UPDATE THE TWO LIST ACCORDING TO THE POSITION
+                //STEP 4: MATCH AND UPDATE THE TWO LIST ACCORDING TO THE POSITION
                 if (location%3 == 2)
                 {
                     var to_remove = [];
@@ -525,6 +538,8 @@ router.get('/members/:id', function(req, res, next) {
                     to_remove.forEach(function(ppl){
                         var index = recommended_people.indexOf(ppl);
                         if (index > -1) {
+
+                            //STEP 5: RANKING: SIMPLE RANKING WITH FIRST MATCH FIRST PRESENT
                             recommended_people.splice(index, 1);
                         }else{
                             console.log("ERROR!!!!!!!!!");

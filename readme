@@ -1,0 +1,34 @@
+This repo is for the Knowledge Engineering course for the Vrije Universiteit in Amsterdam.
+
+You are free to reuse the code if you find it helpful.
+
+Here is a quick guidance corresponding to our report.
+
+Step 0 : LOAD
+There are two files being loaded. One is a people (FOAF) ontology we created by hand. The other one is a publication knowledge
+base we obtained from the PURE system.
+
+    code: index.js line 120 onwards
+
+Step 1 : GENERATE
+The main goal of this project is to help visitors find specialists. The first step is to get a list of specialists from
+the people ontology: researchers, secretary, project manager, etc.
+
+    code: index.js line 155 onwards. Most work is in the loop from line 158
+
+Step 2: SPECIFY keywords
+We interact with the IBM Conversation API to extract keywords from visitors' input. These keywords are predefined from
+people knowledge base.
+
+    code: index.js file, around line 474
+
+Step 3: MATCH specialists
+We then use the keywords we obtained and match up with our specialists. The results are two lists: the relevant ones and
+the irrelevant ones.
+
+    code: index.js file line 483 to 585. Also see the display in file members.hbs
+
+Step 4: RANKING
+Due to the limitation of ontology, we are only doing simple ranking by first match first display.
+
+    code: index.js line 542
