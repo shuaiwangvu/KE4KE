@@ -32,3 +32,16 @@ Step 4: RANKING
 Due to the limitation of ontology, we are only doing simple ranking by first match first display.
 
     code: index.js line 542
+
+
+To view this website, simply go to the folder and type
+    npm install (if it is your first time running this)
+    npm start
+
+You will be able to see the webpages at localhost:8000
+
+Feel free to give us feedback if you have any:
+
+Finn Potason: s2.wang@vu.nl
+Aron van Groningen: aronvgroningen@gmail.com 
+
