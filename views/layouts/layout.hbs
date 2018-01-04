@@ -3,10 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <title>{{ title }}</title>
-    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
-    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+
     <link href="http://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic,700italic" rel="stylesheet" type="text/css">
-    <link rel="stylesheet" href="/stylesheets/style.css">
+
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 	  <link rel="stylesheet"
   href="https://cdn.jsdelivr.net/npm/animate.css@3.5.2/animate.min.css"
@@ -86,11 +85,22 @@
       };
     </script>
 
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+
+    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/stylesheets/style.css">
+    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+
 </head>
 <body>
 
 <!--Nav Bar-->
 <nav class="navbar navbar-default navbar-fixed-top">
+
+
+
     <div class="navbar-header top-left-nav-bar">
         <a class="navbar-brand" href="/.">
             <img id="topImage" src="http://www.vu-kamerorkest.nl/images/griff-blauw.png"><p id="topText">Knowledge Representation and Reasoning</p>
@@ -104,7 +114,7 @@
             <li><a href="/members">SPECIALIST FINDER</a></li>
 					
 						<li class="dropdown">
-							<a class="dropdown-toggle" data-toggle="dropdown" href="#">RESEARCH<span class="caret"></span></a>
+							<a class="dropdown-toggle" data-toggle="dropdown" href=".">RESEARCH<span class="caret"></span></a>
 							<ul class="dropdown-menu">
 								<li><a href="/projects">PROJECTS</a></li>
 								<li><a href="/publications">PUBLICATIONS</a></li>
@@ -112,7 +122,7 @@
 						</li>
 
 						<li class="dropdown">
-							<a class="dropdown-toggle" data-toggle="dropdown" href="$">TEACHING<span class="caret"></span></a>
+							<a class="dropdown-toggle" data-toggle="dropdown" href=".">TEACHING<span class="caret"></span></a>
 							<ul class="dropdown-menu">
 										<li><a href="/courses">COURSES</a></li>
 										<li><a href="/studentProjects">STUDENT PROJECTS</a></li>
@@ -120,9 +130,10 @@
 						</li>
 					
 						<li class="dropdown">
-							<a class="dropdown-toggle" data-toggle="dropdown" href="/about">ABOUT US<span class="caret"></span></a>
+							<a class="dropdown-toggle" data-toggle="dropdown" href=".">ABOUT US<span class="caret"></span></a>
 							<ul class="dropdown-menu">
-										<li><a href="/introduction">INTRODUCTION</a></li>
+                                <li><a href="/about">INTRODUCTION</a></li>
+                                <li><a href="/contact">CONTACT US</a></li>
 										<li><a href="/members">MEMBERS</a></li>
 									<li><a href="/vacancies">VACANCIES</a></li>
 									<li><a href="/collaboration">COLLABORATION</a></li>
@@ -134,5 +145,9 @@
 
 
 {{{ body }}}
+
+
+
 </body>
+
 </html>

@@ -349,6 +349,9 @@ router.get('/courses', function(req, res, next) {
     res.render('courses', { title: 'Courses', condition: true, anyArray: [1,2,3] });
 });
 
+router.get('/contact', function(req, res, next) {
+    res.render('contact', { title: 'Contact', condition: true, anyArray: [1,2,3] });
+});
 
 router.get('/news', function(req, res, next) {
     res.render('news', { title: 'News', condition: true, anyArray: [1,2,3] });
