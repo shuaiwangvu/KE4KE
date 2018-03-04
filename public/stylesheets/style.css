@@ -206,8 +206,6 @@ a{
                  /*0px 18px 23px rgba(0,0,0,0.1);*/
 }
 
-}
-
 .left-half {
   background-color: #ff9e2c;
   position: absolute;
@@ -317,7 +315,7 @@ button {
     float: left;
     width: 50%;
     padding: 10px;
-    /* height: 300px; /* Should be removed. Only for demonstration */ */
+    /* height: 300px; /* Should be removed. Only for demonstration */
 }
 
 /* Clear floats after the columns */
