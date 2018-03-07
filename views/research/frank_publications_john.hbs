@@ -3,7 +3,7 @@
 <div class="container content">
 <div class="narrowcolumn singlepage fullwidth">
 
-			<div class="post">
+			<p class="post">
                 <div class="title"><h1>Publications of Frank</h1></div>
                 <!--<h2>1996 - 2017: 22 years of excellence on KR&amp;R research</h2>-->
                 <!--<hr>-->
@@ -21,6 +21,16 @@
 
 
 
+                {{#each names}}
+                    <h3>
+                        {{this.year}}
+                    </h3>
+                    <p>
+                    {{#each this.paper_names}}
+                        <p>{{this}}</p>
+                    {{/each}}
+                    </p>
+                {{/each}}
 
                 <!--<hr>-->
 				<!--<div class="entry">-->
@@ -30,7 +40,6 @@
                     <!--<div class="clear"></div>-->
                 <!--</div>-->
 				<!--<p class="postmetadata">-->
-
 
 				<!--</p>-->
                 These entries are from John's files.

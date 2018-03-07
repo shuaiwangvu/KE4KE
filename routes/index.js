@@ -209,7 +209,7 @@ String.prototype.replaceAll = function(search, replacement) {
 //CREATE A LIST OF PUBLICATIOONS.
 //IN FACT, HERE WE ONLY NEED THE KEYWORDS OF EACH YEAR.
 
-frank_publications = [] // collect all the papers from Frank
+frank_publications = []; // collect all the papers from Frank
 
 
 
@@ -227,9 +227,23 @@ console.log('1 has :', stms.length);
 
 frank_uris = [];
 
+frank_papers = [];
+frank_paper_names = [];
+
+
+for (var yr = 1996; yr < 2018; yr++){
+    var y = {year: yr, paper_names: []};
+    frank_paper_names.push(y);
+    // console.log("year / ===== ", yr);
+}
+
+
+
+
 for (var j = 0; j < stms.length; j++){
     var stm = stms[j];
     var subject = stm.subject.uri;
+    var paper = stm.object.uri;
     if (subject.includes("Harmelen")) { //subject contains Harmelen then print it out
         // console.log (subject);
 
@@ -237,8 +251,49 @@ for (var j = 0; j < stms.length; j++){
             frank_uris.push(subject);
             console.log('***** add it *******', subject);
         }
+        paper_sym = rdf.sym(paper);
+        var paper_year = store2.any(paper_sym, is_published_on_year);
+        console.log("year  =  ", paper_year.value);
+        frank_papers.push(paper);
+        var index = paper.indexOf("#");
+        var paper = paper.substring(index+1);
+        paper = paper.replaceAll('_', ' ');
+        // frank_paper_names.push(paper);
+        //
+
+        frank_paper_names.forEach(function (ky) {
+                if (ky.year == paper_year){
+                    ky.paper_names.push(paper);
+                    console.log('paper = ', paper);
+                }
+            });
     }
 }
+
+console.log("frank has " , frank_paper_names.length, ' years');
+
+//
+//
+// for (var yr = 1996; yr < 2018; yr++){
+//     // var y = {year: yr, paper_names: []};
+//     // frank_paper_names.push(y);
+//     console.log("year  ===== ", frank_paper_names['year']);
+// }
+
+
+frank_paper_names.forEach(function (ky) {
+    console.log("Frank ----- this is year", ky.year);
+    console.log("Frank paper names this is year", ky.paper_names);
+    // for (kwd in ky.paper_names){
+    //     console.log("     has paper: ", kwd);
+    // }
+});
+//
+// for (var j = 0;  j < frank_paper_names.length ; j++){
+//     pp = frank_paper_names[j];
+//     console.log("paper = ", pp);
+// }
+
 
 
 
@@ -427,7 +482,7 @@ router.get('/frank_publications', function(req, res, next) {
 });
 
 router.get('/frank_publications_john', function(req, res, next) {
-    res.render('./research/frank_publications_john', { title: 'frank_publications_john', condition: true, anyArray: [1,2,3]});
+    res.render('./research/frank_publications_john', { title: 'frank_publications_john', names : frank_paper_names});
 });
 
 
@@ -651,7 +706,7 @@ router.get('/members/:id', function(req, res, next) {
 
             }
             location += 1;
-            res.render('members', {input: question, output: chatbot_reply, valid:valid , found: found, upper: upper, lower: lower, hometown: hometown, oldmembers: oldmembers, visitors:visitors});
+            res.render('members', {input: question, output: chatbot_reply, valid:valid , found: found, upper: upper, lower: lower});
         }
     });
 
