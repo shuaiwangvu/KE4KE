@@ -2,54 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="ab8968bf-feb1-4f94-8c87-4438ded22ed8" name="Default" comment="">
-      <change beforePath="" afterPath="$PROJECT_DIR$/views/research/frank_publications_john.hbs" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change beforePath="$PROJECT_DIR$/node_modules/ajv/README.md" afterPath="$PROJECT_DIR$/node_modules/ajv/README.md" />
-      <change beforePath="$PROJECT_DIR$/node_modules/ajv/dist/ajv.min.js" afterPath="$PROJECT_DIR$/node_modules/ajv/dist/ajv.min.js" />
-      <change beforePath="$PROJECT_DIR$/node_modules/ajv/dist/ajv.min.js.map" afterPath="$PROJECT_DIR$/node_modules/ajv/dist/ajv.min.js.map" />
-      <change beforePath="$PROJECT_DIR$/node_modules/ajv/dist/nodent.min.js" afterPath="$PROJECT_DIR$/node_modules/ajv/dist/nodent.min.js" />
-      <change beforePath="$PROJECT_DIR$/node_modules/ajv/dist/regenerator.min.js" afterPath="$PROJECT_DIR$/node_modules/ajv/dist/regenerator.min.js" />
-      <change beforePath="$PROJECT_DIR$/node_modules/ajv/lib/ajv.d.ts" afterPath="$PROJECT_DIR$/node_modules/ajv/lib/ajv.d.ts" />
-      <change beforePath="$PROJECT_DIR$/node_modules/ajv/package.json" afterPath="$PROJECT_DIR$/node_modules/ajv/package.json" />
-      <change beforePath="$PROJECT_DIR$/node_modules/combined-stream/Readme.md" afterPath="$PROJECT_DIR$/node_modules/combined-stream/Readme.md" />
-      <change beforePath="$PROJECT_DIR$/node_modules/combined-stream/lib/combined_stream.js" afterPath="$PROJECT_DIR$/node_modules/combined-stream/lib/combined_stream.js" />
-      <change beforePath="$PROJECT_DIR$/node_modules/combined-stream/package.json" afterPath="$PROJECT_DIR$/node_modules/combined-stream/package.json" />
-      <change beforePath="$PROJECT_DIR$/node_modules/fast-deep-equal/.eslintrc.yml" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/node_modules/fast-deep-equal/.npmignore" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/node_modules/fast-deep-equal/.travis.yml" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/node_modules/fast-deep-equal/benchmark/.eslintrc.yml" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/node_modules/fast-deep-equal/benchmark/index.js" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/node_modules/fast-deep-equal/index.js" afterPath="$PROJECT_DIR$/node_modules/fast-deep-equal/index.js" />
-      <change beforePath="$PROJECT_DIR$/node_modules/fast-deep-equal/package.json" afterPath="$PROJECT_DIR$/node_modules/fast-deep-equal/package.json" />
-      <change beforePath="$PROJECT_DIR$/node_modules/fast-deep-equal/spec/.eslintrc.yml" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/node_modules/fast-deep-equal/spec/index.spec.js" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/node_modules/fast-deep-equal/spec/tests.js" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/node_modules/form-data/README.md" afterPath="$PROJECT_DIR$/node_modules/form-data/README.md" />
-      <change beforePath="$PROJECT_DIR$/node_modules/form-data/README.md.bak" afterPath="$PROJECT_DIR$/node_modules/form-data/README.md.bak" />
-      <change beforePath="$PROJECT_DIR$/node_modules/form-data/package.json" afterPath="$PROJECT_DIR$/node_modules/form-data/package.json" />
-      <change beforePath="$PROJECT_DIR$/node_modules/hoek/lib/index.js" afterPath="$PROJECT_DIR$/node_modules/hoek/lib/index.js" />
-      <change beforePath="$PROJECT_DIR$/node_modules/hoek/package.json" afterPath="$PROJECT_DIR$/node_modules/hoek/package.json" />
-      <change beforePath="$PROJECT_DIR$/node_modules/request/package.json" afterPath="$PROJECT_DIR$/node_modules/request/package.json" />
-      <change beforePath="$PROJECT_DIR$/node_modules/tough-cookie/README.md" afterPath="$PROJECT_DIR$/node_modules/tough-cookie/README.md" />
-      <change beforePath="$PROJECT_DIR$/node_modules/tough-cookie/lib/cookie.js" afterPath="$PROJECT_DIR$/node_modules/tough-cookie/lib/cookie.js" />
-      <change beforePath="$PROJECT_DIR$/node_modules/tough-cookie/lib/pubsuffix.js" afterPath="$PROJECT_DIR$/node_modules/tough-cookie/lib/pubsuffix.js" />
-      <change beforePath="$PROJECT_DIR$/node_modules/tough-cookie/package.json" afterPath="$PROJECT_DIR$/node_modules/tough-cookie/package.json" />
-      <change beforePath="$PROJECT_DIR$/node_modules/uuid/.eslintrc.json" afterPath="$PROJECT_DIR$/node_modules/uuid/.eslintrc.json" />
-      <change beforePath="$PROJECT_DIR$/node_modules/uuid/HISTORY.md" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/node_modules/uuid/README.md" afterPath="$PROJECT_DIR$/node_modules/uuid/README.md" />
-      <change beforePath="$PROJECT_DIR$/node_modules/uuid/bin/uuid" afterPath="$PROJECT_DIR$/node_modules/uuid/bin/uuid" />
-      <change beforePath="$PROJECT_DIR$/node_modules/uuid/lib/rng-browser.js" afterPath="$PROJECT_DIR$/node_modules/uuid/lib/rng-browser.js" />
-      <change beforePath="$PROJECT_DIR$/node_modules/uuid/lib/rng.js" afterPath="$PROJECT_DIR$/node_modules/uuid/lib/rng.js" />
-      <change beforePath="$PROJECT_DIR$/node_modules/uuid/lib/sha1-browser.js" afterPath="$PROJECT_DIR$/node_modules/uuid/lib/sha1-browser.js" />
-      <change beforePath="$PROJECT_DIR$/node_modules/uuid/lib/sha1.js" afterPath="$PROJECT_DIR$/node_modules/uuid/lib/sha1.js" />
-      <change beforePath="$PROJECT_DIR$/node_modules/uuid/package.json" afterPath="$PROJECT_DIR$/node_modules/uuid/package.json" />
-      <change beforePath="$PROJECT_DIR$/node_modules/uuid/v1.js" afterPath="$PROJECT_DIR$/node_modules/uuid/v1.js" />
-      <change beforePath="$PROJECT_DIR$/node_modules/uuid/v4.js" afterPath="$PROJECT_DIR$/node_modules/uuid/v4.js" />
-      <change beforePath="$PROJECT_DIR$/node_modules/uuid/v5.js" afterPath="$PROJECT_DIR$/node_modules/uuid/v5.js" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" afterPath="$PROJECT_DIR$/package-lock.json" />
-      <change beforePath="$PROJECT_DIR$/package.json" afterPath="$PROJECT_DIR$/package.json" />
       <change beforePath="$PROJECT_DIR$/routes/index.js" afterPath="$PROJECT_DIR$/routes/index.js" />
-      <change beforePath="$PROJECT_DIR$/views/research/frank_publications.hbs" afterPath="$PROJECT_DIR$/views/research/frank_publications.hbs" />
+      <change beforePath="$PROJECT_DIR$/views/research/frank_publications_john.hbs" afterPath="$PROJECT_DIR$/views/research/frank_publications_john.hbs" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -60,11 +14,21 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="index.js" pinned="false" current-in-tab="true">
+      <file leaf-file-name="index.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/routes/index.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="275">
-              <caret line="234" column="0" lean-forward="true" selection-start-line="234" selection-start-column="0" selection-end-line="234" selection-end-column="0" />
+            <state relative-caret-position="333">
+              <caret line="190" column="41" lean-forward="true" selection-start-line="190" selection-start-column="41" selection-end-line="190" selection-end-column="41" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="members.hbs" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/views/members.hbs">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="508">
+              <caret line="93" column="29" lean-forward="true" selection-start-line="84" selection-start-column="36" selection-end-line="93" selection-end-column="29" />
               <folding />
             </state>
           </provider>
@@ -90,11 +54,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="frank_publications_john.hbs" pinned="false" current-in-tab="false">
+      <file leaf-file-name="frank_publications_john.hbs" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/views/research/frank_publications_john.hbs">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="540">
-              <caret line="36" column="0" lean-forward="true" selection-start-line="36" selection-start-column="0" selection-end-line="36" selection-end-column="0" />
+            <state relative-caret-position="315">
+              <caret line="21" column="0" lean-forward="true" selection-start-line="21" selection-start-column="0" selection-end-line="21" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -114,15 +78,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>http://www.w3.org/1999/02/22-rdf-syntax</find>
-      <find>subclass</find>
-      <find>http://www.w3.org/2002/07/owl#</find>
-      <find>A_Contextualised_Semantics_for_owl-sameAs</find>
-      <find>imageTextField</find>
-      <find>http://example.com/ontology#isPublishedOnYear</find>
-      <find>rdf</find>
-      <find>Topic</find>
-      <find>key</find>
       <find>words</find>
       <find>http://example.com/ontology#Topic</find>
       <find>keywords_by_year</find>
@@ -144,6 +99,15 @@
       <find>publicaion</find>
       <find>frank</find>
       <find>fv</find>
+      <find>john</find>
+      <find>each</find>
+      <find>any</find>
+      <find>any</find>
+      <find>frank_paper_names</find>
+      <find>title</find>
+      <find>hometown</find>
+      <find>store</find>
+      <find>key</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -190,7 +154,7 @@
     <handled-path value="$PROJECT_DIR$/node_modules" />
   </component>
   <component name="PhpWorkspaceProjectConfiguration" backward_compatibility_performed="true" />
-  <component name="ProjectFrameBounds">
+  <component name="ProjectFrameBounds" extendedState="1">
     <option name="x" value="267" />
     <option name="y" value="24" />
     <option name="width" value="1171" />
@@ -293,15 +257,15 @@
       <workItem from="1514853990395" duration="16173000" />
       <workItem from="1515085516431" duration="4878000" />
       <workItem from="1520427337486" duration="417000" />
-      <workItem from="1520427794392" duration="3667000" />
+      <workItem from="1520427794392" duration="7785000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="99801000" />
+    <option name="totallyTimeSpent" value="103919000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="267" y="24" width="1171" height="837" extended-state="0" />
+    <frame x="267" y="24" width="1171" height="837" extended-state="1" />
     <editor active="true" />
     <layout>
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.25448334" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
@@ -360,13 +324,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/public/stylesheets/style.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="165">
-          <caret line="11" column="29" lean-forward="true" selection-start-line="11" selection-start-column="29" selection-end-line="11" selection-end-column="29" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/routes/members.js" />
     <entry file="file://$PROJECT_DIR$/bin/www">
       <provider selected="true" editor-type-id="text-editor">
@@ -556,13 +513,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/views/members.hbs">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-22">
-          <caret line="4" column="16" lean-forward="false" selection-start-line="4" selection-start-column="16" selection-end-line="4" selection-end-column="42" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/views/graph.jpg">
       <provider selected="true" editor-type-id="images">
         <state />
@@ -590,10 +540,42 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/frank.bib">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="228">
+          <caret line="110" column="96" lean-forward="false" selection-start-line="110" selection-start-column="88" selection-end-line="110" selection-end-column="96" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/views/research/projects.hbs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="499">
+          <caret line="76" column="155" lean-forward="false" selection-start-line="76" selection-start-column="155" selection-end-line="76" selection-end-column="155" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/package.json">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="240">
           <caret line="16" column="12" lean-forward="false" selection-start-line="16" selection-start-column="5" selection-end-line="16" selection-end-column="12" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/views/members.hbs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="508">
+          <caret line="93" column="29" lean-forward="true" selection-start-line="84" selection-start-column="36" selection-end-line="93" selection-end-column="29" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/routes/index.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="333">
+          <caret line="190" column="41" lean-forward="true" selection-start-line="190" selection-start-column="41" selection-end-line="190" selection-end-column="41" />
           <folding />
         </state>
       </provider>
@@ -608,24 +590,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/views/research/frank_publications_john.hbs">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="540">
-          <caret line="36" column="0" lean-forward="true" selection-start-line="36" selection-start-column="0" selection-end-line="36" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/frank.bib">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="228">
-          <caret line="110" column="96" lean-forward="false" selection-start-line="110" selection-start-column="88" selection-end-line="110" selection-end-column="96" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/routes/index.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="275">
-          <caret line="234" column="0" lean-forward="true" selection-start-line="234" selection-start-column="0" selection-end-line="234" selection-end-column="0" />
+        <state relative-caret-position="315">
+          <caret line="21" column="0" lean-forward="true" selection-start-line="21" selection-start-column="0" selection-end-line="21" selection-end-column="0" />
           <folding />
         </state>
       </provider>
