@@ -6,6 +6,14 @@ var path = require('path');
 var rdf = require('rdflib');
 
 
+var request = require('request');
+request('http://www.google.com', function (error, response, body) {
+    console.log('error:', error); // Print the error if one occurred
+    console.log('statusCode:', response && response.statusCode); // Print the response status code if a response was received
+    console.log('body:', body); // Print the HTML for the Google homepage.
+});
+
+
 //var passport = require("passport");
 //var LocalStrategy = require("passport-local");
 //var User = require("../models/user");
@@ -164,7 +172,7 @@ var topic = rdf.sym("http://example.com/ontology#Topic");
 
 var keywords = store2.each(undefined, sub_class_of, topic);
 
-console.log('HOW MANY Triples ARE THERE? -- ', keywords.length);
+console.log('******HOW MANY Keywords ARE THERE? -- ', keywords.length);
 
 for (var i=0; i<keywords.length;i++) {
     var k = keywords[i];
@@ -201,37 +209,104 @@ String.prototype.replaceAll = function(search, replacement) {
 //CREATE A LIST OF PUBLICATIOONS.
 //IN FACT, HERE WE ONLY NEED THE KEYWORDS OF EACH YEAR.
 
-for (var i=0; i<publications.length;i++) {
-    var p = publications[i];
-    console.log('publications uri = ', p.uri);
-
-    var year = store2.any(p, is_published_on_year);
-    console.log(' is published on year', year.value);
+frank_publications = [] // collect all the papers from Frank
 
 
-    var its_keywords = store2.each(p, is_about);
-    if (its_keywords.length > 0){
-        for (var k =0; k < its_keywords.length; k++){
-            kw = its_keywords[k];
-            console.log("        it has ", kw.value, " keywords");
 
-            keywords_by_year.forEach(function (ky) {
-                if (ky.year == year.value){
+var au = rdf.sym('http://example.com/ontology#isAuthorOf');
+// var fvh = rdf.sym('http://example.com/bibliography#Harmelen_Fv');
+// var fvh2 = rdf.sym('http://example.com/bibliography#van_Harmelen_FAH');
+// var fvh3 = rdf.sym('http://example.com/bibliography#van_Harmelen_F');
+// var fvh3 = rdf.sym('http://example.com/bibliography#Van_Harmelen_F');
+//
 
-                    var index = kw.value.indexOf("#");
-                    var keyword = kw.value.substring(index+1);
-                    keyword = keyword.replaceAll('_', ' ');
 
-                    ky.keyword_list.push(keyword);
-                    console.log(year.value , ' capture ', kw.value);
+var stms = store2.statementsMatching(undefined, au, undefined);
+console.log('1 has :', stms.length);
 
-                }
-            });
 
+frank_uris = [];
+
+for (var j = 0; j < stms.length; j++){
+    var stm = stms[j];
+    var subject = stm.subject.uri;
+    if (subject.includes("Harmelen")) { //subject contains Harmelen then print it out
+        // console.log (subject);
+
+        if (frank_uris.indexOf(subject) < 0){
+            frank_uris.push(subject);
+            console.log('***** add it *******', subject);
         }
     }
-
 }
+
+
+
+// for (var i=0; i<publications.length;i++) {
+//     var p = publications[i];
+//     // console.log('******all the keys', p);
+//
+//
+//     console.log("publications tests");
+//     // store2.
+//
+//     // for (var j=0; j<stms.length;j++) {
+//     //     console.log("\n");
+//     //     var stm = stms[j];
+//     //     var subject = stm.subject.uri;
+//     //     var predicate = stm.predicate.uri;
+//     //     var object = stm.object;
+//     //
+//     //
+//     //     console.log("termType = ", object.termType);
+//     //
+//     //     console.log("subject: "+ subject);
+//     //     console.log("predicate: "+ predicate);
+//     //     // console.log("******** object: "+ object.toString());
+//     //     if (object.termType === "Literal") {
+//     //         console.log("Object : value of = ", object.value);
+//     //     }else {
+//     //         console.log("Object : uri = ", object.uri)
+//     //     }
+//     //
+//     //     console.log(stm) // the WebID of a friend
+//     //
+//     // }
+//
+//
+//     console.log('publications uri = ', p.uri);
+//
+//
+//
+//     var year = store2.any(p, is_published_on_year);
+//     console.log(' is published on year', year.value);
+//
+//     // var author = store2.any (p, ,)
+//
+//
+//     var its_keywords = store2.each(p, is_about);
+//     if (its_keywords.length > 0){
+//         for (var k =0; k < its_keywords.length; k++){
+//             kw = its_keywords[k];
+//             console.log("        it has ", kw.value, " keywords");
+//
+//             keywords_by_year.forEach(function (ky) {
+//                 if (ky.year == year.value){
+//
+//                     var index = kw.value.indexOf("#");
+//                     var keyword = kw.value.substring(index+1);
+//                     keyword = keyword.replaceAll('_', ' ');
+//
+//                     ky.keyword_list.push(keyword);
+//                     console.log(year.value , ' capture ', kw.value);
+//
+//                 }
+//             });
+//
+//         }
+//     }
+//
+// }
 console.log("END OF PUBLICATION.");
 // why is this code not working?
 // var image = store.any(p, has_image);
@@ -343,6 +418,16 @@ router.get('/projects', function(req, res, next) {
 
 router.get('/publications', function(req, res, next) {
     res.render('./research/publications', { title: 'Publications', condition: true, anyArray: [1,2,3]});
+});
+
+
+// Three pulications testing pages
+router.get('/frank_publications', function(req, res, next) {
+    res.render('./research/frank_publications', { title: 'frank_publications', condition: true, anyArray: [1,2,3]});
+});
+
+router.get('/frank_publications_john', function(req, res, next) {
+    res.render('./research/frank_publications_john', { title: 'frank_publications_john', condition: true, anyArray: [1,2,3]});
 });
 
 
