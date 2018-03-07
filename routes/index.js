@@ -331,7 +331,10 @@ router.get("/logout", function(req,res){
 })
 
 
-
+// Profile Edit
+router.get("/edit", function(req,res){
+    res.render('./login/profileEdit')
+})
 
 
 router.get('/projects', function(req, res, next) {
