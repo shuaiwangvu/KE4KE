@@ -10,7 +10,7 @@ var rdf = require('rdflib');
 //var LocalStrategy = require("passport-local");
 //var User = require("../models/user");
 
-var filename = './people.owl';
+var filename = './people_new.ttl';
 var filename2 = './publications.owl';
 
 // var Conversation = require('watson-developer-cloud/conversation/v1'); // watson sdk
@@ -331,10 +331,56 @@ router.get("/logout", function(req,res){
 })
 
 
-// Profile Edit
-router.get("/edit", function(req,res){
-    res.render('./login/profileEdit')
+// Profile Value page
+var person = rdf.sym('file:/Users/finnpotason/Programming/FOAF/krr.rdf#finn')
+
+var list_attribute_person = store.statementsMatching(undefined, undefined, undefined);
+
+var toDisplay = [];
+
+for (var i=0; i<list_attribute_person.length;i++) {
+    var stm = list_attribute_person[i];
+    var subject = stm.subject.value;
+    var predicate = stm.predicate.value;
+    predicate = predicate.split("/");
+    var object = stm.object.value;
+    var entry = {subject: subject, attribute: predicate.reverse()[0], value: object};
+
+    toDisplay.push(entry);
+
+}
+
+router.get("/profile", function(req,res){
+
+res.render('./profile/view', {toDisplay: toDisplay})
+
 })
+
+
+
+// Profile Edit
+router.get("/profile/edit", function(req,res){
+console.log(toDisplay)
+res.render('./profile/edit', {toDisplay: toDisplay})
+});
+
+router.post("/profile", function(req,res){
+
+for (var i=0; i<toDisplay.length;i++) {
+    toDisplay[i]['value'] = req.body.valuePredicate[i]
+    
+    if (toDisplay[i]['attribute'] == 'family_name'){
+        name = req.body.valuePredicate[i]            
+    } 
+
+}
+var data = JSON.stringify(toDisplay)
+fs.writeFile(name +'.json', data);
+
+res.render('./profile/view', {toDisplay: toDisplay})
+
+
+});
 
 
 router.get('/projects', function(req, res, next) {

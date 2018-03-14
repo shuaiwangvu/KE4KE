@@ -1,0 +1,27 @@
+<div class="container">
+    <div class="row">
+        <h1>Edit Profile</h1>
+        <div style="width: 30%; margin: 25px auto;">
+		<form action="/profile" method="POST">
+
+            {{#each toDisplay}}
+                    
+                    <div class="colum">
+                        <div class='row'>
+                            <label for="attribute" class="col-sm-2 col-form-label">{{this.attribute}}</label>
+                        </div>
+                        <div class='row'>
+                            <input name="valuePredicate" class="form-control" value="{{this.value}}" type="text">
+                        </div>
+                    </div>
+
+            {{/each}}
+
+                <div class="form-group">
+                    <button class="btn btn-lg btn-primary btn-block">save</button>
+                </div>
+        </form>
+            <a href="./profile">Go Back</a>
+        </div>
+    </div>
+</div>

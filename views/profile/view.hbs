@@ -1,0 +1,20 @@
+<div class="container">
+    <div class="row">
+        <div style="width: 30%; margin: 25px auto;">
+       
+        {{#each toDisplay}}
+       
+        <div class="form-group row">
+            <label for="staticEmail" class="col-sm-2 col-form-label">{{this.attribute}}</label>
+            <div class="col-lg-10">
+                <p>{{this.value}}</p>
+             </div>
+        </div>
+
+        {{/each}}
+
+            </form>
+            <a href="/profile/edit"><button class="btn btn-lg btn-primary btn-block">edit</button></a>
+        </div>
+    </div>
+</div>
