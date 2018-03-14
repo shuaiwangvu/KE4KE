@@ -4,8 +4,11 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
-
-
+var methodOverrid = require('method-override');
+var User        = require("./models/user");
+var passport    = require("passport");
+var LocalStrategy = require("passport-local");
+var mongoose    = require("mongoose");
 
 // the following is my code:
 var hbs = require('express-handlebars');// Finn
@@ -14,6 +17,25 @@ var index = require('./routes/index');
 // var members = require('./routes/members');
 
 var app = express();
+
+
+// PASSPORT CONFIGURATION
+app.use(require("express-session")({
+  secret: "-",
+  resave: false,
+  saveUninitialized: false
+}));
+app.use(passport.initialize());
+app.use(passport.session());
+passport.use(new LocalStrategy(User.authenticate()));
+passport.serializeUser(User.serializeUser());
+passport.deserializeUser(User.deserializeUser());
+
+app.use(function(req, res, next){
+  res.locals.currentUser = req.user;
+  next();
+});
+
 
 // view engine setup
 

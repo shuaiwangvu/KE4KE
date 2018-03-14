@@ -104,73 +104,9 @@
 
 
 <div class="content">
-	<h3 >
-		A Truly International Team With Global Research Impact
-	</h3>
-	<h4> Green = KR&amp;R Group; Red = hometowns of current members; Yellow = work location of past members; Blue = past visitors' location
-</div>
-<div id="map"></div>
-
-
-    <script>
-
-      function initMap() {
-        var vuLatLng = {lat: 52.332927, lng: 4.867903};
-				var cet = {lat : 32.447073,lng:  7.477245}
-        var map = new google.maps.Map(document.getElementById('map'), {
-          zoom: 2,
-          center: cet
-        });
-
-        var marker = new google.maps.Marker({
-          position: vuLatLng,
-          map: map,
-          title: 'Hello World!'
-        });
-				marker.setIcon('http://maps.google.com/mapfiles/ms/icons/green-dot.png')
-
-
-
-				{{#each hometown}}
-				var myLatLng = {lat: {{this.lat}}, lng: {{this.lng}} };
-				var marker = new google.maps.Marker({
-          position: myLatLng,
-          map: map
-        });
-				{{/each}}
-
-
-				{{#each oldmembers}}
-				var oldLatLng = {lat: {{this.lat}}, lng: {{this.lng}} };
-				var marker = new google.maps.Marker({
-          position: oldLatLng,
-          map: map
-        });
-				marker.setIcon('http://maps.google.com/mapfiles/ms/icons/yellow-dot.png')
-
-				{{/each}}
-
-
-				{{#each visitors}}
-				var vLatLng = {lat: {{this.lat}}, lng: {{this.lng}} };
-				var marker = new google.maps.Marker({
-          position: vLatLng,
-          map: map
-        });
-				marker.setIcon('http://maps.google.com/mapfiles/ms/icons/blue-dot.png')
-
-				{{/each}}
-
-      }
-    </script>
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyANwYFUQxO5rcFP8RyHLyAPY1r_orVlBB4&callback=initMap"
-    async defer></script>
-
-
-<div class="content">
 <!-- <h3>Past Members and Visitors</h3> -->
 
-<div class="row">
+<div class="row pastmembers">
   <div class="column" align="right";>
     <h2>Past Members</h2>
 		<p>

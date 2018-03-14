@@ -324,3 +324,7 @@ button {
     display: table;
     clear: both;
 }
+
+.pastmembers{
+	margin-top: -12%;
+}

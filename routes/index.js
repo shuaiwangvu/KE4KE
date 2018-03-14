@@ -4,11 +4,65 @@ var fs = require('fs');
 
 var path = require('path');
 var rdf = require('rdflib');
+var bodyParser = require('body-parser');
+
+var methodOverride = require('method-override');
+router.use(methodOverride("_method"))
+
+// var passportLocalMongoose = require("passport-local-mongoose");
+// var mongoose = require('mongoose');
+// mongoose.connect('localhost:27017/test');
+// var Schema = mongoose.Schema;
+
+// var userDataSchema = new Schema({
+//     username: String,
+//     password: String
+// });
+
+// userDataSchema.plugin(passportLocalMongoose);
+// var UserData = mongoose.model('UserData', userDataSchema);
+
+var passport = require("passport");
+var LocalStrategy = require("passport-local");
+var User = require("../models/user");
 
 
-//var passport = require("passport");
-//var LocalStrategy = require("passport-local");
-//var User = require("../models/user");
+
+var request = require('request');
+
+request('https://api.krr.triply.cc/datasets/potason/people/statements.json?q=', function (error, response, body) {
+  console.log('error:', error); // Print the error if one occurred
+  console.log('statusCode:', response && response.statusCode); // Print the response status code if a response was received
+  console.log('body:', body); // Print the HTML for the Google homepage.
+  
+
+
+
+  for (var i=0; i<body.length;i++) {
+    // console.log(body)
+
+    // console.log(i)
+  }
+
+
+
+
+//   var toDisplay = [];
+
+//   for (var i=0; i<list_attribute_person.length;i++) {
+//       var stm = list_attribute_person[i];
+//       var predicate = stm.predicate.value;
+//       predicate = predicate.split("/");
+//       var object = stm.object.value;
+//       var entry = {attribute: predicate.reverse()[0], value: object};
+
+//       toDisplay.push(entry);
+
+});
+
+
+
+
 
 var filename = './people.owl';
 var filename2 = './publications.owl';
@@ -40,10 +94,10 @@ rdf.parse(rdfData,store,baseUrl);
 rdf.parse(rdfData2,store2,baseUrl);
 
 
-console.log (" ==== BEGINNING OF PEOPLE! ====\n");
+// console.log (" ==== BEGINNING OF PEOPLE! ====\n");
 
-console.log("There are ", store.length, " triples in people ontology");
-console.log("There are ", store2.length, " triples in publications ontology");
+// console.log("There are ", store.length, " triples in people ontology");
+// console.log("There are ", store2.length, " triples in publications ontology");
 
 var is_of_type = rdf.sym("http://www.w3.org/1999/02/22-rdf-syntax-ns#type");
 var individual = rdf.sym("http://www.w3.org/2002/07/owl#NamedIndividual");
@@ -61,11 +115,11 @@ var location = 0;
 
 var people_prefix = "file:/Users/finnpotason/Programming/FOAF/krr.rdf#";
 var people = store.each(undefined, is_of_type, individual);
-console.log('HOW MANY RESULTS ARE THERE? -- ', people.length);
+// console.log('HOW MANY RESULTS ARE THERE? -- ', people.length);
 
 for (var i=0; i<people.length;i++) {
     var p = people[i];
-    console.log('The URI of this people is: ', p.uri); // the WebID of a friend
+    // console.log('The URI of this people is: ', p.uri); // the WebID of a friend
 
     var pl = {uri : p.uri, interest: [], position: "", email : ""};
 
@@ -75,12 +129,12 @@ for (var i=0; i<people.length;i++) {
     var first_name = store.any(p, has_first_name);
     var has_family_name = rdf.sym("http://xmlns.com/foaf/0.1/family_name");
     var family_name = store.any(p, has_family_name);
-    console.log("This people has first name: ", first_name.value);
-    console.log("This people has family name: ", family_name.value);
+    // console.log("This people has first name: ", first_name.value);
+    // console.log("This people has family name: ", family_name.value);
 
     var has_title = rdf.sym("http://xmlns.com/foaf/0.1/title");
     var title = store.any(p, has_title);
-    console.log("This people has title: ", title.value);
+    // console.log("This people has title: ", title.value);
 
     //interest
     var interest = [];
@@ -98,7 +152,7 @@ for (var i=0; i<people.length;i++) {
             interest_string += it.value;
             pl.interest.push (it.value);
         }
-        console.log("This person has interest in ", interest, " = ", pl.interest.length);
+        // console.log("This person has interest in ", interest, " = ", pl.interest.length);
 
     };
 
@@ -106,29 +160,29 @@ for (var i=0; i<people.length;i++) {
 
     var has_description = rdf.sym("http://xmlns.com/foaf/0.1/topic_interest");
     var description = store.any(p, has_description);
-    console.log("This people has description: ", description.value);
+    // console.log("This people has description: ", description.value);
 
     //image
     var has_image = rdf.sym("http://xmlns.com/foaf/0.1/depiction");
     var image = store.any(p, has_image);
-    console.log("This people has image: ", image.value);
+    // console.log("This people has image: ", image.value);
 
     //homepage
     var has_homepage = rdf.sym("http://xmlns.com/foaf/0.1/homepage");
     var homepage = store.any(p, has_homepage);
-    console.log("This people has homepage: ", homepage.value);
+    // console.log("This people has homepage: ", homepage.value);
 
     // position
     var has_position = rdf.sym("http://xmlns.com/foaf/0.1/status");
     var position = store.any(p, has_position);
-    console.log("This people has position: ", position.value);
+    // console.log("This people has position: ", position.value);
 
     pl.position = position.value;
 
     //email
     var has_email = rdf.sym("http://xmlns.com/foaf/0.1/mbox");
     var email = store.any(p, has_email);
-    console.log("This people has email: ", email.value);
+    // console.log("This people has email: ", email.value);
 
     pl.email = email.value;
 
@@ -140,7 +194,7 @@ for (var i=0; i<people.length;i++) {
         interest: interest_string, image: image.value, homepage: homepage.value, position: position.value,
         email: email.value, description: description.value};
 
-    console.log("Initialised an entry for " + pp.name + "\n");
+    // console.log("Initialised an entry for " + pp.name + "\n");
 
     // -- PREPARE A LIST OF PEOPLE TO BE CLASSIFIED ACCORDING TO THE SPECIFICATION OF VISITORS
     to_display.push(pp);
@@ -149,12 +203,12 @@ for (var i=0; i<people.length;i++) {
 var upper = [];
 var lower = to_display;
 
-console.log('         < ALL PEOPLE > ', all_people.length);
+// console.log('         < ALL PEOPLE > ', all_people.length);
 
-console.log (" ==== END OF PEOPLE! ====\n");
+// console.log (" ==== END OF PEOPLE! ====\n");
 
 
-console.log (" ==== BEGINNING OF PUBLICATIONS! ====\n");
+// console.log (" ==== BEGINNING OF PUBLICATIONS! ====\n");
 
 
 var sub_class_of = rdf.sym("http://www.w3.org/2000/01/rdf-schema#subClassOf");
@@ -164,11 +218,11 @@ var topic = rdf.sym("http://example.com/ontology#Topic");
 
 var keywords = store2.each(undefined, sub_class_of, topic);
 
-console.log('HOW MANY Triples ARE THERE? -- ', keywords.length);
+// console.log('HOW MANY Triples ARE THERE? -- ', keywords.length);
 
 for (var i=0; i<keywords.length;i++) {
     var k = keywords[i];
-    console.log('keywords uri = ', k.uri);
+    // console.log('keywords uri = ', k.uri);
 }
 //keyword prefix = http://example.com/bibliography#
 
@@ -182,7 +236,7 @@ var keywords_by_year = [];
 for (var yr = 1996; yr < 2018; yr++){
     var y = {year: yr, keyword_list: []};
     keywords_by_year.push(y);
-    console.log("year ===== ", yr);
+    // console.log("year ===== ", yr);
 }
 
 var publications = store2.each(undefined, is_published_on_year, undefined);
@@ -203,17 +257,17 @@ String.prototype.replaceAll = function(search, replacement) {
 
 for (var i=0; i<publications.length;i++) {
     var p = publications[i];
-    console.log('publications uri = ', p.uri);
+    // console.log('publications uri = ', p.uri);
 
     var year = store2.any(p, is_published_on_year);
-    console.log(' is published on year', year.value);
+    // console.log(' is published on year', year.value);
 
 
     var its_keywords = store2.each(p, is_about);
     if (its_keywords.length > 0){
         for (var k =0; k < its_keywords.length; k++){
             kw = its_keywords[k];
-            console.log("        it has ", kw.value, " keywords");
+            // console.log("        it has ", kw.value, " keywords");
 
             keywords_by_year.forEach(function (ky) {
                 if (ky.year == year.value){
@@ -223,7 +277,7 @@ for (var i=0; i<publications.length;i++) {
                     keyword = keyword.replaceAll('_', ' ');
 
                     ky.keyword_list.push(keyword);
-                    console.log(year.value , ' capture ', kw.value);
+                    // console.log(year.value , ' capture ', kw.value);
 
                 }
             });
@@ -232,7 +286,7 @@ for (var i=0; i<publications.length;i++) {
     }
 
 }
-console.log("END OF PUBLICATION.");
+// console.log("END OF PUBLICATION.");
 // why is this code not working?
 // var image = store.any(p, has_image);
 // keywords_by_year.forEach(function (ky) {
@@ -246,8 +300,8 @@ console.log("END OF PUBLICATION.");
 for (var yr=0; yr<keywords_by_year.length;yr++) {
     kwy = keywords_by_year[yr];
 
-    console.log('this is year ', kwy.year);
-    console.log('has keywords ', kwy.keyword_list);
+    // console.log('this is year ', kwy.year);
+    // console.log('has keywords ', kwy.keyword_list);
 
 }
 
@@ -257,6 +311,54 @@ for (var yr=0; yr<keywords_by_year.length;yr++) {
 router.get('/', function(req, res, next) {
     res.render('index', { condition: true, anyArray: [1,2,3] });
 });
+
+// show register form
+router.get("/register", function(req, res){
+    res.render("./profile/register"); 
+ });
+ 
+ //handle sign up logic
+ router.post("/register", function(req, res){
+     var newUser = new User({username: req.body.username});
+     User.register(newUser, req.body.password, function(err, user){
+         if(err){
+             console.log(err);
+             return res.render("./profile/register");
+         }
+         passport.authenticate("local")(req, res, function(){
+            res.redirect("/"); 
+         });
+     });
+ });
+ 
+ //show login form
+ router.get("/login", function(req, res){
+    res.render("./profile/login"); 
+ });
+ 
+ //handling login logic
+ router.post("/login", passport.authenticate("local", 
+     {
+         successRedirect: "/",
+         failureRedirect: "/login"
+     }), function(req, res){
+ });
+ 
+ // logout route
+ router.get("/logout", function(req, res){
+    req.logout();
+    res.redirect("/");
+ });
+ 
+ //middleware
+ function isLoggedIn(req, res, next){
+     if(req.isAuthenticated()){
+         return next();
+     }
+     res.redirect("/login");
+ }
+
+
 
 
 router.get('/about', function(req, res, next) {
@@ -290,51 +392,59 @@ router.get('/vacancies', function(req, res, next) {
 
 
 
-// show register form
-router.get("/register", function(req, res){
-    res.render("./login/register", { title: 'Register', condition: true, anyArray: [1,2,3] });
+
+    // Profile Value page
+    var person = rdf.sym('file:/Users/finnpotason/Programming/FOAF/krr.rdf#finn')
+
+    var list_attribute_person = store.statementsMatching(person, undefined, undefined);
+
+    var toDisplay = [];
+
+    for (var i=0; i<list_attribute_person.length;i++) {
+        var stm = list_attribute_person[i];
+        var predicate = stm.predicate.value;
+        predicate = predicate.split("/");
+        var object = stm.object.value;
+        var entry = {attribute: predicate.reverse()[0], value: object};
+  
+        toDisplay.push(entry);
+
+    }
+
+router.get("/profile", function(req,res){
+
+    res.render('./profile/view', {toDisplay: toDisplay})
+
 })
 
-////Handle sign up logic
-//router.post("/register", function(req, res){
-//    var newUser = new User({username: req.body.username})
-//    User.register(newUser, req.body.password, function(err, user){
-//        if(err){
-//            console.log(err);
-//            return res.render("register")
-//        }
-//        passport.authenticate("local")(req, res, function(){
-//            res.redirect("/");
-//        })
-//    })
-//})
-
-
-//Login ROUTE
-router.get('/login', function(req, res, next) {
-    res.render('./login/login', { title: 'Login', condition: true, anyArray: [1,2,3] });
-});
-
-//router.post("/login", passport.authenticate("local", 
-//    {
-//        successRedirect: "/",
-//        failureRedirect: "./login/login"
-//     }), function(req, res){
-//    
-//})
-
-
-// Logout ROUTE
-router.get("/logout", function(req,res){
-    req.logout();
-    res.redirect("/");
-})
 
 
 // Profile Edit
-router.get("/edit", function(req,res){
-    res.render('./login/profileEdit')
-})
+router.get("/profile/edit", function(req,res){
+    console.log(toDisplay)
+    res.render('./profile/edit', {toDisplay: toDisplay})
+  })
+  
+router.post("/profile", function(req,res){
+    console.log(req.body.valuePredicate);
+
+
+    for (var i=0; i<toDisplay.length;i++) {
+        console.log(toDisplay[i])
+        toDisplay[i]['value'] = req.body.valuePredicate[i]
+    }
+    console.log(toDisplay)
+
+    res.render('./profile/view', {toDisplay: toDisplay})
+
+  });
+
+
+
+
+
+
+
 
 
 router.get('/projects', function(req, res, next) {
@@ -388,25 +498,24 @@ router.get('/members/:id', function(req, res, next) {
 
     var stms = store.statementsMatching(undefined, undefined , undefined);
     for (var i=0; i<stms.length;i++) {
-        console.log("\n");
+        // console.log("\n");
         var stm = stms[i];
         var subject = stm.subject.uri;
         var predicate = stm.predicate.uri;
         var object = stm.object;
 
+        // console.log("termType = ", object.termType);
 
-        console.log("termType = ", object.termType);
-
-        console.log("subject: "+ subject);
-        console.log("predicate: "+ predicate);
+        // console.log("subject: "+ subject);
+        // console.log("predicate: "+ predicate);
         // console.log("******** object: "+ object.toString());
         if (object.termType === "Literal") {
-            console.log("Object : value of = ", object.value);
+            // console.log("Object : value of = ", object.value);
         }else {
-            console.log("Object : uri = ", object.uri)
+            // console.log("Object : uri = ", object.uri)
         }
 
-        console.log(stm) // the WebID of a friend
+        // console.log(stm) // the WebID of a friend
 
     }
 
