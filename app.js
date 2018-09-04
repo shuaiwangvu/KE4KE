@@ -10,8 +10,17 @@ var bodyParser = require('body-parser');
 // the following is my code:
 var hbs = require('express-handlebars');// Finn
 
-var index = require('./routes/index');
-// var members = require('./routes/members');
+var index = require('./routes/index'),
+		members = require('./routes/members'),
+		publications = require('./routes/publications'),
+		courses = require('./routes/courses'),
+		about = require('./routes/aboutUs'),
+		news = require('./routes/news'),
+		studentProjects = require('./routes/studentProjects'),
+		vacancies = require('./routes/vacancies'),
+		contact = require('./routes/contact'),
+		collcaboration = require('./routes/collaboration]'),
+		projects = require('./routes/projects');
 
 var app = express();
 
@@ -30,7 +39,16 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', index);
-// app.use('/members', members);
+app.use('/members', members);
+app.use('/publications', publications);
+app.use('/courses', courses);
+app.use('/about', about);
+app.use('/news', news);
+app.use('/studentprojects', studentProjects);
+app.use('/vacancies', vacancies);
+app.use('/contact', contact);
+app.use('/collaboration', collcaboration);
+app.use('/projects', projects);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
