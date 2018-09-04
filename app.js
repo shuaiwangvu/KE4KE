@@ -6,27 +6,21 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 
 
-
 // the following is my code:
 var hbs = require('express-handlebars');// Finn
 
-<<<<<<< HEAD
-var index = require('./routes/index'),
-		members = require('./routes/members'),
-		publications = require('./routes/publications'),
-		courses = require('./routes/courses'),
-		about = require('./routes/aboutUs'),
-		news = require('./routes/news'),
-		studentProjects = require('./routes/studentProjects'),
-		vacancies = require('./routes/vacancies'),
-		contact = require('./routes/contact'),
-		collcaboration = require('./routes/collaboration]'),
-		projects = require('./routes/projects');
-=======
-var indexRoutes 	= require('./routes/index');
-//var membersRoutes = require('../routes/members');
-//var publicationsRoutes = require('../routes/publications');
->>>>>>> aa96afdeb435b204ab3460a62ad03c7070758f62
+var indexRoutes = require('./routes/index'),
+		membersRoutes = require('./routes/members'),
+		publicationsRoutes = require('./routes/publications'),
+		coursesRoutes = require('./routes/courses'),
+		aboutRoutes = require('./routes/aboutUs'),
+		newsRoutes = require('./routes/news'),
+		studentProjectsRoutes = require('./routes/studentProjects'),
+		vacanciesRoutes = require('./routes/vacancies'),
+		contactRoutes = require('./routes/contact'),
+		collcaborationRoutes = require('./routes/collaboration]'),
+		projectsRoutes = require('./routes/projects');
+
 
 var app = express();
 
@@ -44,24 +38,18 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-<<<<<<< HEAD
-app.use('/', index);
-app.use('/members', members);
-app.use('/publications', publications);
-app.use('/courses', courses);
-app.use('/about', about);
-app.use('/news', news);
-app.use('/studentprojects', studentProjects);
-app.use('/vacancies', vacancies);
-app.use('/contact', contact);
-app.use('/collaboration', collcaboration);
-app.use('/projects', projects);
-=======
 app.use('/', indexRoutes);
-//app.use('/members', membersRoutes);
-//app.use('/publications', publicationsRoutes);
-//app.use('/members', membersRoutes);
->>>>>>> aa96afdeb435b204ab3460a62ad03c7070758f62
+app.use('/members', membersRoutes);
+app.use('/publications', publicationsRoutes);
+app.use('/courses', coursesRoutes);
+app.use('/about', aboutRoutes);
+app.use('/news', newsRoutes);
+app.use('/studentprojects', studentProjectsRoutes);
+app.use('/vacancies', vacanciesRoutes);
+app.use('/contact', contactRoutes);
+app.use('/collaboration', collcaborationRoutes);
+app.use('/projects', projectsRoutes);
+
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
