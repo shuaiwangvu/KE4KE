@@ -153,13 +153,13 @@ console.log (" ==== END OF PEOPLE! ====\n");
 // });
 
 // SIMPLY OUTPUT THE KEYWORDS
-for (var yr=0; yr<keywords_by_year.length;yr++) {
-    kwy = keywords_by_year[yr];
-
-    console.log('this is year ', kwy.year);
-    console.log('has keywords ', kwy.keyword_list);
-
-}
+//for (var yr=0; yr<keywords_by_year.length;yr++) {
+//    kwy = keywords_by_year[yr];
+//
+//    console.log('this is year ', kwy.year);
+//    console.log('has keywords ', kwy.keyword_list);
+//
+//}
 
 
 

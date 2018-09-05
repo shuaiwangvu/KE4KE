@@ -18,7 +18,7 @@ var indexRoutes = require('./routes/index'),
 		studentProjectsRoutes = require('./routes/studentProjects'),
 		vacanciesRoutes = require('./routes/vacancies'),
 		contactRoutes = require('./routes/contact'),
-		collcaborationRoutes = require('./routes/collaboration]'),
+		collcaborationRoutes = require('./routes/collaboration'),
 		projectsRoutes = require('./routes/projects');
 
 
