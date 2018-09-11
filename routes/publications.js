@@ -30,9 +30,9 @@ var baseUrl="http://www.w3.org/2002/07/owl#Thing";
 
 
 rdf.parse(rdfData2,store2,baseUrl);
-console.log("There are ", store2.length, " triples in publications ontology");
+// console.log("There are ", store2.length, " triples in publications ontology");
 
-console.log (" ==== BEGINNING OF PUBLICATIONS! ====\n");
+// console.log (" ==== BEGINNING OF PUBLICATIONS! ====\n");
 
 
 var sub_class_of = rdf.sym("http://www.w3.org/2000/01/rdf-schema#subClassOf");
@@ -42,11 +42,11 @@ var topic = rdf.sym("http://example.com/ontology#Topic");
 
 var keywords = store2.each(undefined, sub_class_of, topic);
 
-console.log('HOW MANY Triples ARE THERE? -- ', keywords.length);
+// console.log('HOW MANY Triples ARE THERE? -- ', keywords.length);
 
 for (var i=0; i<keywords.length;i++) {
     var k = keywords[i];
-    console.log('keywords uri = ', k.uri);
+    // console.log('keywords uri = ', k.uri);
 }
 //keyword prefix = http://example.com/bibliography#
 
@@ -60,7 +60,7 @@ var keywords_by_year = [];
 for (var yr = 1996; yr < 2018; yr++){
     var y = {year: yr, keyword_list: []};
     keywords_by_year.push(y);
-    console.log("year ===== ", yr);
+    // console.log("year ===== ", yr);
 }
 
 var publications = store2.each(undefined, is_published_on_year, undefined);
@@ -81,17 +81,17 @@ String.prototype.replaceAll = function(search, replacement) {
 
 for (var i=0; i<publications.length;i++) {
     var p = publications[i];
-    console.log('publications uri = ', p.uri);
+    // console.log('publications uri = ', p.uri);
 
     var year = store2.any(p, is_published_on_year);
-    console.log(' is published on year', year.value);
+    // console.log(' is published on year', year.value);
 
 
     var its_keywords = store2.each(p, is_about);
     if (its_keywords.length > 0){
         for (var k =0; k < its_keywords.length; k++){
             kw = its_keywords[k];
-            console.log("        it has ", kw.value, " keywords");
+            // console.log("        it has ", kw.value, " keywords");
 
             keywords_by_year.forEach(function (ky) {
                 if (ky.year == year.value){
@@ -101,7 +101,7 @@ for (var i=0; i<publications.length;i++) {
                     keyword = keyword.replaceAll('_', ' ');
 
                     ky.keyword_list.push(keyword);
-                    console.log(year.value , ' capture ', kw.value);
+                    // console.log(year.value , ' capture ', kw.value);
 
                 }
             });
@@ -110,7 +110,7 @@ for (var i=0; i<publications.length;i++) {
     }
 
 }
-console.log("END OF PUBLICATION.");
+// console.log("END OF PUBLICATION.");
 
 
 

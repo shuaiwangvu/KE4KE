@@ -7,14 +7,18 @@
   },
   "dependencies": {
     "body-parser": "~1.18.2",
+    "connect-flash": "^0.1.1",
     "cookie-parser": "~1.4.3",
     "debug": "~2.6.9",
-    "express": "~4.15.5",
+    "express": "^4.16.3",
     "express-handlebars": "^3.0.0",
+    "express-session": "^1.15.6",
     "morgan": "~1.9.0",
-    "npm": "^5.7.1",
+    "npm": "^6.4.1",
+    "passport": "^0.4.0",
+    "passport-local": "^1.0.0",
     "rdflib": "^0.16.5",
     "serve-favicon": "~2.4.5",
-    "watson-developer-cloud": "^3.0.3"
+    "watson-developer-cloud": "^3.9.1"
   }
 }

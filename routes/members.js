@@ -30,9 +30,9 @@ var baseUrl="http://www.w3.org/2002/07/owl#Thing";
 
 rdf.parse(rdfData,store,baseUrl);
 
-console.log("There are ", store.length, " triples in people ontology");
+// console.log("There are ", store.length, " triples in people ontology");
 
-console.log (" ==== BEGINNING OF PEOPLE! ====\n");
+// console.log (" ==== BEGINNING OF PEOPLE! ====\n");
 
 var is_of_type = rdf.sym("http://www.w3.org/1999/02/22-rdf-syntax-ns#type");
 var individual = rdf.sym("http://www.w3.org/2002/07/owl#NamedIndividual");
@@ -50,11 +50,11 @@ var location = 0;
 
 var people_prefix = "file:/Users/finnpotason/Programming/FOAF/krr.rdf#";
 var people = store.each(undefined, is_of_type, individual);
-console.log('HOW MANY RESULTS ARE THERE? -- ', people.length);
+// console.log('HOW MANY RESULTS ARE THERE? -- ', people.length);
 
 for (var i=0; i<people.length;i++) {
     var p = people[i];
-    console.log('The URI of this people is: ', p.uri); // the WebID of a friend
+    // console.log('The URI of this people is: ', p.uri); // the WebID of a friend
 
     var pl = {uri : p.uri, interest: [], position: "", email : ""};
 
@@ -64,12 +64,12 @@ for (var i=0; i<people.length;i++) {
     var first_name = store.any(p, has_first_name);
     var has_family_name = rdf.sym("http://xmlns.com/foaf/0.1/family_name");
     var family_name = store.any(p, has_family_name);
-    console.log("This people has first name: ", first_name.value);
-    console.log("This people has family name: ", family_name.value);
+    // console.log("This people has first name: ", first_name.value);
+    // console.log("This people has family name: ", family_name.value);
 
     var has_title = rdf.sym("http://xmlns.com/foaf/0.1/title");
     var title = store.any(p, has_title);
-    console.log("This people has title: ", title.value);
+    // console.log("This people has title: ", title.value);
 
     //interest
     var interest = [];
@@ -87,7 +87,7 @@ for (var i=0; i<people.length;i++) {
             interest_string += it.value;
             pl.interest.push (it.value);
         }
-        console.log("This person has interest in ", interest, " = ", pl.interest.length);
+        // console.log("This person has interest in ", interest, " = ", pl.interest.length);
 
     };
 
@@ -95,29 +95,29 @@ for (var i=0; i<people.length;i++) {
 
     var has_description = rdf.sym("http://xmlns.com/foaf/0.1/topic_interest");
     var description = store.any(p, has_description);
-    console.log("This people has description: ", description.value);
+    // console.log("This people has description: ", description.value);
 
     //image
     var has_image = rdf.sym("http://xmlns.com/foaf/0.1/depiction");
     var image = store.any(p, has_image);
-    console.log("This people has image: ", image.value);
+    // console.log("This people has image: ", image.value);
 
     //homepage
     var has_homepage = rdf.sym("http://xmlns.com/foaf/0.1/homepage");
     var homepage = store.any(p, has_homepage);
-    console.log("This people has homepage: ", homepage.value);
+    // console.log("This people has homepage: ", homepage.value);
 
     // position
     var has_position = rdf.sym("http://xmlns.com/foaf/0.1/status");
     var position = store.any(p, has_position);
-    console.log("This people has position: ", position.value);
+    // console.log("This people has position: ", position.value);
 
     pl.position = position.value;
 
     //email
     var has_email = rdf.sym("http://xmlns.com/foaf/0.1/mbox");
     var email = store.any(p, has_email);
-    console.log("This people has email: ", email.value);
+    // console.log("This people has email: ", email.value);
 
     pl.email = email.value;
 
@@ -129,7 +129,7 @@ for (var i=0; i<people.length;i++) {
         interest: interest_string, image: image.value, homepage: homepage.value, position: position.value,
         email: email.value, description: description.value};
 
-    console.log("Initialised an entry for " + pp.name + "\n");
+    // console.log("Initialised an entry for " + pp.name + "\n");
 
     // -- PREPARE A LIST OF PEOPLE TO BE CLASSIFIED ACCORDING TO THE SPECIFICATION OF VISITORS
     to_display.push(pp);
@@ -138,9 +138,9 @@ for (var i=0; i<people.length;i++) {
 var upper = [];
 var lower = to_display;
 
-console.log('         < ALL PEOPLE > ', all_people.length);
+// console.log('         < ALL PEOPLE > ', all_people.length);
 
-console.log (" ==== END OF PEOPLE! ====\n");
+// console.log (" ==== END OF PEOPLE! ====\n");
 
 
 // why is this code not working?
@@ -172,20 +172,26 @@ router.get('/', function(req, res, next) {
     recommended_people = [];
     other_people = [];
     // STEP 1: START THE CHATBOT (IBM BLUEMIX CONVERSATION API)
-    var chatbot_reply; // empty string for now
+    var chatbot_reply = ""; // empty string for now
 
     conversation.message({
     workspace_id: '49317eb4-0292-4f3d-a6ea-93dc547151ac',
     input: {'text': 'Hello'}
-},  function(err, response) {
-    if (err)
+},  
+    function(err, response) {
+    if (err){
+        console.log("het antwoord is",response);
+
         console.log('error:', err);
-    else
+    } else {
         console.log(JSON.stringify(response, null, 2));
         // console.log(response.output.text);
+        console.log(chatbot_reply)
         chatbot_reply = response.output.text
+        console.log(chatbot_reply)
         console.log(chatbot_reply);
         res.render('members', { output: chatbot_reply, upper: upper, lower: lower});
+        }
     });
     //res.render('members', { output: chatbot_reply, upper: upper, lower: lower, hometown: hometown, oldmembers:oldmembers, visitors:visitors});
     // res.render('members', { title: 'Members', condition: true, anyArray: [1,2,3], reply: chatbot_reply });

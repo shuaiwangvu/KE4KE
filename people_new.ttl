@@ -16,6 +16,8 @@
 ###  http://www.semanticweb.org/aron/ontologies/2018/2/people#officeNumber
 krr:officeNumber rdf:type owl:AnnotationProperty .
 
+###  http://www.semanticweb.org/aron/ontologies/2018/2/people#password
+krr:password rdf:type owl:AnnotationProperty .
 
 ###  http://www.semanticweb.org/aron/ontologies/2018/2/people#teacherOfCourse
 krr:teacherOfCourse rdf:type owl:AnnotationProperty .
@@ -85,6 +87,7 @@ krr:People rdf:type owl:Class .
 krr:no-name rdf:type owl:NamedIndividual ,
                      krr:People ;
             krr:officeNumber "Office Number" ;
+            krr:password "12345" ;
             krr:teacherOfCourse "Course 1" ,
                                 "Course 2" ,
                                 "Course 3" ,

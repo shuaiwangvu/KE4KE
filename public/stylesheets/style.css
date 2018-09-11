@@ -49,7 +49,7 @@ h1 {
 }
 
 hr{
-	    width: 500px;
+	width: 500px;
     border-top: 1px solid #f8f8f8;
     border-bottom: 1px solid rgba(0,0,0,0.2);
 }
@@ -323,4 +323,9 @@ button {
     content: "";
     display: table;
     clear: both;
+}
+
+div > .login{
+	margin: 200px auto auto auto;
+	width: 30%;
 }
