@@ -1,8 +1,14 @@
+var express            = require('express');
+var router             = express.Router();
+var fs                 = require('fs'),
+    rdf                = require('rdflib'),
+    session            = require('express-session'),
+    passport           = require('passport'),
+    LocalStrategy      = require('passport-local').Strategy,
+    flash              = require('connect-flash');
 
-var express = require('express');
-var router = express.Router();
-var fs = require('fs');
 
+<<<<<<< HEAD
 var path = require('path');
 var rdf = require('rdflib');
 
@@ -111,222 +117,110 @@ var store2 = rdf.graph();
 
 var contentType='text/turtle';
 var baseUrl="http://www.w3.org/2002/07/owl#Thing";
+=======
+var store           =   rdf.graph();
+var filename        =   './1537970111555.ttl';
+var rdfData         =   fs.readFileSync(filename).toString();
+var baseUrl         =   "http://www.w3.org/2002/07/owl#Thing";
+>>>>>>> 9202097be4618590a1b4e4a3d794d98b999e9967
 
 rdf.parse(rdfData,store,baseUrl);
-rdf.parse(rdfData2,store2,baseUrl);
+
+var FOAF = rdf.Namespace("http://xmlns.com/foaf/0.1/")
+var KRR = rdf.Namespace("http://www.semanticweb.org/aron/ontologies/2018/2/people#")
+var name = ""
+
+passport.serializeUser(function(user, done) {
+    done(null, user.id);
+});
+
+passport.deserializeUser(function(id, done) {
+    done(null, { id: id, nickname: "test"})
+  });
 
 
-console.log (" ==== BEGINNING OF PEOPLE! ====\n");
+passport.use(new LocalStrategy(function(username, password, done) {
+    console.log('in passport')
+        name = KRR(username)
+        id = '1234'
+        var rdf_store = store.statementsMatching(name, KRR('password'), undefined);
+        
+        if (rdf_store && rdf_store.length){
+            rdf_store.forEach(function(stm){
 
-console.log("There are ", store.length, " triples in people ontology");
-console.log("There are ", store2.length, " triples in publications ontology");
+                if (password === stm.object.value) {
+                    return done(null, { name: username, id: id});
+                } else { 
+                    return done(null, false, { message: 'Incorrect password.' }) }
+            })
+        } else { return done(null, false, { message: 'Incorrect username.' }) }
+    }
+));
+    
 
-var is_of_type = rdf.sym("http://www.w3.org/1999/02/22-rdf-syntax-ns#type");
-var individual = rdf.sym("http://www.w3.org/2002/07/owl#NamedIndividual");
-
-// GLOBAL LIST OF ALL PEOPLE . NOTE THAT NOT ALL PEOPLE ARE SCIENTISTS
-var all_people = []; // uri
-var recommended_people = [];
-var other_people = [];
-
-var to_display = [];
-var upper = [];
-var lower = [];
-
-var location = 0;
-
-var people_prefix = "file:/Users/finnpotason/Programming/FOAF/krr.rdf#";
-var people = store.each(undefined, is_of_type, individual);
-console.log('HOW MANY RESULTS ARE THERE? -- ', people.length);
-
-for (var i=0; i<people.length;i++) {
-    var p = people[i];
-    console.log('The URI of this people is: ', p.uri); // the WebID of a friend
-
-    var pl = {uri : p.uri, interest: [], position: "", email : ""};
+router.use(express.static('public'));
+router.use(session({ secret: 'keyboard cat', resave: false, saveUninitialized: false }));
+router.use(passport.initialize());
+router.use(passport.session());
+router.use(flash());
 
 
-    // title and name
-    var has_first_name = rdf.sym("http://xmlns.com/foaf/0.1/givenname");
-    var first_name = store.any(p, has_first_name);
-    var has_family_name = rdf.sym("http://xmlns.com/foaf/0.1/family_name");
-    var family_name = store.any(p, has_family_name);
-    console.log("This people has first name: ", first_name.value);
-    console.log("This people has family name: ", family_name.value);
-
-    var has_title = rdf.sym("http://xmlns.com/foaf/0.1/title");
-    var title = store.any(p, has_title);
-    console.log("This people has title: ", title.value);
-
-    //interest
-    var interest = [];
-    var interest_string = "";
-    var has_interest = rdf.sym("http://xmlns.com/foaf/0.1/interest");
-
-    var interest_list = store.each(p, has_interest, undefined);
-    if (interest_list.length > 0){
-				pl.interest.push(interest_list[0].value);
-        interest_string += interest_list[0].value;
-				for (var j=1; j<interest_list.length;j++) {
-            it = interest_list[j];
-            interest += it.value; // the WebID of a friend
-            interest_string += "; ";
-            interest_string += it.value;
-            pl.interest.push (it.value);
+function remove_dups(list) {
+    let unique = {};
+    list.forEach(function(i) {
+        if(!unique[i]) {
+            unique[i] = true;
         }
-        console.log("This person has interest in ", interest, " = ", pl.interest.length);
+    });
 
-    };
-
-    //description = topic_interest
-
-    var has_description = rdf.sym("http://xmlns.com/foaf/0.1/topic_interest");
-    var description = store.any(p, has_description);
-    console.log("This people has description: ", description.value);
-
-    //image
-    var has_image = rdf.sym("http://xmlns.com/foaf/0.1/depiction");
-    var image = store.any(p, has_image);
-    console.log("This people has image: ", image.value);
-
-    //homepage
-    var has_homepage = rdf.sym("http://xmlns.com/foaf/0.1/homepage");
-    var homepage = store.any(p, has_homepage);
-    console.log("This people has homepage: ", homepage.value);
-
-    // position
-    var has_position = rdf.sym("http://xmlns.com/foaf/0.1/status");
-    var position = store.any(p, has_position);
-    console.log("This people has position: ", position.value);
-
-    pl.position = position.value;
-
-    //email
-    var has_email = rdf.sym("http://xmlns.com/foaf/0.1/mbox");
-    var email = store.any(p, has_email);
-    console.log("This people has email: ", email.value);
-
-    pl.email = email.value;
-
-
-    //store up and go
-    all_people.push(pl); // all this person in the all_people for splitting
-
-    var pp = {uri: p.uri ,name : title.value + " " + first_name.value + " "+ family_name.value,
-        interest: interest_string, image: image.value, homepage: homepage.value, position: position.value,
-        email: email.value, description: description.value};
-
-    console.log("Initialised an entry for " + pp.name + "\n");
-
-    // -- PREPARE A LIST OF PEOPLE TO BE CLASSIFIED ACCORDING TO THE SPECIFICATION OF VISITORS
-    to_display.push(pp);
-}
-
-var upper = [];
-var lower = to_display;
-
-console.log('         < ALL PEOPLE > ', all_people.length);
-
-console.log (" ==== END OF PEOPLE! ====\n");
-
-
-console.log (" ==== BEGINNING OF PUBLICATIONS! ====\n");
-
-
-var sub_class_of = rdf.sym("http://www.w3.org/2000/01/rdf-schema#subClassOf");
-var topic = rdf.sym("http://example.com/ontology#Topic");
-
-
-
-var keywords = store2.each(undefined, sub_class_of, topic);
-
-console.log('HOW MANY Triples ARE THERE? -- ', keywords.length);
-
-for (var i=0; i<keywords.length;i++) {
-    var k = keywords[i];
-    console.log('keywords uri = ', k.uri);
-}
-//keyword prefix = http://example.com/bibliography#
-
-var is_published_on_year = rdf.sym("http://example.com/ontology#isPublishedOnYear");
-var is_about = rdf.sym("http://example.com/ontology#isAbout");
-
-var publication_list = [];
-var keywords_by_year = [];
-
-
-for (var yr = 1996; yr < 2018; yr++){
-    var y = {year: yr, keyword_list: []};
-    keywords_by_year.push(y);
-    console.log("year ===== ", yr);
-}
-
-var publications = store2.each(undefined, is_published_on_year, undefined);
-
-// REFERENCE: I took this method from
-// https://stackoverflow.com/questions/1144783/how-to-replace-all-occurrences-of-a-string-in-javascript
-
-String.prototype.replaceAll = function(search, replacement) {
-    var target = this;
-    return target.replace(new RegExp(search, 'g'), replacement);
+    return Object.keys(unique);
 };
 
-//REFERENCE END
+function clean_uri(uri){
+    uri = uri.split("/").reverse()[0];
+    uri = uri.split("#").reverse()[0];
 
+    return uri
+}
 
-//CREATE A LIST OF PUBLICATIOONS.
-//IN FACT, HERE WE ONLY NEED THE KEYWORDS OF EACH YEAR.
+function get_attributes(){
+    var rdf_store = store.statementsMatching(name, undefined, undefined);
+    var list_attributes = []
+    
+    rdf_store.forEach(function(attribute) {
+        list_attributes.push(attribute.predicate.value)
+    });
+    unique_attributes = remove_dups(list_attributes)
 
-for (var i=0; i<publications.length;i++) {
-    var p = publications[i];
-    console.log('publications uri = ', p.uri);
+    return unique_attributes
+}
 
-    var year = store2.any(p, is_published_on_year);
-    console.log(' is published on year', year.value);
+function get_attributes_values(){
+    var rdf_store = store.statementsMatching(name, undefined, undefined);
+    var list_predicates = get_attributes()
+    var to_display = {};
 
+    list_predicates.forEach(function(predicate) {
+        var list_objects = [];
+        rdf_store.forEach(function(stm){
+            if (stm.predicate.value == predicate){
+                list_objects.push(stm.object.value)
+            }
+        });
+        attribute = clean_uri(predicate)
+        to_display[attribute] = list_objects
+    });
+    return to_display   
+}
 
-    var its_keywords = store2.each(p, is_about);
-    if (its_keywords.length > 0){
-        for (var k =0; k < its_keywords.length; k++){
-            kw = its_keywords[k];
-            console.log("        it has ", kw.value, " keywords");
-
-            keywords_by_year.forEach(function (ky) {
-                if (ky.year == year.value){
-
-                    var index = kw.value.indexOf("#");
-                    var keyword = kw.value.substring(index+1);
-                    keyword = keyword.replaceAll('_', ' ');
-
-                    ky.keyword_list.push(keyword);
-                    console.log(year.value , ' capture ', kw.value);
-
-                }
-            });
-
-        }
+function authenticationMiddleware () {
+    return function (req, res, next) {
+      if (req.isAuthenticated()) {
+        return next()
+      }
+      res.redirect('/login')
     }
-
-}
-console.log("END OF PUBLICATION.");
-// why is this code not working?
-// var image = store.any(p, has_image);
-// keywords_by_year.forEach(function (ky) {
-//     console.log("this is year", ky.year);
-//     for (kwd in ky.keyword_list){
-//         console.log("     has keyword: ", kwd);
-//     }
-// });
-
-// SIMPLY OUTPUT THE KEYWORDS
-for (var yr=0; yr<keywords_by_year.length;yr++) {
-    kwy = keywords_by_year[yr];
-
-    console.log('this is year ', kwy.year);
-    console.log('has keywords ', kwy.keyword_list);
-
-}
-
+  }
 
 
 /* GET home page. */
@@ -334,6 +228,7 @@ router.get('/', function(req, res, next) {
     res.render('index', { condition: true, anyArray: [1,2,3] });
 });
 
+<<<<<<< HEAD
 
 router.get('/about', function(req, res, next) {
     res.render('./aboutUs/about', { title: 'About', condition: true, anyArray: [1,2,3] });
@@ -351,11 +246,31 @@ router.get('/studentprojects', function(req, res, next) {
 router.get('/contact', function(req, res, next) {
     res.render('contact', { title: 'Contact', condition: true, anyArray: [1,2,3] });
 });
-
-router.get('/news', function(req, res, next) {
-    res.render('news', { title: 'News', condition: true, anyArray: [1,2,3] });
+=======
+//Login ROUTE
+router.get('/login', function(req, res, next) {
+    res.render('./profile/login', { title: 'Login', condition: true, anyArray: [1,2,3] });
 });
 
+router.post('/login',
+    passport.authenticate('local', { 
+        successRedirect: '/profile',
+        failureRedirect: '/login',
+        failureFlash: true 
+    })
+);
+
+// Profile Edit
+router.get("/profile/edit", authenticationMiddleware(), function(req,res){
+    var to_display = get_attributes_values()
+    res.render('./profile/edit', {to_display: to_display})
+});
+
+>>>>>>> 9202097be4618590a1b4e4a3d794d98b999e9967
+
+router.post("/profile/edit", authenticationMiddleware() ,function(req,res){
+
+<<<<<<< HEAD
 router.get('/collaboration', function(req, res, next) {
     res.render('./aboutUs/collaboration', { title: 'Collaboration', condition: true, anyArray: [1,2,3] });
 });
@@ -417,8 +332,48 @@ router.get('/projects', function(req, res, next) {
 router.get('/publications', function(req, res, next) {
     res.render('./research/publications', { title: 'Publications', condition: true, anyArray: [1,2,3]});
 });
+=======
+    // Remove all obejects from the store
+    var predicates = get_attributes()
+    predicates.forEach(function(predicate) {
+        predicate = clean_uri(predicate)
+        store.removeMany(name, FOAF(predicate), undefined)
+        store.removeMany(name, KRR(predicate), undefined)
 
+    });
+>>>>>>> 9202097be4618590a1b4e4a3d794d98b999e9967
 
+    // Add new obecjets to the store
+    // Person Data
+    store.add(name, FOAF('depiction'), rdf.literal(req.body.depiction))
+    store.add(name, FOAF('title'), rdf.literal(req.body.title))
+    store.add(name, FOAF('givenname'), rdf.literal(req.body.first_name))
+    store.add(name, FOAF('nick'), rdf.literal(req.body.nickname))
+    store.add(name, FOAF('family_name'), rdf.literal(req.body.familiy_name))
+    store.add(name, FOAF('status'), rdf.literal(req.body.position))
+    store.add(name, FOAF('topic_interest'), rdf.literal(req.body.biography))
+    store.add(name, KRR('password'), rdf.literal(req.body.password))
+    store.add(name, KRR('officeNumber'), rdf.literal(req.body.office_number))
+
+    // Links
+    // store.add(name, FOAF('mbox'), req.body.email)
+    // store.add(name, KRR('twitterAccount'), FOAF(req.body.twitterAccount))
+
+    // Interests
+    if(typeof req.body.interest === 'string' || req.body.interest instanceof String){
+        var interest = req.body.interest
+        store.add(name, FOAF('interest'), interest);
+    } else {
+        var interests = req.body.interest
+        interests.forEach(function(interest) {
+            store.add(name, FOAF('interest'), interest);
+        });
+    };
+    console.log(store)
+    // store.add(name, KRR('teacherOfCourse'), req.body.teacherOfCourse)  
+    // store.add(name, FOAF('currentProject'), req.body.currentProject)
+
+<<<<<<< HEAD
 router.get('/members', function(req, res, next) {
 
     location  = 1;
@@ -452,12 +407,46 @@ router.get('/members/:id', function(req, res, next) {
     lower = [];
     var valid = true;
     var found = true;
+=======
+    datum = Date.now()
 
-    var question = req.params.id;
 
-    // console.log(rdfData);
-    // console.log('======= end of file =======');
 
+//     // - create an empty store
+// var kb = new rdf.IndexedFormula();
+
+// // - load RDF file
+// fs.readFile('people_new.ttl', function (err, data) {
+//     if (err) { /* error handling */ }
+
+//     // NOTE: to get rdflib.js' RDF/XML parser to work with node.js,
+//     // see https://github.com/linkeddata/rdflib.js/issues/47
+
+//     // - parse RDF/XML file
+//     rdf.parse(data.toString(), kb, './people_new.ttl', 'application/rdf+xml', function(err, kb) {
+//         if (err) { /* error handling */ }
+
+//         var me = kb.sym('http://kindl.io/christoph/foaf.rdf#me');
+
+//         // // - add new properties
+//         kb.add(me, FOAF('mbox'), kb.sym('mailto:e0828633@student.tuwien.ac.at'));
+//         kb.add(me, FOAF('nick'), 'ckristo');
+
+//         // - alter existing statement
+//         kb.removeMany(me, FOAF('age'));
+//         kb.add(me, FOAF('age'), kb.literal('25'));
+>>>>>>> 9202097be4618590a1b4e4a3d794d98b999e9967
+
+//         // - find some existing statements and iterate over them
+//         var statements = kb.statementsMatching(me, FOAF('mbox'));
+//         statements.forEach(function(statement) {
+//             console.log(statement.object.uri);
+//         });
+
+//         // - delete some statements
+//         kb.removeMany(me, FOAF('mbox'));
+
+<<<<<<< HEAD
     var stms = store.statementsMatching(undefined, undefined , undefined);
     for (var i=0; i<stms.length;i++) {
         console.log("\n");
@@ -465,23 +454,29 @@ router.get('/members/:id', function(req, res, next) {
         var subject = stm.subject.uri;
         var predicate = stm.predicate.uri;
         var object = stm.object;
+=======
+//         // - print modified RDF document
+//         rdf.serialize(undefined, kb, undefined, 'application/rdf+xml', function(err, str) {
+//             console.log(str);
+//         });
+//     });
+// });
+
+>>>>>>> 9202097be4618590a1b4e4a3d794d98b999e9967
+
+    // data = rdf.serialize(undefined, kb, undefined, 'application/rdf+xml', function(err, str) {
+    //         console.log(str);
 
 
-        console.log("termType = ", object.termType);
+    console.log('going to serialize')
 
-        console.log("subject: "+ subject);
-        console.log("predicate: "+ predicate);
-        // console.log("******** object: "+ object.toString());
-        if (object.termType === "Literal") {
-            console.log("Object : value of = ", object.value);
-        }else {
-            console.log("Object : uri = ", object.uri)
-        }
 
-        console.log(stm) // the WebID of a friend
+    rdf.serialize(undefined,store,baseUrl, undefined, function(err, str){
+        if (err){
+            console.log(err)
+        } else{
 
-    }
-
+<<<<<<< HEAD
     //INTERACTION WITH CHATBOT
     // var answer = 'answer of ' + question;
     var chatbot_reply;
@@ -643,11 +638,33 @@ router.get('/members/:id', function(req, res, next) {
     });
 
 });
+=======
+            fs.writeFile(datum + '.ttl', str, function() {
+                res.redirect("/profile")
+                
+            })
+            console.log(str)
+        }
+    })
 
-router.post('/members/submit', function (req, res, next) {
-    var id = req.body.id;
-    console.log(id);
-    res.redirect('/members/' + id)
+  //  fs.writeFile(datum +'.ttl',store);
+
 });
+
+router.get("/profile", authenticationMiddleware() ,function(req,res){
+    var to_display = get_attributes_values();
+    res.render('./profile/view', {to_display: to_display})
+});
+
+
+
+
+// Logout ROUTE
+router.get("/logout", function(req,res){
+    req.logout();
+    res.redirect("/");
+})
+>>>>>>> 9202097be4618590a1b4e4a3d794d98b999e9967
+
 
 module.exports = router;

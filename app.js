@@ -4,14 +4,23 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
-
+var publicDir = require('path').join(__dirname,'/public');
 
 
 // the following is my code:
 var hbs = require('express-handlebars');// Finn
 
-var index = require('./routes/index');
-// var members = require('./routes/members');
+var indexRoutes = require('./routes/index'),
+		membersRoutes = require('./routes/members'),
+		publicationsRoutes = require('./routes/publications'),
+		coursesRoutes = require('./routes/courses'),
+		aboutRoutes = require('./routes/aboutUs'),
+		newsRoutes = require('./routes/news'),
+		studentProjectsRoutes = require('./routes/studentProjects'),
+		vacanciesRoutes = require('./routes/vacancies'),
+		contactRoutes = require('./routes/contact'),
+		collcaborationRoutes = require('./routes/collaboration'),
+		projectsRoutes = require('./routes/projects');
 
 var app = express();
 
@@ -28,9 +37,20 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(publicDir));
 
-app.use('/', index);
-// app.use('/members', members);
+app.use('/', indexRoutes);
+app.use('/members', membersRoutes);
+app.use('/publications', publicationsRoutes);
+app.use('/courses', coursesRoutes);
+app.use('/about', aboutRoutes);
+app.use('/news', newsRoutes);
+app.use('/studentprojects', studentProjectsRoutes);
+app.use('/vacancies', vacanciesRoutes);
+app.use('/contact', contactRoutes);
+app.use('/collaboration', collcaborationRoutes);
+app.use('/projects', projectsRoutes);
+
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

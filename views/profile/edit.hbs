@@ -1,0 +1,176 @@
+<div class="container">
+		<form action="/profile/edit" method="POST">
+
+        <div class="form-group row">
+            <label class="col-sm-2 col-form-label">Name</label>
+            <div class="col-lg-2">
+                <input name="title" class="form-control" value="{{to_display.title}}" type="text" placeholder="title">
+            </div>
+                        <div class="col-lg-3">
+                <input name="first_name" class="form-control" value="{{to_display.givenname}}" type="text" placeholder="first name">
+            </div>
+                        <div class="col-lg-4">
+                <input name="familiy_name" class="form-control" value="{{to_display.family_name}}" type="text" placeholder="familiy name">
+            </div>     
+            <div class="col-lg-1">          
+            </div>
+        </div>
+
+
+        <div class="form-group row">
+            <label class="col-sm-2 col-form-label">Password</label>
+            <div class="col-lg-9">
+                <input name="password" class="form-control" value="{{to_display.password}}" type="text" placeholder="password">
+            </div>
+            <div class="col-lg-1">           
+            </div>
+        </div>
+
+
+
+        <div class="form-group row">
+            <label class="col-sm-2 col-form-label">Nickname
+                        <a href="#" data-toggle="popover" data-placement="top" data-content="Only needed when your first name is different then your name you use">
+                        <i class="fas fa-info-circle"></i>
+                    </a>
+            </label>
+            <div class="col-lg-9">
+                <input name="nickname" class="form-control" value="{{to_display.nick}}" type="text" placeholder="nickname">
+            </div>
+            <div class="col-lg-1">           
+            </div>
+        </div>
+
+
+        <div class="form-group row">
+            <label class="col-sm-2 col-form-label">Depiction</label>
+            <div class="col-lg-9">
+                <input name="depiction" class="form-control" value="{{to_display.depiction}}" type="file" placeholder="URL of your picture">
+            </div>
+            <div class="col-lg-1">          
+            </div>
+        </div>
+
+
+        <div class="form-group row">
+            <label class="col-sm-2 col-form-label">Biography</label>
+            <div class="col-lg-9">
+                <textarea name="biography" class="form-control" placeholder="Write a description about yourself">{{to_display.topic_interest}}</textarea>
+            </div>
+            <div class="col-lg-1">          
+            </div>
+        </div>
+
+
+        <div class="form-group row">
+            <label class="col-sm-2 col-form-label">Position</label>
+            <div class="col-lg-9">
+                <input name="position" class="form-control" value="{{to_display.status}}" type="text" placeholder="position">
+            </div>
+            <div class="col-lg-1">          
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <label class="col-sm-2 col-form-label">Office Number</label>
+            <div class="col-lg-9">
+                <input name="office_number" class="form-control" value="{{to_display.officeNumber}}" type="text" placeholder="office number">
+            </div>
+            <div class="col-lg-1">           
+            </div>
+        </div>
+
+        <div class="form-group row email">
+                <label class="col-lg-2 col-form-label"> E-mail</label>            <div class="col-lg-9">
+                <input name="email" class="form-control" value="{{to_display.mbox}}" type="text" placeholder="e-mail adress">
+            </div>
+            <div class="col-lg-1">        
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <label class="col-sm-2 col-form-label">Links</label>
+            <div class="col-lg-2">
+                <div class="btn-group">
+                    <button class="btn dropdown-toggle" name="recordinput" data-toggle="dropdown">
+                        Choose Your Link
+                        <span class="caret"></span>
+                    </button>
+                    <ul class="dropdown-menu">
+                        <li><a href="#"><i class="fas fa-user-circle"></i>  Homepage</a></li>
+                        <li><a href="#"><i class="fab fa-twitter-square"></i>  Twitter</a></li>
+                        <li><a href="#"><i class="fab fa-linkedin"></i>  LinkedIn</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-lg-7">
+                <input name="homepage" class="form-control" value="{{to_display.homepage}}" type="text" placeholder="url link">
+            </div>
+            <div class="col-lg-1">
+                 <i class="fas fa-plus"></i>
+                 <i class="fas fa-trash-alt"></i>            
+            </div>
+        </div>
+
+        <div class="form-group row interests">
+            <label class="col-lg-2 col-form-label"> 
+                Interests
+                <button class="add_form_field"><i class="fas fa-plus"></i></button>
+            </label>
+                {{#each to_display.interest}}
+                    <div>
+                        <label class="col-sm-2 col-form-label"></label>
+                        <div class="col-lg-9">
+                            <input name="interest" class="form-control" value="{{this}}" type="text" placeholder="your interest">
+                        </div>
+                        <div class="col-lg-1">
+                            <a href="#" class="delete"><i class="fas fa-trash-alt"></i></a>
+                        </div>
+                    </div>
+                {{/each}}
+        </div>
+
+        <div class="form-group">
+            <button class="btn btn-lg btn-primary btn-block">save</button>
+        </div>
+    </form>
+            <a href="./profile">Go Back</a>
+</div>
+
+    <script>
+
+        $(".dropdown-menu li a").click(function(){
+            var selText = $(this).text();
+            $(this).parents('.btn-group').find('.dropdown-toggle').html(selText +' <span class="caret"></span>');
+        });
+    </script>
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+<script>
+$(document).ready(function() {
+    var interest         = $(".interests");
+    var add_interest      = $(".add_form_field");
+
+    $(add_interest).click(function(e){
+        e.preventDefault();
+        $(interest).append(' \
+            <div> <label class="col-sm-2 col-form-label"></label> \
+                <div class="col-lg-9"> \
+                    <input name="interest" class="form-control" value="" type="text" placeholder="your interest"> \
+                </div> \
+                <div class="col-lg-1"> \
+                    <a href="#" class="delete"><i class="fas fa-trash-alt"></i></a></div> \
+                </div> </div> \ '
+        ); 
+    });
+    
+    $(interest).on("click",".delete", function(e){
+        e.preventDefault(); $(this).parent('div').parent('div').remove();;
+    })
+});
+</script>
+
+
+
+
