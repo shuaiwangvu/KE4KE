@@ -3,11 +3,13 @@ var express = require('express');
 var router = express.Router();
 var fs = require('fs');
 
-
-var testMe = "TestMe";
-
 var path = require('path');
 var rdf = require('rdflib');
+
+//var passport    = require("passport");
+//var LocalStrategy = require("passport-local");
+//var passport = require("passport");
+//var User = require("../models/user");
 
 var filename = './people.owl';
 var filename2 = './publications.owl';
@@ -96,25 +98,7 @@ var visitors = [
   {lat: 30.763851, lng: 103.970534},//chendu, china
   {lat: 39.480926, lng: -0.341142},//Universitat Politècnica de València
 ];
-// conversation.listWorkspaces(function(err, response) {
-//     if (err) {
-//         console.error(err);
-//     } else {
-//         console.log(JSON.stringify(response, null, 2));
-//     }
-// });
 
-
-// conversation.message({
-//     workspace_id: '49317eb4-0292-4f3d-a6ea-93dc547151ac',
-//     input: {'text': 'Hello'}
-// },  function(err, response) {
-//     if (err)
-//         console.log('error:', err);
-//     else
-//         // console.log(JSON.stringify(response, null, 2));
-//         console.log(response.output.text);
-// });
 
 
 // STEP 0: LOAD KNOWLEDGE BASES: PEOPLE AND PUBLICATIONS
@@ -352,12 +336,17 @@ router.get('/', function(req, res, next) {
 
 
 router.get('/about', function(req, res, next) {
-    res.render('about', { title: 'About', condition: true, anyArray: [1,2,3] });
+    res.render('./aboutUs/about', { title: 'About', condition: true, anyArray: [1,2,3] });
 });
 
 router.get('/courses', function(req, res, next) {
-    res.render('courses', { title: 'Courses', condition: true, anyArray: [1,2,3] });
+    res.render('./teaching/courses', { title: 'Courses', condition: true, anyArray: [1,2,3] });
 });
+
+router.get('/studentprojects', function(req, res, next) {
+    res.render('./teaching/studentprojects', { title: 'Studentprojects', condition: true, anyArray: [1,2,3] });
+});
+
 
 router.get('/contact', function(req, res, next) {
     res.render('contact', { title: 'Contact', condition: true, anyArray: [1,2,3] });
@@ -368,11 +357,65 @@ router.get('/news', function(req, res, next) {
 });
 
 router.get('/collaboration', function(req, res, next) {
-    res.render('collaboration', { title: 'Collaboration', condition: true, anyArray: [1,2,3] });
+    res.render('./aboutUs/collaboration', { title: 'Collaboration', condition: true, anyArray: [1,2,3] });
 });
 
 router.get('/vacancies', function(req, res, next) {
-    res.render('vacancies', { title: 'Vacancies', condition: true, anyArray: [1,2,3] });
+    res.render('./aboutUs/vacancies', { title: 'Vacancies', condition: true, anyArray: [1,2,3] });
+});
+
+
+
+// show register form
+router.get("/register", function(req, res){
+    res.render("./login/register", { title: 'register', condition: true, anyArray: [1,2,3] });
+})
+
+////Handle sign up logic
+//router.post("/register", function(req, res){
+//    var newUser = new User({username: req.body.username})
+//    User.register(newUser, req.body.password, function(err, user){
+//        if(err){
+//            console.log(err);
+//            return res.render("register")
+//        }
+//        passport.authenticate("local")(req, res, function(){
+//            res.redirect("/");
+//        })
+//    })
+//})
+
+
+//Login ROUTE
+router.get('/login', function(req, res, next) {
+    res.render('./login/login', { title: 'Login', condition: true, anyArray: [1,2,3] });
+});
+
+//router.post("/login", passport.authenticate("local", 
+//    {
+//        successRedirect: "/",
+//        failureRedirect: "./login/login"
+//     }), function(req, res){
+//    
+//})
+
+
+// Logout ROUTE
+router.get("/logout", function(req,res){
+    req.logout();
+    res.redirect("/");
+})
+
+
+
+
+
+router.get('/projects', function(req, res, next) {
+    res.render('./research/projects', { title: 'Projects', condition: true, anyArray: [1,2,3] });
+});
+
+router.get('/publications', function(req, res, next) {
+    res.render('./research/publications', { title: 'Publications', condition: true, anyArray: [1,2,3]});
 });
 
 
@@ -400,26 +443,11 @@ router.get('/members', function(req, res, next) {
         console.log(chatbot_reply);
         res.render('members', { output: chatbot_reply, upper: upper, lower: lower, hometown: hometown, oldmembers:oldmembers, visitors:visitors});
     });
-
     // res.render('members', { title: 'Members', condition: true, anyArray: [1,2,3], reply: chatbot_reply });
     // res.render('members', {input: "", output: "", upper: upper, lower: lower});
 });
 
-router.get('/projects', function(req, res, next) {
-    res.render('projects', { title: 'Projects', condition: true, anyArray: [1,2,3] });
-});
-
-router.get('/publications', function(req, res, next) {
-    res.render('publications', { title: 'Publications', condition: true, anyArray: [1,2,3]});
-});
-
-
 router.get('/members/:id', function(req, res, next) {
-
-
-
-    console.log("this is location  ", location);
-
     upper = [];
     lower = [];
     var valid = true;
@@ -429,7 +457,6 @@ router.get('/members/:id', function(req, res, next) {
 
     // console.log(rdfData);
     // console.log('======= end of file =======');
-
 
     var stms = store.statementsMatching(undefined, undefined , undefined);
     for (var i=0; i<stms.length;i++) {
@@ -595,7 +622,6 @@ router.get('/members/:id', function(req, res, next) {
                     });
                 };
 
-
             } else{
 
                 upper = [];
@@ -611,17 +637,11 @@ router.get('/members/:id', function(req, res, next) {
                 });
 
             }
-
-
-
             location += 1;
             res.render('members', {input: question, output: chatbot_reply, valid:valid , found: found, upper: upper, lower: lower, hometown: hometown, oldmembers: oldmembers, visitors:visitors});
-
         }
-
     });
 
-    // res.render('members', {input: question, output: answer});
 });
 
 router.post('/members/submit', function (req, res, next) {

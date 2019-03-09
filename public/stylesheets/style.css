@@ -26,9 +26,6 @@ html {
 	margin-right: 200px;
 }
 
-#navBarRight{
-	margin-right: 200px;
-}
 
 
 h1 {
@@ -178,7 +175,6 @@ a{
 	background-color: skyblue;
 	border-radius: 20px 20px 20px;
 	margin-top: 50px;
-
 }
 
 
@@ -325,4 +321,8 @@ button {
     content: "";
     display: table;
     clear: both;
+}
+
+.form_login{
+	margin-top: 10%;
 }
